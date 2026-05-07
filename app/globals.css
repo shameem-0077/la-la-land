@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer theme {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Base */
+    --background: #fffdf8;
+    --foreground: #10213a;
+
+    /* Brand Palette */
+    --primary: #fd4b01;      /* energetic orange */
+    --secondary: #02a1a8;    /* tropical teal */
+    --accent: #ffb902;       /* vibrant yellow */
+    --success: #6ea001;      /* earthy green */
+
+    /* Supporting Colors */
+    --primary-dark: #d93f00;
+    --secondary-dark: #017d83;
+    --accent-soft: #fff3cc;
+    --success-soft: #edf7d8;
+
+    /* UI */
+    --muted: #f5f7f8;
+    --muted-foreground: #64748b;
+
+    --card: #ffffff;
+    --card-foreground: #10213a;
+
+    --popover: #ffffff;
+    --popover-foreground: #10213a;
+
+    --border: #e7edf2;
+    --input: #dce5eb;
+    --ring: #02a1a8;
+
+    /* Sidebar / Navigation */
+    --sidebar-background: #ffffff;
+    --sidebar-foreground: #10213a;
+    --sidebar-primary: #fd4b01;
+    --sidebar-accent: #02a1a8;
+
+    /* States */
+    --destructive: #ef4444;
+    --warning: #ffb902;
+    --info: #02a1a8;
+
+    /* Radius */
+    --radius: 1.8rem;
+
+    /* Optional Gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      #fd4b01 0%,
+      #ffb902 100%
+    );
+
+    --gradient-secondary: linear-gradient(
+      135deg,
+      #02a1a8 0%,
+      #6ea001 100%
+    );
+
+    /* Shadows */
+    --shadow-primary: 0 10px 30px rgba(253, 75, 1, 0.18);
+    --shadow-secondary: 0 10px 30px rgba(2, 161, 168, 0.18);
   }
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-cream: var(--cream);
+  --radius-xl: var(--radius);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+.wave-divider {
+  mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,186.7C960,192,1056,160,1152,144C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="white"/></svg>');
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  mask-position: bottom;
+}
+
