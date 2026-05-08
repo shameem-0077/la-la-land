@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const WhoWeAre = () => {
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-12 md:py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-16 md:gap-24">
           {/* Left Content */}

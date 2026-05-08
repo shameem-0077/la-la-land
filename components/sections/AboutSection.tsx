@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const AboutSection = () => {
   return (
-    <section id="about-preview" className="py-8 md:py-24 bg-white overflow-hidden">
+    <section id="about-preview" className="py-12 md:py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           {/* Left: Content */}

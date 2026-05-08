@@ -94,7 +94,7 @@ const activityTypes = [
 
 const Rides = () => {
   return (
-    <section id="rides" className="relative py-8 md:py-24 bg-white overflow-hidden">
+    <section id="rides" className="relative py-12 md:py-16 bg-white overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-60 -z-10" />
       

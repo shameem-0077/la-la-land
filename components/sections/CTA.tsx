@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const CTA = () => {
   return (
-    <section className="py-8 md:py-20 px-4">
+    <section className="py-12 md:py-14 px-4">
       <div className="container mx-auto">
         <div className="relative overflow-hidden rounded-[30px] md:rounded-[50px] bg-primary md:bg-gradient-to-r md:from-primary md:via-primary md:to-secondary p-8 md:p-16 lg:p-20 shadow-2xl">
           {/* Illustrative Tower Asset - Hidden on Mobile for Focus */}

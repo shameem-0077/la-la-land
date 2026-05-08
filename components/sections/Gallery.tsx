@@ -32,7 +32,7 @@ const galleryItems = [
 
 const Gallery = () => {
   return (
-    <section id="gallery" className="py-8 md:py-24 bg-white overflow-hidden">
+    <section id="gallery" className="py-12 md:py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 md:gap-8 mb-6 md:mb-16 text-center md:text-left">

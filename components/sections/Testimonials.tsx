@@ -44,7 +44,7 @@ const Testimonials = () => {
   }, [currentIndex]);
 
   return (
-    <section id="testimonials" className="py-8 md:py-24 relative overflow-hidden bg-gradient-to-br from-secondary via-secondary to-purple-800">
+    <section id="testimonials" className="py-12 md:py-16 relative overflow-hidden bg-gradient-to-br from-secondary via-secondary to-purple-800">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />

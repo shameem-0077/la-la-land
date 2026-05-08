@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const VisionMission = () => {
   return (
-    <section className="py-24 bg-muted/50">
+    <section className="py-12 md:py-16 bg-muted/50">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Our Vision */}

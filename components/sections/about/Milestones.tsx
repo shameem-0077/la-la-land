@@ -33,7 +33,7 @@ const milestones = [
 
 const Milestones = () => {
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-12 md:py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-20">
