@@ -42,7 +42,7 @@ const Gallery = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-secondary text-[10px] font-black uppercase tracking-[0.2em] mb-4 border border-primary/10">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-secondary text-[10px] uppercase tracking-[0.2em] mb-4 border border-primary/10">
                 Visual Tour
               </span>
               <h2 className="text-3xl md:text-5xl font-black text-secondary leading-tight">
@@ -58,8 +58,8 @@ const Gallery = () => {
             className="flex items-center gap-4"
           >
             <div className="text-right hidden sm:block">
-              <p className="text-[10px] font-black text-[#0f172a] uppercase tracking-wider">Follow our Journey</p>
-              <p className="text-[10px] text-zinc-400 font-bold">@lalalandwayanad</p>
+              <p className="text-[10px] text-[#0f172a] uppercase tracking-wider">Follow our Journey</p>
+              <p className="text-[10px] text-zinc-400">@lalalandwayanad</p>
             </div>
             <a 
               href="https://instagram.com" 
@@ -93,9 +93,9 @@ const Gallery = () => {
               />
               
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2d31fa]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+              <div className="absolute inset-0 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-[10px] font-black text-white/70 uppercase tracking-[0.2em] mb-2 block">La La Land Moments</span>
+                  <span className="text-[10px] text-white/70 uppercase tracking-[0.2em] mb-2 block">La La Land Moments</span>
                   <h3 className="text-2xl font-black text-white leading-tight mb-4">{item.title}</h3>
                   <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
                     <Maximize2 className="w-5 h-5" />
@@ -111,7 +111,7 @@ const Gallery = () => {
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-zinc-400 font-bold text-sm uppercase tracking-[0.15em]"
+            className="text-zinc-400 text-sm uppercase tracking-[0.15em]"
           >
             Tag your memories with <span className="text-[#ff7d00]">#LaLaLandWayanad</span> to get featured!
           </motion.p>

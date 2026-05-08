@@ -103,7 +103,7 @@ const PackagesPage = () => {
                 Adventure <br />
                 <span className="text-primary">Packages</span>
               </h1>
-              <p className="text-lg md:text-2xl text-white/80 font-bold max-w-xl mx-auto lg:mx-0">
+              <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
                 Choose the perfect plan for your squad. More thrills, better value, and memories that last forever.
               </p>
             </div>
@@ -132,7 +132,7 @@ const PackagesPage = () => {
                 </div>
                 <div>
                   <h4 className="text-xl font-black text-secondary uppercase">{item.title}</h4>
-                  <p className="text-zinc-500 font-bold text-sm">{item.desc}</p>
+                  <p className="text-zinc-500 text-sm">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -154,14 +154,14 @@ const PackagesPage = () => {
                 className={`relative bg-white rounded-[50px] p-8 md:p-10 border-2 ${pkg.popular ? 'border-primary shadow-2xl scale-105 z-10' : 'border-zinc-100 shadow-xl'} flex flex-col h-full`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-2 rounded-full text-xs uppercase tracking-widest">
                     Best Choice
                   </div>
                 )}
                 
                 <div className="mb-8">
                   <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className={`inline-block px-4 py-1.5 rounded-full ${pkg.color} text-white text-[10px] font-black uppercase tracking-widest`}>
+                    <span className={`inline-block px-4 py-1.5 rounded-full ${pkg.color} text-white text-[10px] uppercase tracking-widest`}>
                       {pkg.badge}
                     </span>
                     <div className={pkg.popular ? "text-primary" : "text-secondary"}>
@@ -174,12 +174,12 @@ const PackagesPage = () => {
                 </div>
 
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-2xl font-black text-secondary">₹</span>
-                  <span className="text-5xl font-black text-primary leading-none">{pkg.price}</span>
-                  <span className="text-zinc-400 font-bold text-sm ml-2">/ Person</span>
+                  <span className="text-2xl text-secondary">₹</span>
+                  <span className="text-5xl text-primary leading-none">{pkg.price}</span>
+                   <span className="text-zinc-400 text-sm ml-2">/ Person</span>
                 </div>
 
-                <p className="text-zinc-500 font-bold mb-8 leading-relaxed">
+                <p className="text-zinc-500 mb-8 leading-relaxed">
                   {pkg.description}
                 </p>
 
@@ -189,12 +189,12 @@ const PackagesPage = () => {
                       <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                         <Check className="w-4 h-4 stroke-[4]" />
                       </div>
-                      <span className="text-sm font-bold text-secondary">{feature}</span>
+                      <span className="text-sm text-secondary">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                <button className={`w-full py-5 rounded-full font-black text-xs uppercase tracking-widest transition-all ${
+                <button className={`w-full py-5 rounded-full text-xs uppercase tracking-widest transition-all ${
                   pkg.popular ? 'bg-primary text-white shadow-xl hover:bg-primary-dark shadow-primary/20' : 'bg-secondary/5 text-secondary hover:bg-secondary hover:text-white'
                 }`}>
                   Book This Package
@@ -210,13 +210,13 @@ const PackagesPage = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-secondary uppercase italic">Essential Information</h2>
-            <p className="text-zinc-500 font-bold mt-2">Everything you need to know before you visit.</p>
+            <p className="text-zinc-500 mt-2">Everything you need to know before you visit.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white p-8 rounded-[40px] shadow-sm border border-secondary/5">
               <h4 className="text-xl font-black text-secondary mb-4 uppercase">Entry Policies</h4>
-              <ul className="space-y-3 text-zinc-500 font-bold text-sm">
+              <ul className="space-y-3 text-zinc-500 text-sm">
                 <li>• Free entry for children below 3ft height.</li>
                 <li>• Senior citizen discounts available at counter.</li>
                 <li>• Outside food & drinks are not permitted.</li>
@@ -225,7 +225,7 @@ const PackagesPage = () => {
             </div>
             <div className="bg-white p-8 rounded-[40px] shadow-sm border border-secondary/5">
               <h4 className="text-xl font-black text-secondary mb-4 uppercase">Park Timings</h4>
-              <ul className="space-y-3 text-zinc-500 font-bold text-sm">
+              <ul className="space-y-3 text-zinc-500 text-sm">
                 <li>• Monday - Friday: 10:00 AM - 6:00 PM</li>
                 <li>• Saturday - Sunday: 10:00 AM - 7:00 PM</li>
                 <li>• Water Park closes 30 mins prior to main park.</li>

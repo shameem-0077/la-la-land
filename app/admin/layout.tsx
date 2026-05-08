@@ -44,7 +44,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }, [pathname, router]);
 
   if (pathname === "/admin/login") return <>{children}</>;
-  if (isLoading) return <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center font-black text-secondary uppercase tracking-widest">Authenticating...</div>;
+  if (isLoading) return <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center text-secondary uppercase tracking-widest">Authenticating...</div>;
   if (!isAuthenticated) return null;
 
   const menuItems = [
@@ -71,8 +71,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
             <div className="leading-none">
-              <p className="text-sm font-black uppercase tracking-tighter">La La Land</p>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Admin Panel</p>
+              <p className="text-sm uppercase tracking-tighter">La La Land</p>
+              <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Admin Panel</p>
             </div>
           </div>
 
@@ -83,7 +83,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Link 
                   key={item.label}
                   href={item.href}
-                  className={`flex items-center gap-4 px-4 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all group ${
+                  className={`flex items-center gap-4 px-4 py-4 rounded-2xl text-xs uppercase tracking-widest transition-all group ${
                     isActive ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                   }`}
                 >
@@ -100,7 +100,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="mt-auto pt-8 border-t border-slate-800">
             <button 
               onClick={handleLogout}
-              className="flex items-center gap-4 px-4 py-4 w-full rounded-2xl font-black text-xs uppercase tracking-widest text-red-400 hover:bg-red-500/10 transition-all group"
+              className="flex items-center gap-4 px-4 py-4 w-full rounded-2xl text-xs uppercase tracking-widest text-red-400 hover:bg-red-500/10 transition-all group"
             >
               <LogOut className="w-5 h-5 group-hover:scale-110 transition-transform" />
               Sign Out
@@ -121,7 +121,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <div className="hidden md:flex items-center gap-4 bg-slate-50 px-6 py-2.5 rounded-full border border-slate-100 w-96 group focus-within:border-blue-500 focus-within:bg-white transition-all">
             <Search className="w-4 h-4 text-slate-400 group-focus-within:text-blue-500" />
-            <input type="text" placeholder="Search orders, rides..." className="bg-transparent border-none focus:outline-none text-xs font-bold text-slate-600 w-full" />
+            <input type="text" placeholder="Search orders, rides..." className="bg-transparent border-none focus:outline-none text-xs text-slate-600 w-full" />
           </div>
 
           <div className="flex items-center gap-6">
@@ -132,11 +132,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="h-10 w-[1px] bg-slate-200" />
             <div className="flex items-center gap-4">
               <div className="text-right hidden sm:block">
-                <p className="text-xs font-black text-slate-900 uppercase tracking-tighter leading-none">Admin User</p>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Super Admin</p>
+                <p className="text-xs text-slate-900 uppercase tracking-tighter leading-none">Admin User</p>
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Super Admin</p>
               </div>
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 p-0.5 shadow-lg shadow-blue-500/20">
-                <div className="w-full h-full rounded-[10px] bg-white flex items-center justify-center font-black text-blue-600 text-xs">
+                <div className="w-full h-full rounded-[10px] bg-white flex items-center justify-center text-blue-600 text-xs">
                   AD
                 </div>
               </div>

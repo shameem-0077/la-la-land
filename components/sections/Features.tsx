@@ -52,7 +52,7 @@ const Features = () => {
                 <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider leading-none">
                   {feature.title}
                 </h3>
-                <p className="text-lg font-black text-[#1a365d] leading-tight">
+                <p className="text-lg text-[#1a365d] leading-tight">
                   {feature.subtitle}
                 </p>
               </div>

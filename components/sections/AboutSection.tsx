@@ -18,14 +18,14 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-[10px] uppercase tracking-[0.2em] mb-6">
                 Where Fun Meets Nature
               </span>
               <h2 className="text-3xl md:text-[54px] font-black text-secondary leading-[1.1] mb-8 uppercase tracking-tighter">
                 Discover the Heart of <br className="hidden md:block" />
                 <span className="text-primary italic">La La Land</span>
               </h2>
-              <p className="text-base md:text-lg text-zinc-500 font-bold leading-relaxed mb-8 md:mb-10 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-base md:text-lg text-zinc-500 leading-relaxed mb-8 md:mb-10 max-w-2xl mx-auto lg:mx-0">
                 La La Land is more than just an adventure park. It's a sanctuary of joy where 
                 thrilling rides, lush landscapes, and family moments come together. From the 
                 highest swings to the biggest splashes, we create memories that last a lifetime.
@@ -38,7 +38,7 @@ const AboutSection = () => {
                   </div>
                   <div>
                     <h4 className="font-black text-secondary text-[10px] md:text-sm uppercase tracking-wider mb-1">Safety First</h4>
-                    <p className="text-[10px] md:text-xs text-zinc-400 font-bold leading-tight">ISO Certified safety protocols for all rides.</p>
+                    <p className="text-[10px] md:text-xs text-zinc-400 leading-tight">ISO Certified safety protocols for all rides.</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 group">
@@ -47,14 +47,14 @@ const AboutSection = () => {
                   </div>
                   <div>
                     <h4 className="font-black text-secondary text-[10px] md:text-sm uppercase tracking-wider mb-1">Family Heart</h4>
-                    <p className="text-[10px] md:text-xs text-zinc-400 font-bold leading-tight">Dedicated zones for every age group.</p>
+                    <p className="text-[10px] md:text-xs text-zinc-400 leading-tight">Dedicated zones for every age group.</p>
                   </div>
                 </div>
               </div>
 
               <Link 
                 href="/about" 
-                className="inline-flex items-center gap-3 px-8 py-3.5 md:px-10 md:py-4 bg-primary text-white rounded-full font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 group"
+                className="inline-flex items-center gap-3 px-8 py-3.5 md:px-10 md:py-4 bg-primary text-white rounded-full text-[10px] md:text-xs uppercase tracking-widest hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 group"
               >
                 Learn Our Full Story
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -83,7 +83,7 @@ const AboutSection = () => {
                 {/* Floating Stat Badge */}
                 <div className="absolute bottom-6 -left-4 md:bottom-10 md:-left-10 bg-[#ff7d00] text-white p-6 md:p-8 rounded-[30px] md:rounded-[40px] shadow-2xl">
                   <div className="text-2xl md:text-4xl font-black mb-1">10+</div>
-                  <div className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] opacity-80 leading-none">Years of Smiles</div>
+                  <div className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] opacity-80 leading-none">Years of Smiles</div>
                 </div>
               </div>
 

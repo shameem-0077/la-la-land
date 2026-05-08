@@ -195,13 +195,13 @@ const BlogDetailPage = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <div className="inline-block px-6 py-2 bg-accent text-foreground font-black text-xs uppercase tracking-widest rounded-full mb-8 shadow-xl">
+            <div className="inline-block px-6 py-2 bg-accent text-foreground text-xs uppercase tracking-widest rounded-full mb-8 shadow-xl">
               {post.category}
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] mb-8 uppercase tracking-tight">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-white/80 font-bold uppercase tracking-widest text-[10px] md:text-xs">
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-white/80 uppercase tracking-widest text-[10px] md:text-xs">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-primary" />
                 {post.date}
@@ -238,7 +238,7 @@ const BlogDetailPage = () => {
               <div className="lg:w-3/4">
                 <Link 
                   href="/blogs" 
-                  className="inline-flex items-center gap-2 text-secondary font-black text-xs uppercase tracking-widest mb-10 hover:text-primary transition-colors group"
+                  className="inline-flex items-center gap-2 text-secondary text-xs uppercase tracking-widest mb-10 hover:text-primary transition-colors group"
                 >
                   <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                   Back to All Stories
@@ -247,15 +247,15 @@ const BlogDetailPage = () => {
                 <div 
                   className="prose prose-xl prose-zinc max-w-none 
                     prose-headings:font-black prose-headings:text-secondary prose-headings:uppercase prose-headings:tracking-tight
-                    prose-p:text-zinc-500 prose-p:font-bold prose-p:leading-relaxed
-                    prose-strong:text-secondary prose-strong:font-black
-                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-zinc-50 prose-blockquote:p-8 prose-blockquote:rounded-2xl prose-blockquote:text-secondary prose-blockquote:font-black prose-blockquote:italic"
+                    prose-p:text-zinc-500 prose-p:leading-relaxed
+                    prose-strong:text-secondary
+                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-zinc-50 prose-blockquote:p-8 prose-blockquote:rounded-2xl prose-blockquote:text-secondary prose-blockquote:italic"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
 
                 <div className="mt-16 pt-10 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-6">
                   <div className="flex items-center gap-4">
-                    <span className="text-secondary font-black text-xs uppercase tracking-widest">Share this story:</span>
+                    <span className="text-secondary text-xs uppercase tracking-widest">Share this story:</span>
                     <div className="flex gap-2">
                       <button className="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all"><Facebook /></button>
                       <button className="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all"><TwitterX /></button>
@@ -265,7 +265,7 @@ const BlogDetailPage = () => {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {["Adventure", "Family Fun", "Water Park"].map((tag) => (
-                      <span key={tag} className="px-4 py-2 bg-zinc-50 rounded-lg text-zinc-400 font-black text-[10px] uppercase tracking-widest">
+                      <span key={tag} className="px-4 py-2 bg-zinc-50 rounded-lg text-zinc-400 text-[10px] uppercase tracking-widest">
                         #{tag}
                       </span>
                     ))}
@@ -278,10 +278,10 @@ const BlogDetailPage = () => {
                 <div className="sticky top-32 space-y-10">
                   <div className="bg-secondary rounded-[30px] p-8 text-white">
                     <h4 className="text-xl font-black uppercase mb-4 leading-tight">Ready for your own adventure?</h4>
-                    <p className="text-white/70 font-bold text-sm mb-6">Book your tickets online and save up to 20% on group bookings!</p>
+                    <p className="text-white/70 text-sm mb-6">Book your tickets online and save up to 20% on group bookings!</p>
                     <Link 
                       href="/packages"
-                      className="block w-full py-4 bg-primary text-white text-center rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform"
+                      className="block w-full py-4 bg-primary text-white text-center rounded-2xl text-xs uppercase tracking-widest hover:scale-105 transition-transform"
                     >
                       View Packages
                     </Link>
@@ -292,7 +292,7 @@ const BlogDetailPage = () => {
                     <div className="space-y-6">
                       {relatedPosts.map((rp) => (
                         <Link key={rp.id} href={`/blogs/${rp.slug}`} className="group block">
-                          <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1 block">{rp.category}</span>
+                          <span className="text-[10px] text-primary uppercase tracking-widest mb-1 block">{rp.category}</span>
                           <h5 className="text-sm font-black text-secondary leading-tight group-hover:text-primary transition-colors line-clamp-2">
                             {rp.title}
                           </h5>
@@ -329,13 +329,13 @@ const BlogDetailPage = () => {
                   <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
                 <div className="p-8">
-                  <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-2 block">{p.category}</span>
+                  <span className="text-[10px] text-primary uppercase tracking-widest mb-2 block">{p.category}</span>
                   <h3 className="text-xl font-black text-secondary mb-4 leading-tight group-hover:text-primary transition-colors line-clamp-2">
                     {p.title}
                   </h3>
                   <Link 
                     href={`/blogs/${p.slug}`}
-                    className="inline-flex items-center gap-2 text-secondary font-black text-[10px] uppercase tracking-widest group/link"
+                    className="inline-flex items-center gap-2 text-secondary text-[10px] uppercase tracking-widest group/link"
                   >
                     Read More
                     <ArrowLeft className="w-4 h-4 rotate-180 transition-transform group-hover/link:translate-x-1" />

@@ -27,7 +27,7 @@ const VisionMission = () => {
               </div>
               <h3 className="text-3xl font-black text-primary uppercase">Our Vision</h3>
             </div>
-            <p className="text-xl text-zinc-500 font-bold leading-relaxed">
+            <p className="text-xl text-zinc-500 leading-relaxed">
               To be Wayanad's most loved family adventure destination, creating joyful memories for every visitor through innovation, safety, and care.
             </p>
           </motion.div>
@@ -58,7 +58,7 @@ const VisionMission = () => {
                 "Maintain clean and welcoming facilities",
                 "Support local communities"
               ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-lg text-zinc-500 font-bold">
+                <li key={item} className="flex items-center gap-3 text-lg text-zinc-500">
                   <div className="w-2 h-2 rounded-full bg-accent" />
                   {item}
                 </li>

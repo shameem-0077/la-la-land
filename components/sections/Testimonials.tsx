@@ -60,7 +60,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white text-[10px] font-black uppercase tracking-[0.2em] mb-4 border border-white/10">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white text-[10px] uppercase tracking-[0.2em] mb-4 border border-white/10">
                 <Star className="w-3 h-3 fill-[#adff00] text-[#adff00]" />
                 Real Stories
               </span>
@@ -93,7 +93,7 @@ const Testimonials = () => {
                       ))}
                     </div>
 
-                    <p className="text-xl md:text-2xl font-black text-white leading-tight md:leading-snug mb-10 italic">
+                    <p className="text-xl md:text-2xl text-white leading-tight md:leading-snug mb-10 italic">
                       "{testimonials[currentIndex].text}"
                     </p>
 
@@ -108,7 +108,7 @@ const Testimonials = () => {
                       <h4 className="text-lg font-black text-white mb-0.5 uppercase tracking-wider">
                         {testimonials[currentIndex].name}
                       </h4>
-                      <span className="text-[10px] font-black text-[#adff00] uppercase tracking-widest opacity-80">
+                      <span className="text-[10px] text-[#adff00] uppercase tracking-widest opacity-80">
                         {testimonials[currentIndex].role}
                       </span>
                     </div>

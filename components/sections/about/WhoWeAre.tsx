@@ -18,14 +18,14 @@ const WhoWeAre = () => {
             viewport={{ once: true }}
             className="flex-1"
           >
-            <span className="text-secondary font-black uppercase tracking-widest text-sm mb-4 block">
+            <span className="text-secondary uppercase tracking-widest text-sm mb-4 block">
               Who We Are
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-primary leading-tight mb-8 uppercase">
               Wayanad's Ultimate <br />
               Adventure Destination
             </h2>
-            <div className="space-y-6 text-zinc-500 font-bold leading-relaxed">
+            <div className="space-y-6 text-zinc-500 leading-relaxed">
               <p>
                 We are Wayanad's most popular adventure & amusement park, offering over 50+ attractions for all age groups. From thrill-seekers to toddlers, we provide a complete day of joy in the heart of nature. Our park is designed to bring families together through shared experiences, laughter, and a touch of adrenaline.
               </p>
@@ -36,7 +36,7 @@ const WhoWeAre = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="mt-10">
               <Link 
                 href="/book" 
-                className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-black py-4 px-10 rounded-full shadow-lg transition-all text-sm tracking-wider uppercase"
+                className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white py-4 px-10 rounded-full shadow-lg transition-all text-sm tracking-wider uppercase"
               >
                 Book Tickets
                 <Ticket className="w-5 h-5" />

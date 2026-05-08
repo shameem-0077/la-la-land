@@ -21,7 +21,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         {/* Main Park Image - Using standard img for guaranteed visibility */}
         <img
-          src="/images/hero-bg-image.png"
+          src="/images/hero-bg-image-3.png"
           alt="La La Land Adventure Park"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
@@ -30,7 +30,7 @@ const Hero = () => {
         
         {/* Soft atmospheric overlays */}
         {/* <div className="absolute inset-0 bg-gradient-to-r from-[#2d31fa] via-[#2d31fa]/40 to-transparent lg:w-1/2 z-10" /> */}
-        <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] z-10" />
+        {/* <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] z-10" /> */}
       </div>
 
       <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-40 lg:pb-0">
@@ -46,7 +46,7 @@ const Hero = () => {
               Best Adventure Park in
               <span className="text-accent"> Wayanad.</span>
             </h1>
-            <p className="text-lg md:text-2xl text-white/80 font-bold max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
               Adventures for all ages. Memories for a lifetime.
             </p>
           </div>
@@ -54,14 +54,14 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 justify-center lg:justify-start">
             <Link
               href="/book"
-              className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-primary text-white rounded-full font-black text-xs md:text-sm uppercase tracking-widest hover:bg-primary-dark transition-all shadow-2xl"
+              className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-primary text-white rounded-full text-xs md:text-sm uppercase tracking-widest hover:bg-primary-dark transition-all shadow-2xl"
             >
               Book Tickets
               <Ticket className="w-5 h-5 fill-current" />
             </Link>
             <Link
               href="/rides"
-              className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-white text-secondary rounded-full font-black text-xs md:text-sm uppercase tracking-widest hover:bg-muted transition-all shadow-xl shadow-black/5 group"
+              className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-white text-secondary rounded-full text-xs md:text-sm uppercase tracking-widest hover:bg-muted transition-all shadow-xl shadow-black/5 group"
             >
               Explore Rides
               <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -103,8 +103,8 @@ const Hero = () => {
                   {badge.icon}
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[10px] md:text-[11px] font-bold text-zinc-400 uppercase tracking-tight leading-none mb-1">{badge.title}</span>
-                  <span className="text-xs md:text-sm font-black text-secondary leading-tight">{badge.sub}</span>
+                  <span className="text-[10px] md:text-[11px] text-zinc-400 uppercase tracking-tight leading-none mb-1">{badge.title}</span>
+                  <span className="text-xs md:text-sm text-secondary leading-tight">{badge.sub}</span>
                 </div>
               </motion.div>
               

@@ -39,10 +39,10 @@ const ContactPage = () => {
               <h1 className="text-4xl md:text-6xl lg:text-[86px] font-black text-white leading-[0.95] tracking-tight uppercase">
                 Contact Us
               </h1>
-              <div className="inline-block bg-accent text-foreground px-6 py-2 rounded-full font-black text-sm md:text-base w-fit mx-auto lg:mx-0">
+              <div className="inline-block bg-accent text-foreground px-6 py-2 rounded-full text-sm md:text-base w-fit mx-auto lg:mx-0">
                 We'd Love to Hear From You!
               </div>
-              <p className="text-lg md:text-2xl text-white/80 font-bold max-w-xl mx-auto lg:mx-0">
+              <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
                 Have questions, need help, or want to plan your perfect day at La La Land? We're here to make it easy!
               </p>
             </div>
@@ -76,7 +76,7 @@ const ContactPage = () => {
               </div>
               <div>
                 <h3 className="text-xl font-black text-secondary mb-2 uppercase">Call Us</h3>
-                <div className="flex flex-col gap-1 text-zinc-500 font-bold text-sm">
+                <div className="flex flex-col gap-1 text-zinc-500 text-sm">
                   <p>+91 7511183000</p>
                   <p>+91 7511159000</p>
                   <p>04936 292219</p>
@@ -97,7 +97,7 @@ const ContactPage = () => {
               </div>
               <div>
                 <h3 className="text-xl font-black text-secondary mb-2 uppercase">Visit Us</h3>
-                <p className="text-zinc-500 font-bold text-sm leading-relaxed">
+                <p className="text-zinc-500 text-sm leading-relaxed">
                   La La Land Adventure Park, <br />
                   Vythiri, Wayanad - 673576 <br />
                   Kerala, India
@@ -118,7 +118,7 @@ const ContactPage = () => {
               </div>
               <div>
                 <h3 className="text-xl font-black text-secondary mb-2 uppercase">Email Us</h3>
-                <div className="flex flex-col gap-1 text-zinc-500 font-bold text-sm">
+                <div className="flex flex-col gap-1 text-zinc-500 text-sm">
                   <p>info@lalalandpark.com</p>
                   <p>reservation@lalalandpark.com</p>
                   <p>marketing@lalalandpark.com</p>
@@ -140,13 +140,13 @@ const ContactPage = () => {
               viewport={{ once: true }}
             >
               <div className="mb-10">
-                <span className="text-accent font-black uppercase tracking-widest text-sm mb-4 block">
+                <span className="text-accent uppercase tracking-widest text-sm mb-4 block">
                   &gt; Send Us A Message &lt;
                 </span>
                 <h2 className="text-4xl md:text-5xl font-black text-secondary mb-4">
                   We Are Here to Help!
                 </h2>
-                <p className="text-zinc-500 font-bold">
+                <p className="text-zinc-500">
                   Fill out the form and our team will get back to you as soon as possible.
                 </p>
               </div>
@@ -156,31 +156,31 @@ const ContactPage = () => {
                   <input 
                     type="text" 
                     placeholder="Your Name" 
-                    className="w-full bg-zinc-50 border border-zinc-100 rounded-full px-8 py-4 focus:outline-none focus:border-primary font-bold text-secondary"
+                    className="w-full bg-zinc-50 border border-zinc-100 rounded-full px-8 py-4 focus:outline-none focus:border-primary text-secondary"
                   />
                 </div>
                 <div className="relative">
                   <input 
                     type="email" 
                     placeholder="Your Email" 
-                    className="w-full bg-zinc-50 border border-zinc-100 rounded-full px-8 py-4 focus:outline-none focus:border-primary font-bold text-secondary"
+                    className="w-full bg-zinc-50 border border-zinc-100 rounded-full px-8 py-4 focus:outline-none focus:border-primary text-secondary"
                   />
                 </div>
                 <div className="relative">
                   <input 
                     type="tel" 
                     placeholder="Your Phone" 
-                    className="w-full bg-zinc-50 border border-zinc-100 rounded-full px-8 py-4 focus:outline-none focus:border-primary font-bold text-secondary"
+                    className="w-full bg-zinc-50 border border-zinc-100 rounded-full px-8 py-4 focus:outline-none focus:border-primary text-secondary"
                   />
                 </div>
                 <div className="relative">
                   <textarea 
                     placeholder="Your Message" 
                     rows={4}
-                    className="w-full bg-zinc-50 border border-zinc-100 rounded-[30px] px-8 py-4 focus:outline-none focus:border-primary font-bold text-secondary resize-none"
+                    className="w-full bg-zinc-50 border border-zinc-100 rounded-[30px] px-8 py-4 focus:outline-none focus:border-primary text-secondary resize-none"
                   ></textarea>
                 </div>
-                <button className="bg-primary text-white px-10 py-5 rounded-full font-black uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center gap-3 shadow-xl shadow-primary/20">
+                <button className="bg-primary text-white px-10 py-5 rounded-full uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center gap-3 shadow-xl shadow-primary/20">
                   Send Message
                   <Send className="w-5 h-5" />
                 </button>
@@ -221,7 +221,7 @@ const ContactPage = () => {
           <div className="relative rounded-[40px] overflow-hidden h-[600px] shadow-2xl">
             {/* Mock Map Image or iframe */}
             <div className="absolute inset-0 bg-[#e5e7eb] flex items-center justify-center">
-              <p className="text-zinc-400 font-bold">Google Maps Integration Here</p>
+              <p className="text-zinc-400">Google Maps Integration Here</p>
             </div>
             
             {/* Map Info Overlay */}
@@ -235,15 +235,15 @@ const ContactPage = () => {
                 </div>
                 
                 <div className="mb-6">
-                  <p className="font-black text-secondary mb-1">La La Land Adventure Park</p>
-                  <p className="text-zinc-500 font-bold text-sm leading-relaxed">
+                  <p className="text-secondary mb-1">La La Land Adventure Park</p>
+                  <p className="text-zinc-500 text-sm leading-relaxed">
                     Vythiri, Wayanad - 673576 <br />
                     Kerala, India
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 mb-8">
-                  <p className="font-black text-secondary">4.8</p>
+                  <p className="text-secondary">4.8</p>
                   <div className="flex gap-1 text-accent">
                     <Star className="w-4 h-4 fill-current" />
                     <Star className="w-4 h-4 fill-current" />
@@ -251,15 +251,15 @@ const ContactPage = () => {
                     <Star className="w-4 h-4 fill-current" />
                     <Star className="w-4 h-4 fill-current" />
                   </div>
-                  <p className="text-zinc-400 font-bold text-xs">(19,401)</p>
+                  <p className="text-zinc-400 text-xs">(19,401)</p>
                 </div>
 
                 <div className="space-y-3">
-                  <button className="w-full bg-primary text-white py-4 rounded-full font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl shadow-primary/20 hover:bg-primary-dark transition-all">
+                  <button className="w-full bg-primary text-white py-4 rounded-full text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl shadow-primary/20 hover:bg-primary-dark transition-all">
                     <Navigation className="w-4 h-4" />
                     Get Directions
                   </button>
-                  <button className="w-full bg-white border-2 border-zinc-100 text-secondary py-4 rounded-full font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                  <button className="w-full bg-white border-2 border-zinc-100 text-secondary py-4 rounded-full text-xs uppercase tracking-widest flex items-center justify-center gap-2">
                     View in Google Maps
                   </button>
                 </div>

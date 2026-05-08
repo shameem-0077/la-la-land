@@ -42,13 +42,13 @@ const PackagesPreview = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-secondary text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-secondary text-[10px] uppercase tracking-[0.2em] mb-4">
               Ticketing
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-secondary leading-tight">
               Adventure <span className="text-primary">Packages</span>
             </h2>
-            <p className="text-lg text-secondary/60 font-bold max-w-2xl mx-auto mt-4">
+            <p className="text-lg text-secondary/60 max-w-2xl mx-auto mt-4">
               Choose the perfect plan for your group and save more with our bundled park packages.
             </p>
           </motion.div>
@@ -68,7 +68,7 @@ const PackagesPreview = () => {
                 {/* Card Header */}
                 <div className="mb-8">
                   <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className={`inline-block px-4 py-1.5 rounded-full ${pkg.color} text-white text-[10px] font-black uppercase tracking-widest`}>
+                    <span className={`inline-block px-4 py-1.5 rounded-full ${pkg.color} text-white text-[10px] uppercase tracking-widest`}>
                       {pkg.badge}
                     </span>
                     <div className="text-secondary">
@@ -84,10 +84,10 @@ const PackagesPreview = () => {
                 <div className="flex items-baseline gap-1 mb-6">
                   <span className="text-2xl font-black text-secondary">₹</span>
                   <span className="text-4xl md:text-5xl font-black text-primary-dark leading-none">{pkg.price}</span>
-                  <span className="text-secondary/40 font-bold text-sm ml-2">/ Person</span>
+                  <span className="text-secondary/40 text-sm ml-2">/ Person</span>
                 </div>
 
-                <p className="text-secondary/60 font-bold mb-8 leading-relaxed">
+                <p className="text-secondary/60 mb-8 leading-relaxed">
                   {pkg.description}
                 </p>
 
@@ -98,7 +98,7 @@ const PackagesPreview = () => {
                       <div className={`w-6 h-6 rounded-full bg-secondary/5 flex items-center justify-center text-secondary`}>
                         <Check className="w-4 h-4" />
                       </div>
-                      <span className="text-sm font-bold text-secondary">{feature}</span>
+                      <span className="text-sm text-secondary">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -107,10 +107,10 @@ const PackagesPreview = () => {
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Link
                     href="#tickets"
-                    className={`block w-full text-center py-5 rounded-full font-black text-xs uppercase tracking-widest transition-all ${
+                    className={`block w-full text-center py-5 rounded-full text-xs uppercase tracking-widest transition-all ${
                       pkg.title === 'Kids Package' 
                         ? 'bg-accent hover:bg-accent/90 text-white shadow-xl shadow-accent/20' 
-                        : 'bg-secondary hover:bg-secondary/90 text-white shadow-xl shadow-secondary/20'
+                         : 'bg-secondary hover:bg-secondary/90 text-white shadow-xl shadow-secondary/20'
                     }`}
                   >
                     Book This Package
@@ -124,7 +124,7 @@ const PackagesPreview = () => {
         <div className="mt-16 text-center">
           <Link 
             href="/packages" 
-            className="inline-flex items-center gap-2 text-sm font-black text-secondary hover:text-accent transition-colors uppercase tracking-widest group"
+            className="inline-flex items-center gap-2 text-sm text-secondary hover:text-accent transition-colors uppercase tracking-widest group"
           >
             View All Specialized Packages
             <Ticket className="w-4 h-4 transition-transform group-hover:rotate-12" />

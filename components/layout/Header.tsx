@@ -109,7 +109,7 @@ const Header = () => {
           {!isMobileMenuOpen && (
             <NextLink
               href="https://wa.me/your-number"
-              className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-success text-white hover:scale-110 transition-transform shadow-lg shadow-success/20"
+              className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-success text-primary hover:scale-110 transition-transform shadow-lg shadow-success/20"
             >
               <MessageCircle className="w-5 h-5 fill-current" />
             </NextLink>

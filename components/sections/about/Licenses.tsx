@@ -25,7 +25,7 @@ const Licenses = () => {
               <div className="w-3 h-3 rounded-full bg-primary rotate-45" />
             </div>
           </div>
-          <p className="text-lg text-zinc-500 font-bold max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
             View our official licenses and approvals that demonstrate our compliance with government regulations.
           </p>
         </div>
@@ -45,9 +45,9 @@ const Licenses = () => {
               <div className="absolute inset-0 bg-white group-hover:bg-zinc-50 transition-colors" />
               <div className="relative z-10 flex flex-col items-center gap-4 text-zinc-300">
                 <div className="w-12 h-16 border-2 border-zinc-200 rounded flex items-center justify-center">
-                  <span className="text-[10px] font-black uppercase tracking-tighter">Seal</span>
+                  <span className="text-[10px] uppercase tracking-tighter">Seal</span>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Certificate {i}</span>
+                <span className="text-[10px] uppercase tracking-widest text-zinc-400">Certificate {i}</span>
               </div>
             </motion.div>
           ))}

@@ -115,7 +115,7 @@ const Rides = () => {
               Rides & Activities
             </h2>
           </div>
-          <p className="text-base md:text-xl text-zinc-500 font-bold px-4">
+          <p className="text-base md:text-xl text-zinc-500 px-4">
             Adventure. Splash. Laughter. Repeat.
           </p>
         </div>
@@ -152,7 +152,7 @@ const Rides = () => {
                       <h3 className={`text-lg md:text-xl font-black ${activity.color} leading-none mb-2`}>
                         {activity.title}
                       </h3>
-                      <div className="flex items-center gap-2 text-xs font-black text-zinc-400 group-hover:text-primary transition-all">
+                      <div className="flex items-center gap-2 text-xs text-zinc-400 group-hover:text-primary transition-all">
                         View All 
                         <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
                       </div>

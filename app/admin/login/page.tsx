@@ -48,12 +48,12 @@ const AdminLoginPage = () => {
              <ShieldCheck className="w-10 h-10 text-blue-500 group-hover:scale-110 transition-transform" />
           </div>
           <h1 className="text-3xl font-black text-white uppercase tracking-tight mb-2">Admin Portal</h1>
-          <p className="text-slate-400 font-bold text-sm">Sign in to manage La La Land content</p>
+          <p className="text-slate-400 text-sm">Sign in to manage La La Land content</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Username</label>
+            <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">Username</label>
             <div className="relative group">
               <User className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-blue-500 transition-colors" />
               <input 
@@ -61,14 +61,14 @@ const AdminLoginPage = () => {
                 required
                 value={credentials.username}
                 onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                className="w-full pl-16 pr-6 py-5 rounded-3xl bg-slate-800/50 border border-slate-700 text-white font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+                className="w-full pl-16 pr-6 py-5 rounded-3xl bg-slate-800/50 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                 placeholder="Enter username"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Password</label>
+            <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">Password</label>
             <div className="relative group">
               <Lock className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-blue-500 transition-colors" />
               <input 
@@ -76,7 +76,7 @@ const AdminLoginPage = () => {
                 required
                 value={credentials.password}
                 onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                className="w-full pl-16 pr-14 py-5 rounded-3xl bg-slate-800/50 border border-slate-700 text-white font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+                className="w-full pl-16 pr-14 py-5 rounded-3xl bg-slate-800/50 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                 placeholder="••••••••"
               />
               <button 
@@ -92,7 +92,7 @@ const AdminLoginPage = () => {
           <button 
             type="submit"
             disabled={isLoading}
-            className="w-full py-5 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 text-white rounded-3xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3 group mt-4"
+            className="w-full py-5 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 text-white rounded-3xl text-xs uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3 group mt-4"
           >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -105,7 +105,7 @@ const AdminLoginPage = () => {
           </button>
         </form>
 
-        <p className="text-center mt-12 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
+        <p className="text-center mt-12 text-[10px] text-slate-500 uppercase tracking-[0.2em]">
           &copy; 2024 La La Land Adventure Park. Secure Access.
         </p>
       </motion.div>

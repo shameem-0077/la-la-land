@@ -37,13 +37,13 @@ const AdminDashboard = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Dashboard Overview</h1>
-          <p className="text-slate-400 font-bold text-sm mt-1">Welcome back, Admin! Here's what's happening today.</p>
+          <p className="text-slate-400 text-sm mt-1">Welcome back, Admin! Here's what's happening today.</p>
         </div>
         <div className="flex items-center gap-4">
-           <button className="px-6 py-3 bg-white border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest text-slate-600 hover:bg-slate-50 transition-all">
+           <button className="px-6 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] uppercase tracking-widest text-slate-600 hover:bg-slate-50 transition-all">
               Export Report
            </button>
-           <button className="px-6 py-3 bg-blue-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-blue-600/20 hover:bg-blue-500 transition-all flex items-center gap-2">
+           <button className="px-6 py-3 bg-blue-600 text-white rounded-2xl text-[10px] uppercase tracking-widest shadow-lg shadow-blue-600/20 hover:bg-blue-500 transition-all flex items-center gap-2">
               <Plus className="w-4 h-4" /> Add New Ride
            </button>
         </div>
@@ -63,12 +63,12 @@ const AdminDashboard = () => {
                <div className={`w-14 h-14 rounded-2xl ${stat.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                   {stat.icon}
                </div>
-               <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-black ${stat.trending === 'up' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>
+               <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-[10px] ${stat.trending === 'up' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>
                   {stat.trending === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                   {stat.change}
                </div>
             </div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
+            <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
             <h3 className="text-3xl font-black text-slate-900 tracking-tighter leading-none">{stat.value}</h3>
           </motion.div>
         ))}
@@ -79,33 +79,33 @@ const AdminDashboard = () => {
         <div className="lg:col-span-2 bg-white rounded-[40px] shadow-sm border border-slate-50 overflow-hidden">
           <div className="p-8 border-b border-slate-50 flex items-center justify-between">
             <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Recent Bookings</h3>
-            <button className="text-xs font-black text-blue-600 uppercase tracking-widest hover:underline">View All</button>
+            <button className="text-xs text-blue-600 uppercase tracking-widest hover:underline">View All</button>
           </div>
           <div className="overflow-x-auto text-left">
             <table className="w-full">
               <thead>
                 <tr className="bg-slate-50/50">
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Order ID</th>
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Customer</th>
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Pass Type</th>
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Amount</th>
+                  <th className="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest">Order ID</th>
+                  <th className="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest">Customer</th>
+                  <th className="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest">Pass Type</th>
+                  <th className="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest">Status</th>
+                  <th className="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest text-right">Amount</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
                 {recentBookings.map((booking) => (
                   <tr key={booking.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-8 py-6 text-xs font-black text-slate-900">{booking.id}</td>
+                    <td className="px-8 py-6 text-xs text-slate-900">{booking.id}</td>
                     <td className="px-8 py-6">
-                       <p className="text-xs font-black text-slate-900 leading-none">{booking.user}</p>
-                       <p className="text-[9px] font-bold text-slate-400 mt-1">{booking.date}</p>
+                       <p className="text-xs text-slate-900 leading-none">{booking.user}</p>
+                       <p className="text-[9px] text-slate-400 mt-1">{booking.date}</p>
                     </td>
                     <td className="px-8 py-6">
-                       <p className="text-xs font-black text-blue-600 leading-none">{booking.type}</p>
-                       <p className="text-[9px] font-bold text-slate-400 mt-1">{booking.count}</p>
+                       <p className="text-xs text-blue-600 leading-none">{booking.type}</p>
+                       <p className="text-[9px] text-slate-400 mt-1">{booking.count}</p>
                     </td>
                     <td className="px-8 py-6">
-                       <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                       <span className={`px-3 py-1 rounded-full text-[9px] uppercase tracking-widest ${
                          booking.status === 'Paid' ? 'bg-emerald-50 text-emerald-600' :
                          booking.status === 'Pending' ? 'bg-orange-50 text-orange-600' :
                          'bg-red-50 text-red-600'
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
                          {booking.status}
                        </span>
                     </td>
-                    <td className="px-8 py-6 text-xs font-black text-slate-900 text-right">{booking.amount}</td>
+                    <td className="px-8 py-6 text-xs text-slate-900 text-right">{booking.amount}</td>
                   </tr>
                 ))}
               </tbody>
@@ -127,8 +127,8 @@ const AdminDashboard = () => {
               <div className="relative z-10">
                 <Map className="w-10 h-10 text-white/50 mb-6 group-hover:scale-110 transition-transform duration-500" />
                 <h3 className="text-2xl font-black uppercase leading-tight mb-4">Manage <br /> Your Rides</h3>
-                <p className="text-white/70 text-xs font-bold mb-8">Update pricing, status, and details for 50+ attractions.</p>
-                <Link href="/admin/rides" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-secondary rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-50 transition-all">
+                <p className="text-white/70 text-xs mb-8">Update pricing, status, and details for 50+ attractions.</p>
+                <Link href="/admin/rides" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-secondary rounded-2xl text-[10px] uppercase tracking-widest hover:bg-blue-50 transition-all">
                    Manage Rides <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -139,8 +139,8 @@ const AdminDashboard = () => {
               <div className="relative z-10">
                 <FileText className="w-10 h-10 text-slate-200 mb-6 group-hover:scale-110 transition-transform duration-500" />
                 <h3 className="text-2xl font-black text-slate-900 uppercase leading-tight mb-4">Content <br /> Studio</h3>
-                <p className="text-slate-400 text-xs font-bold mb-8">Publish news, park updates and blog stories for your visitors.</p>
-                <Link href="/admin/blogs" className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-800 transition-all">
+                <p className="text-slate-400 text-xs mb-8">Publish news, park updates and blog stories for your visitors.</p>
+                <Link href="/admin/blogs" className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl text-[10px] uppercase tracking-widest hover:bg-slate-800 transition-all">
                    Write Blog <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>

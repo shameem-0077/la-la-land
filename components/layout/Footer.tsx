@@ -28,7 +28,7 @@ const Footer = () => {
           {/* Brand & Mission */}
           <div className="flex flex-col gap-6">
             <Link href="/" className="inline-block group">
-              <Image 
+              <img 
                 src="/images/header-logo.png" 
                 alt="La La Land Logo" 
                 width={180} 
@@ -44,7 +44,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="flex flex-col gap-6 md:gap-8">
             <h4 className="text-lg font-black uppercase tracking-widest text-primary">Quick Links</h4>
-            <div className="flex flex-col gap-4 text-white/70 font-bold text-[13px] uppercase tracking-wider">
+            <div className="flex flex-col gap-4 text-white/70 text-[13px] uppercase tracking-wider">
               <Link href="#about" className="hover:text-primary transition-colors">About Us</Link>
               <Link href="#rides" className="hover:text-primary transition-colors">Rides & Activities</Link>
               <Link href="#packages" className="hover:text-primary transition-colors">Packages</Link>
@@ -56,7 +56,7 @@ const Footer = () => {
           {/* Visitor Info */}
           <div className="flex flex-col gap-6 md:gap-8">
             <h4 className="text-lg font-black uppercase tracking-widest text-primary">Visitor Info</h4>
-            <div className="flex flex-col gap-4 text-white/70 font-bold text-[13px] uppercase tracking-wider">
+            <div className="flex flex-col gap-4 text-white/70 text-[13px] uppercase tracking-wider">
               <Link href="#timings" className="hover:text-primary transition-colors">Park Timings</Link>
               <Link href="#tickets" className="hover:text-primary transition-colors">Ticket Info</Link>
               <Link href="#group" className="hover:text-primary transition-colors">Group Bookings</Link>
@@ -80,7 +80,7 @@ const Footer = () => {
               </Link>
             </div>
             <div className="mt-4">
-              <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] mb-4">Subscribe for Updates</p>
+              <p className="text-white/40 text-[10px] uppercase tracking-[0.2em] mb-4">Subscribe for Updates</p>
               <div className="flex bg-white/5 rounded-full p-1 border border-white/10">
                 <input 
                   type="email" 
@@ -96,7 +96,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-16 md:mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
+        <div className="mt-16 md:mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/30 uppercase tracking-[0.2em]">
           <p>© 2024 La La Land Adventure Park. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

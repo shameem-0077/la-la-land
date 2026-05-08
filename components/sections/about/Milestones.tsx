@@ -37,7 +37,7 @@ const Milestones = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-20">
-          <span className="text-secondary font-black uppercase tracking-widest text-sm mb-4 block">
+          <span className="text-secondary uppercase tracking-widest text-sm mb-4 block">
             Our Journey
           </span>
           <div className="flex items-center justify-center gap-6 mb-4">
@@ -55,7 +55,7 @@ const Milestones = () => {
               <div className="w-3 h-3 rounded-full bg-primary rotate-45" />
             </div>
           </div>
-          <p className="text-lg text-zinc-500 font-bold max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
             Tracing our path from a visionary concept to becoming Wayanad's most trusted adventure park.
           </p>
         </div>
@@ -80,13 +80,13 @@ const Milestones = () => {
                   {item.icon}
                 </div>
                 
-                <span className={`text-sm font-black uppercase tracking-widest ${item.color} mb-2`}>
+                <span className={`text-sm uppercase tracking-widest ${item.color} mb-2`}>
                   {item.date}
                 </span>
                 <h3 className="text-2xl font-black text-primary uppercase mb-4">
                   {item.title}
                 </h3>
-                <p className="text-zinc-500 font-bold leading-relaxed">
+                <p className="text-zinc-500 leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>

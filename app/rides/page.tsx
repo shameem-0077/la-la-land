@@ -90,14 +90,14 @@ function RidesContent() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <span className="inline-block px-5 py-2 rounded-full bg-accent text-foreground text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-xl shadow-accent/20">
+            <span className="inline-block px-5 py-2 rounded-full bg-accent text-foreground text-[10px] uppercase tracking-[0.2em] mb-6 shadow-xl shadow-accent/20">
               Rides & Attractions
             </span>
             <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.95] mb-8 tracking-tighter">
               Endless Adventures.<br />
               Unforgettable Memories.
             </h1>
-            <p className="text-lg md:text-xl text-white/90 font-bold mb-10 max-w-lg leading-relaxed">
+            <p className="text-lg md:text-xl text-white/90 mb-10 max-w-lg leading-relaxed">
               Explore 50+ thrilling rides, water fun, adventure activities & kids' favorites for all ages.
             </p>
             
@@ -105,7 +105,7 @@ function RidesContent() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link 
                   href="/book" 
-                  className="flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-black py-4 px-10 rounded-full shadow-2xl shadow-primary/40 transition-all text-xs tracking-widest uppercase"
+                  className="flex items-center gap-3 bg-primary hover:bg-primary-dark text-white py-4 px-10 rounded-full shadow-2xl shadow-primary/40 transition-all text-xs tracking-widest uppercase"
                 >
                   Book Tickets
                   <Ticket className="w-5 h-5 fill-white" />
@@ -114,7 +114,7 @@ function RidesContent() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link 
                   href="#whatsapp" 
-                  className="flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 font-black py-4 px-10 rounded-full transition-all text-xs tracking-widest uppercase"
+                  className="flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 py-4 px-10 rounded-full transition-all text-xs tracking-widest uppercase"
                 >
                   Chat on WhatsApp
                   <MessageCircle className="w-5 h-5" />
@@ -139,14 +139,14 @@ function RidesContent() {
       </section>
 
       {/* Filter Bar */}
-      <section className="py-12 bg-white sticky top-16 z-30 shadow-sm border-b border-zinc-50">
+      <section className="py-4 md:py-12 bg-white sticky top-16 z-30 shadow-sm border-b border-zinc-50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center flex-wrap gap-4">
+          <div className="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar gap-4 pb-2 md:pb-0 scroll-smooth">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-black text-xs uppercase tracking-widest transition-all ${
+                className={`flex items-center shrink-0 gap-2 px-6 py-3 rounded-full text-xs uppercase tracking-widest transition-all ${
                   activeTab === cat.id 
                     ? "bg-primary text-white shadow-lg" 
                     : "bg-muted text-zinc-400 hover:bg-zinc-100"
@@ -185,7 +185,7 @@ function RidesContent() {
                     <div className="relative h-[220px] w-full">
                       <Image src={ride.image} alt={ride.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute top-4 left-4">
-                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-white shadow-lg ${
+                        <span className={`px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest text-white shadow-lg ${
                           ride.category === 'water' ? 'bg-primary' :
                           ride.category === 'adventure' ? 'bg-success' :
                           ride.category === 'thrill' ? 'bg-secondary' :
@@ -197,7 +197,7 @@ function RidesContent() {
                       </div>
                     </div>
                     <div className="p-8">
-                      <div className="flex items-center gap-2 text-zinc-400 text-[10px] font-black uppercase tracking-widest mb-2">
+                      <div className="flex items-center gap-2 text-zinc-400 text-[10px] uppercase tracking-widest mb-2">
                         <Users className="w-3 h-3" />
                         {ride.age}
                       </div>
@@ -206,7 +206,7 @@ function RidesContent() {
                       </h3>
                       
                       <div className="flex items-center justify-between pt-6 border-t border-zinc-50">
-                        <span className="text-[10px] font-black text-secondary uppercase tracking-[0.2em] group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
+                        <span className="text-[10px] text-secondary uppercase tracking-[0.2em] group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
                           View Details
                           <ChevronDown className="w-3 h-3 -rotate-90" />
                         </span>
@@ -219,7 +219,7 @@ function RidesContent() {
           </motion.div>
 
           <div className="mt-16 text-center">
-            <button className="inline-flex items-center gap-3 px-12 py-4 bg-white border border-zinc-100 rounded-full font-black text-xs text-zinc-500 hover:text-primary hover:border-primary transition-all uppercase tracking-widest group">
+            <button className="inline-flex items-center gap-3 px-12 py-4 bg-white border border-zinc-100 rounded-full text-xs text-zinc-500 hover:text-primary hover:border-primary transition-all uppercase tracking-widest group">
               Load More Attractions
               <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
             </button>
@@ -232,7 +232,7 @@ function RidesContent() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-end justify-between gap-6 mb-16">
             <div className="max-w-2xl">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest mb-4">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] uppercase tracking-widest mb-4">
                 Guest Favorites
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-secondary leading-tight uppercase tracking-tight">
@@ -240,7 +240,7 @@ function RidesContent() {
                 Rides This Week
               </h2>
             </div>
-            <Link href="#all" className="text-xs font-black text-primary uppercase tracking-widest hover:translate-x-2 transition-transform flex items-center gap-2 mb-4">
+            <Link href="#all" className="text-xs text-primary uppercase tracking-widest hover:translate-x-2 transition-transform flex items-center gap-2 mb-4">
               View All Rides <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -260,17 +260,17 @@ function RidesContent() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 
                 <div className="absolute top-8 left-8">
-                  <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 text-white text-[10px] font-black uppercase tracking-widest">
+                  <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 text-white text-[10px] uppercase tracking-widest">
                     <Star className="w-3 h-3 fill-accent text-accent" />
                     Top Rated
                   </div>
                 </div>
 
                 <div className="absolute bottom-10 left-10 right-10">
-                  <p className="text-primary text-[10px] font-black uppercase tracking-widest mb-2">{ride.category}</p>
+                  <p className="text-primary text-[10px] uppercase tracking-widest mb-2">{ride.category}</p>
                   <h3 className="text-3xl font-black text-white uppercase leading-none mb-4">{ride.title}</h3>
-                  <p className="text-white/70 text-sm font-bold mb-6 line-clamp-2">{ride.desc}</p>
-                    <Link href="/book" className="inline-flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-primary-dark transition-all shadow-xl shadow-primary/20">
+                  <p className="text-white/70 text-sm mb-6 line-clamp-2">{ride.desc}</p>
+                    <Link href="/book" className="inline-flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-full text-[10px] uppercase tracking-widest hover:bg-primary-dark transition-all shadow-xl shadow-primary/20">
                       Fast Pass Booking
                     </Link>
                   </div>
@@ -294,20 +294,20 @@ function RidesContent() {
                 <div className="absolute inset-0 bg-gradient-to-r from-secondary/40 to-transparent" />
                 <div className="absolute bottom-10 left-10">
                   <div className="bg-accent text-foreground px-6 py-4 rounded-3xl shadow-xl">
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-70 mb-1">Starting from</p>
-                    <p className="text-3xl font-black italic tracking-tighter leading-none">₹399.00</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] opacity-70 mb-1">Starting from</p>
+                    <p className="text-3xl italic tracking-tighter leading-none">₹399.00</p>
                   </div>
                 </div>
               </div>
               
               {/* Right Side: Content */}
               <div className="lg:w-1/2 p-12 md:p-20 flex flex-col justify-center">
-                <span className="text-primary text-xs font-black uppercase tracking-widest mb-6 block">Exclusive Deals</span>
+                <span className="text-primary text-xs uppercase tracking-widest mb-6 block">Exclusive Deals</span>
                 <h2 className="text-4xl md:text-5xl font-black text-secondary leading-[1.1] uppercase tracking-tight mb-8">
                   Unlock More Fun <br />
                   With Our Passes
                 </h2>
-                <p className="text-zinc-500 font-bold text-lg mb-10 leading-relaxed">
+                <p className="text-zinc-500 text-lg mb-10 leading-relaxed">
                   Get the best value for your visit with our specially curated packages. 
                   Whether you're visiting with family, friends, or a large group, 
                   we have the perfect plan to make your day unforgettable.
@@ -316,13 +316,13 @@ function RidesContent() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link 
                     href="/packages" 
-                    className="px-10 py-5 bg-primary text-white rounded-full font-black text-xs uppercase tracking-widest shadow-xl hover:bg-primary-dark transition-all text-center"
+                    className="px-10 py-5 bg-primary text-white rounded-full text-xs uppercase tracking-widest shadow-xl hover:bg-primary-dark transition-all text-center"
                   >
                     View All Packages
                   </Link>
                   <Link 
                     href="/book" 
-                    className="px-10 py-5 bg-muted text-secondary rounded-full font-black text-xs uppercase tracking-widest hover:bg-zinc-100 transition-all text-center border border-zinc-100"
+                    className="px-10 py-5 bg-muted text-secondary rounded-full text-xs uppercase tracking-widest hover:bg-zinc-100 transition-all text-center border border-zinc-100"
                   >
                     Book Tickets
                   </Link>

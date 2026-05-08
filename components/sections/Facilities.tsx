@@ -50,7 +50,7 @@ const Facilities = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-lg text-zinc-500 font-bold"
+              className="text-lg text-zinc-500"
             >
               Everything you need for a perfect day out.
             </motion.p>
@@ -76,7 +76,7 @@ const Facilities = () => {
                 <h3 className={`text-sm md:text-base font-black ${item.color} leading-tight mb-3`}>
                   {item.title}
                 </h3>
-                <p className="text-[11px] font-bold text-zinc-400 leading-relaxed max-w-[140px]">
+                <p className="text-[11px] text-zinc-400 leading-relaxed max-w-[140px]">
                   {item.desc}
                 </p>
               </motion.div>

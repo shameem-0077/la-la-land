@@ -115,7 +115,7 @@ const BlogPage = () => {
                 The <span className="text-primary">Adventure</span> <br />
                 Journal
               </h1>
-              <p className="text-lg md:text-2xl text-white/80 font-bold max-w-xl mx-auto lg:mx-0">
+              <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
                 Stories, tips, and updates from the heart of La La Land. Stay tuned for the latest thrills and family fun.
               </p>
             </div>
@@ -144,7 +144,7 @@ const BlogPage = () => {
                 placeholder="Search stories..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-6 py-4 rounded-2xl bg-muted/50 border-none focus:ring-2 focus:ring-primary font-bold text-secondary placeholder:text-zinc-400"
+                className="w-full pl-12 pr-6 py-4 rounded-2xl bg-muted/50 border-none focus:ring-2 focus:ring-primary text-secondary placeholder:text-zinc-400"
               />
             </div>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -152,7 +152,7 @@ const BlogPage = () => {
                 <button 
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all ${
+                  className={`px-6 py-3 rounded-xl text-[10px] uppercase tracking-widest transition-all ${
                     activeCategory === cat 
                       ? "bg-primary text-white shadow-lg" 
                       : "bg-muted text-secondary hover:bg-secondary hover:text-white"
@@ -183,18 +183,18 @@ const BlogPage = () => {
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute top-8 left-8">
-                  <span className="px-6 py-3 bg-primary text-white font-black text-xs uppercase tracking-widest rounded-full shadow-2xl">
+                  <span className="px-6 py-3 bg-primary text-white text-xs uppercase tracking-widest rounded-full shadow-2xl">
                     Featured Story
                   </span>
                 </div>
               </div>
               <div className="lg:w-2/5 p-10 md:p-16 flex flex-col justify-center">
                 <div className="flex items-center gap-6 mb-6">
-                  <div className="flex items-center gap-2 text-zinc-400 font-black text-xs uppercase tracking-widest">
+                  <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest">
                     <Calendar className="w-4 h-4 text-primary" />
                     {featuredPost.date}
                   </div>
-                  <div className="flex items-center gap-2 text-zinc-400 font-black text-xs uppercase tracking-widest">
+                  <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest">
                     <User className="w-4 h-4 text-primary" />
                     {featuredPost.author}
                   </div>
@@ -204,14 +204,14 @@ const BlogPage = () => {
                   {featuredPost.title}
                 </h2>
                 
-                <p className="text-zinc-500 font-bold mb-10 text-lg leading-relaxed">
+                <p className="text-zinc-500 mb-10 text-lg leading-relaxed">
                   {featuredPost.excerpt}
                 </p>
 
                 <div>
                   <Link 
                     href={`/blogs/${featuredPost.slug}`}
-                    className="inline-flex items-center gap-4 bg-primary text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-[0.2em] hover:bg-primary-dark transition-all shadow-xl group/btn"
+                    className="inline-flex items-center gap-4 bg-primary text-white px-10 py-5 rounded-full text-xs uppercase tracking-[0.2em] hover:bg-primary-dark transition-all shadow-xl group/btn"
                   >
                     Read Featured Story
                     <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
@@ -238,7 +238,7 @@ const BlogPage = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute top-6 left-6">
-                    <span className="px-4 py-2 bg-accent text-foreground font-black text-[10px] uppercase tracking-widest rounded-full shadow-lg">
+                    <span className="px-4 py-2 bg-accent text-foreground text-[10px] uppercase tracking-widest rounded-full shadow-lg">
                       {post.category}
                     </span>
                   </div>
@@ -246,11 +246,11 @@ const BlogPage = () => {
                 
                 <div className="p-8 md:p-10 flex flex-col flex-grow">
                   <div className="flex items-center gap-6 mb-4">
-                    <div className="flex items-center gap-2 text-zinc-400 font-bold text-xs uppercase tracking-wider">
+                    <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-wider">
                       <Calendar className="w-4 h-4 text-primary" />
                       {post.date}
                     </div>
-                    <div className="flex items-center gap-2 text-zinc-400 font-bold text-xs uppercase tracking-wider">
+                    <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-wider">
                       <User className="w-4 h-4 text-primary" />
                       {post.author}
                     </div>
@@ -260,14 +260,14 @@ const BlogPage = () => {
                     {post.title}
                   </h3>
                   
-                  <p className="text-zinc-500 font-bold mb-8 line-clamp-3 leading-relaxed">
+                  <p className="text-zinc-500 mb-8 line-clamp-3 leading-relaxed">
                     {post.excerpt}
                   </p>
 
                   <div className="mt-auto">
                     <Link 
                       href={`/blogs/${post.slug}`}
-                      className="inline-flex items-center gap-3 text-secondary font-black text-xs uppercase tracking-[0.2em] group/btn"
+                      className="inline-flex items-center gap-3 text-secondary text-xs uppercase tracking-[0.2em] group/btn"
                     >
                       Read Full Story
                       <div className="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:text-white transition-all duration-300">
@@ -282,11 +282,11 @@ const BlogPage = () => {
 
           {/* Pagination Placeholder */}
           <div className="mt-20 flex justify-center items-center gap-4">
-            <button className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center text-secondary font-black hover:bg-primary hover:text-white transition-all">1</button>
-            <button className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center text-secondary font-black hover:bg-primary hover:text-white transition-all">2</button>
-            <button className="w-14 h-14 rounded-2xl bg-zinc-100 flex items-center justify-center text-secondary font-black hover:bg-primary hover:text-white transition-all">3</button>
-            <span className="text-zinc-300 font-black">...</span>
-            <button className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center text-secondary font-black hover:bg-primary hover:text-white transition-all">10</button>
+            <button className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all">1</button>
+            <button className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all">2</button>
+            <button className="w-14 h-14 rounded-2xl bg-zinc-100 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all">3</button>
+            <span className="text-zinc-300">...</span>
+            <button className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all">10</button>
           </div>
         </div>
       </section>

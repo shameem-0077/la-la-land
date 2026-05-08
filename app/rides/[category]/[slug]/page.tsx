@@ -70,7 +70,7 @@ export default function RideDetailPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ff7d00] text-white text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-xl">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ff7d00] text-white text-[10px] uppercase tracking-[0.2em] mb-6 shadow-xl">
               <Waves className="w-3 h-3 fill-white" />
               {ride.category}
             </span>
@@ -78,15 +78,15 @@ export default function RideDetailPage() {
               {ride.title}
             </h1>
             <div className="mb-8">
-               <p className="text-xl md:text-2xl text-[#fbbf24] font-black uppercase tracking-wider mb-2">{ride.tagline}</p>
-               <p className="text-lg text-white/90 font-bold max-w-xl leading-relaxed">{ride.desc}</p>
+               <p className="text-xl md:text-2xl text-[#fbbf24] uppercase tracking-wider mb-2">{ride.tagline}</p>
+               <p className="text-lg text-white/90 max-w-xl leading-relaxed">{ride.desc}</p>
             </div>
             
             <div className="flex flex-wrap gap-4">
-              <Link href="#tickets" className="flex items-center gap-3 bg-[#2d31fa] hover:bg-rose-600 text-white font-black py-4 px-10 rounded-full shadow-2xl transition-all text-xs tracking-widest uppercase">
+              <Link href="#tickets" className="flex items-center gap-3 bg-[#2d31fa] hover:bg-rose-600 text-white py-4 px-10 rounded-full shadow-2xl transition-all text-xs tracking-widest uppercase">
                 Book Tickets <Ticket className="w-5 h-5 fill-white" />
               </Link>
-              <Link href="#whatsapp" className="flex items-center gap-3 bg-white hover:bg-zinc-100 text-[#ff7d00] font-black py-4 px-10 rounded-full shadow-2xl transition-all text-xs tracking-widest uppercase">
+              <Link href="#whatsapp" className="flex items-center gap-3 bg-white hover:bg-zinc-100 text-[#ff7d00] py-4 px-10 rounded-full shadow-2xl transition-all text-xs tracking-widest uppercase">
                 Chat on WhatsApp <MessageCircle className="w-5 h-5 fill-[#22c55e] text-[#22c55e]" />
               </Link>
             </div>
@@ -117,7 +117,7 @@ export default function RideDetailPage() {
                 <div className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-all">
                   {item.icon}
                 </div>
-                <span className="text-sm font-black text-zinc-500 uppercase tracking-widest">{item.label}</span>
+                <span className="text-sm text-zinc-500 uppercase tracking-widest">{item.label}</span>
               </div>
             ))}
           </div>
@@ -136,10 +136,10 @@ export default function RideDetailPage() {
                   for Every Moment
                 </h2>
               </div>
-              <div className="space-y-8 text-lg text-zinc-500 font-bold leading-relaxed">
+              <div className="space-y-8 text-lg text-zinc-500 leading-relaxed">
                 <p>{ride.details}</p>
                 <p>{ride.extraText}</p>
-                <p className="text-secondary font-black italic">
+                <p className="text-secondary italic">
                   With fun, refreshment, and leisure coming together, the {ride.title} promises moments of happiness, rejuvenation, and memorable downtime during your visit to the park.
                 </p>
               </div>
@@ -166,8 +166,8 @@ export default function RideDetailPage() {
                     {spec.icon}
                   </div>
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 block mb-1">{spec.label}</span>
-                    <span className="text-sm font-black text-primary whitespace-pre-line">{spec.value}</span>
+                    <span className="text-[10px] uppercase tracking-widest text-zinc-400 block mb-1">{spec.label}</span>
+                    <span className="text-sm text-primary whitespace-pre-line">{spec.value}</span>
                   </div>
                </div>
              ))}
@@ -178,7 +178,7 @@ export default function RideDetailPage() {
       {/* Moments Gallery */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="container mx-auto px-4 text-center">
-           <span className="text-secondary font-black uppercase tracking-widest text-sm mb-4 block">Experience Moments</span>
+           <span className="text-secondary uppercase tracking-widest text-sm mb-4 block">Experience Moments</span>
            <h2 className="text-4xl md:text-5xl font-black text-primary mb-16 uppercase">Memories That Make a Splash</h2>
            
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -186,7 +186,7 @@ export default function RideDetailPage() {
                 <div key={i} className="group relative rounded-[40px] overflow-hidden shadow-xl aspect-[4/3]">
                    <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-8">
-                      <span className="text-white font-black uppercase tracking-widest text-sm bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30">
+                      <span className="text-white uppercase tracking-widest text-sm bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30">
                         {item.title}
                       </span>
                    </div>

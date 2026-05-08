@@ -63,7 +63,7 @@ const WhyChoose = () => {
               <div className="w-3 h-3 rounded-full bg-primary rotate-45" />
             </div>
           </div>
-          <p className="text-lg text-zinc-500 font-bold max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
             We combine the thrill of adventure with the comfort of world-class facilities to ensure your day is perfect.
           </p>
         </div>
@@ -82,7 +82,7 @@ const WhyChoose = () => {
               <div className={`w-24 h-24 rounded-3xl ${item.bgColor} flex items-center justify-center ${item.color} mb-6 shadow-sm border border-white`}>
                 {item.icon}
               </div>
-              <span className="text-sm font-black text-zinc-400 uppercase tracking-widest mb-1">
+              <span className="text-sm text-zinc-400 uppercase tracking-widest mb-1">
                 {item.title}
               </span>
               <h3 className={`text-base font-black ${item.color} leading-tight`}>

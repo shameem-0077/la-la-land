@@ -28,14 +28,14 @@ const AboutHero = () => {
           transition={{ duration: 0.8 }}
           className="max-w-2xl"
         >
-          <span className="inline-block px-5 py-2 rounded-full bg-accent text-foreground text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-xl shadow-accent/20">
+          <span className="inline-block px-5 py-2 rounded-full bg-accent text-foreground text-[10px] uppercase tracking-[0.2em] mb-6 shadow-xl shadow-accent/20">
             Discover Our Story
           </span>
           <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.95] mb-8 tracking-tighter">
             Adventure, Fun & <br />
             Memories...
           </h1>
-          <p className="text-lg md:text-xl text-white/90 font-bold mb-10 max-w-lg leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 mb-10 max-w-lg leading-relaxed">
             La La Land Adventure Park is Wayanad's most loved destination for thrill, joy and unforgettable experiences.
           </p>
           
@@ -43,7 +43,7 @@ const AboutHero = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link 
                 href="/book" 
-                className="flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-black py-4 px-10 rounded-full shadow-2xl shadow-primary/40 transition-all text-xs tracking-widest uppercase"
+                className="flex items-center gap-3 bg-primary hover:bg-primary-dark text-white py-4 px-10 rounded-full shadow-2xl shadow-primary/40 transition-all text-xs tracking-widest uppercase"
               >
                 Book Tickets
                 <Ticket className="w-5 h-5 fill-white" />

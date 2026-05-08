@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -37,8 +37,8 @@ const BookPage = () => {
     senior: 0
   });
 
-  const [selectedDate, setSelectedDate] = useState("07-05-2026");
-  const [selectedDateFull, setSelectedDateFull] = useState("Thu, 07 May 2026");
+  const [selectedDate, setSelectedDate] = useState("21-05-2025");
+  const [selectedDateFull, setSelectedDateFull] = useState("Thu, 21 May 2025");
 
   const [formData, setFormData] = useState({
     fullName: "Shameem abdulkareem",
@@ -98,11 +98,49 @@ const BookPage = () => {
 
   // Simple calendar generator for May 2025
   const daysInMonth = 31;
-  const startDay = 4; // Thursday for May 1st 2025? (Wait, May 1st 2025 is Thursday)
+  const startDay = 4; // Thursday for May 1st 2025
   const calendarDays = Array.from({ length: 42 }, (_, i) => {
     const day = i - startDay + 1;
     return day > 0 && day <= daysInMonth ? day : null;
   });
+
+  const handleDateSelect = (day: number) => {
+    const dateStr = `${day < 10 ? '0' + day : day}-05-2025`;
+    setSelectedDate(dateStr);
+    
+    // Thu, 21 May 2025 format
+    const dateObj = new Date(2025, 4, day);
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'short', 
+      day: '2-digit', 
+      month: 'short', 
+      year: 'numeric' 
+    };
+    setSelectedDateFull(dateObj.toLocaleDateString('en-US', options));
+  };
+
+  // Sync full date when short date is typed manually
+  useEffect(() => {
+    const parts = selectedDate.split('-');
+    if (parts.length === 3) {
+      const day = parseInt(parts[0]);
+      const month = parseInt(parts[1]) - 1;
+      const year = parseInt(parts[2]);
+      
+      if (!isNaN(day) && !isNaN(month) && !isNaN(year) && year > 2000) {
+        const dateObj = new Date(year, month, day);
+        if (!isNaN(dateObj.getTime())) {
+          const options: Intl.DateTimeFormatOptions = { 
+            weekday: 'short', 
+            day: '2-digit', 
+            month: 'short', 
+            year: 'numeric' 
+          };
+          setSelectedDateFull(dateObj.toLocaleDateString('en-US', options));
+        }
+      }
+    }
+  }, [selectedDate]);
 
   return (
     <main className="min-h-screen bg-zinc-50 flex flex-col">
@@ -132,7 +170,7 @@ const BookPage = () => {
                   Book Your Adventure <br />
                   in Just a Few Clicks!
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 font-bold mb-10 max-w-2xl">
+                <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl">
                   Get ready for unlimited fun with 40+ activities, exciting water rides, adventure zones & more.
                 </p>
               </>
@@ -150,7 +188,7 @@ const BookPage = () => {
                     <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-2 uppercase tracking-tight">
                       BOOK YOUR PASS
                     </h1>
-                    <p className="text-sm md:text-base text-white/70 font-black uppercase tracking-widest mb-10">
+                    <p className="text-sm md:text-base text-white/70 uppercase tracking-widest mb-10">
                       40+ Activities • Water Rides • Adventure Zones • Kids Area
                     </p>
                    </div>
@@ -158,7 +196,7 @@ const BookPage = () => {
               </>
             )}
 
-            <div className="flex flex-wrap gap-6 text-white font-black text-[10px] md:text-xs uppercase tracking-widest">
+            <div className="flex flex-wrap gap-6 text-white text-[10px] md:text-xs uppercase tracking-widest">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-success" />
                 Instant Confirmation
@@ -196,16 +234,16 @@ const BookPage = () => {
               
               {/* Step 1 */}
               <div className="flex flex-col items-center gap-3 relative z-10 flex-1 group">
-                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-3xl flex items-center justify-center font-black transition-all duration-700 ${
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-3xl flex items-center justify-center transition-all duration-700 ${
                   step >= 1 ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-110' : 'bg-zinc-100 text-zinc-400'
                 }`}>
                   <Ticket className="w-5 h-5 md:w-7 md:h-7" />
                 </div>
                 <div className="text-center">
-                  <p className={`text-[10px] md:text-[12px] font-black uppercase tracking-widest transition-colors duration-500 ${step >= 1 ? 'text-secondary' : 'text-zinc-400'}`}>
+                  <p className={`text-[10px] md:text-[12px] uppercase tracking-widest transition-colors duration-500 ${step >= 1 ? 'text-secondary' : 'text-zinc-400'}`}>
                     Select Tickets
                   </p>
-                  <p className="hidden md:block text-[10px] font-bold text-zinc-400 mt-1">Ticket & Date</p>
+                  <p className="hidden md:block text-[10px] text-zinc-400 mt-1">Ticket & Date</p>
                 </div>
               </div>
 
@@ -219,16 +257,16 @@ const BookPage = () => {
 
               {/* Step 2 */}
               <div className="flex flex-col items-center gap-3 relative z-10 flex-1 group">
-                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-3xl flex items-center justify-center font-black transition-all duration-700 ${
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-3xl flex items-center justify-center transition-all duration-700 ${
                   step >= 2 ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-110' : 'bg-zinc-100 text-zinc-400'
                 }`}>
                   <User className="w-5 h-5 md:w-7 md:h-7" />
                 </div>
                 <div className="text-center">
-                  <p className={`text-[10px] md:text-[12px] font-black uppercase tracking-widest transition-colors duration-500 ${step >= 2 ? 'text-secondary' : 'text-zinc-400'}`}>
+                  <p className={`text-[10px] md:text-[12px] uppercase tracking-widest transition-colors duration-500 ${step >= 2 ? 'text-secondary' : 'text-zinc-400'}`}>
                     Visitor Info
                   </p>
-                  <p className="hidden md:block text-[10px] font-bold text-zinc-400 mt-1">Your Details</p>
+                  <p className="hidden md:block text-[10px] text-zinc-400 mt-1">Your Details</p>
                 </div>
               </div>
 
@@ -242,16 +280,16 @@ const BookPage = () => {
 
               {/* Step 3 */}
               <div className="flex flex-col items-center gap-3 relative z-10 flex-1 group">
-                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-3xl flex items-center justify-center font-black transition-all duration-700 ${
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-3xl flex items-center justify-center transition-all duration-700 ${
                   step >= 3 ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-110' : 'bg-zinc-100 text-zinc-400'
                 }`}>
                   <ShieldCheck className="w-5 h-5 md:w-7 md:h-7" />
                 </div>
                 <div className="text-center">
-                  <p className={`text-[10px] md:text-[12px] font-black uppercase tracking-widest transition-colors duration-500 ${step >= 3 ? 'text-secondary' : 'text-zinc-400'}`}>
+                  <p className={`text-[10px] md:text-[12px] uppercase tracking-widest transition-colors duration-500 ${step >= 3 ? 'text-secondary' : 'text-zinc-400'}`}>
                     Secure Pay
                   </p>
-                  <p className="hidden md:block text-[10px] font-bold text-zinc-400 mt-1">Complete Pay</p>
+                  <p className="hidden md:block text-[10px] text-zinc-400 mt-1">Complete Pay</p>
                 </div>
               </div>
 
@@ -276,7 +314,7 @@ const BookPage = () => {
                       </div>
                       <div>
                         <h2 className="text-2xl font-black text-secondary uppercase leading-none">Select Tickets</h2>
-                        <p className="text-muted-foreground font-bold text-sm mt-1">Choose your ticket type and number of visitors</p>
+                        <p className="text-muted-foreground text-sm mt-1">Choose your ticket type and number of visitors</p>
                       </div>
                     </div>
 
@@ -289,7 +327,7 @@ const BookPage = () => {
                           } ${ticket.popular ? 'shadow-lg' : ''}`}
                         >
                           {ticket.popular && (
-                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-foreground px-4 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
+                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-foreground px-4 py-1 rounded-full text-[8px] uppercase tracking-widest">
                               Popular
                             </div>
                           )}
@@ -299,11 +337,11 @@ const BookPage = () => {
                           </div>
                           
                           <h3 className="text-lg font-black text-secondary uppercase leading-none">{ticket.title}</h3>
-                          <p className="text-[10px] font-bold text-zinc-400 mt-1 mb-4">{ticket.subtitle}</p>
+                          <p className="text-[10px] text-zinc-400 mt-1 mb-4">{ticket.subtitle}</p>
                           
                           <div className="flex items-center justify-center gap-2 mb-6">
-                            <span className="text-xs font-bold text-zinc-300 line-through">₹{ticket.originalPrice}</span>
-                            <span className="text-2xl font-black text-primary">₹{ticket.price}</span>
+                             <span className="text-xs text-zinc-300 line-through">₹{ticket.originalPrice}</span>
+                            <span className="text-2xl text-primary">₹{ticket.price}</span>
                           </div>
 
                           <div className="flex items-center justify-center gap-6">
@@ -313,7 +351,7 @@ const BookPage = () => {
                             >
                               <Minus className="w-4 h-4" />
                             </button>
-                            <span className="text-xl font-black text-secondary w-6">{counts[ticket.id as keyof typeof counts]}</span>
+                            <span className="text-xl text-secondary w-6">{counts[ticket.id as keyof typeof counts]}</span>
                             <button 
                               onClick={() => updateCount(ticket.id, 1)}
                               className="w-10 h-10 rounded-full bg-zinc-50 border border-zinc-100 flex items-center justify-center text-zinc-400 hover:bg-primary hover:text-white transition-all"
@@ -340,19 +378,19 @@ const BookPage = () => {
                             placeholder="dd-mm-yyyy"
                             value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)}
-                            className="w-full px-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-secondary font-bold text-secondary"
+                            className="w-full px-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-secondary text-secondary"
                           />
                           <CalendarIcon className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
                         </div>
 
                         <div className="space-y-3">
-                          <p className="text-[10px] font-bold text-zinc-400 flex gap-2">
+                          <p className="text-[10px] text-zinc-400 flex gap-2">
                             <span className="text-success">•</span> Only kids with height between 90-120 CM are allowed with Kids pass.
                           </p>
-                          <p className="text-[10px] font-bold text-zinc-400 flex gap-2">
+                          <p className="text-[10px] text-zinc-400 flex gap-2">
                             <span className="text-success">•</span> Infants (below 90 CM) enter FREE.
                           </p>
-                          <p className="text-[10px] font-bold text-zinc-400 flex gap-2">
+                          <p className="text-[10px] text-zinc-400 flex gap-2">
                             <span className="text-success">•</span> Physically challenged visitors enter FREE.
                           </p>
                         </div>
@@ -368,7 +406,7 @@ const BookPage = () => {
                         
                         <div className="grid grid-cols-7 gap-2 mb-2">
                           {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(d => (
-                            <div key={d} className="text-[8px] font-black text-zinc-300 text-center">{d}</div>
+                            <div key={d} className="text-[8px] text-zinc-300 text-center">{d}</div>
                           ))}
                         </div>
                         
@@ -377,9 +415,11 @@ const BookPage = () => {
                             <button 
                               key={i}
                               disabled={!day}
-                              className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-all ${
-                                day === 21 ? 'bg-primary text-white shadow-lg' : 
-                                day ? 'text-secondary hover:bg-primary/5' : 'text-transparent cursor-default'
+                              onClick={() => day && handleDateSelect(day)}
+                              className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] transition-all ${
+                                day && parseInt(selectedDate.split('-')[0]) === day 
+                                  ? 'bg-primary text-white shadow-lg' 
+                                  : day ? 'text-secondary hover:bg-primary/5' : 'text-transparent cursor-default'
                               }`}
                             >
                               {day}
@@ -391,7 +431,7 @@ const BookPage = () => {
 
                     <button 
                       onClick={() => setStep(2)}
-                      className="w-full mt-12 py-5 bg-primary text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center gap-3 group shadow-xl shadow-primary/20"
+                      className="w-full mt-12 py-5 bg-primary text-white rounded-full text-xs uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center gap-3 group shadow-xl shadow-primary/20"
                     >
                       Proceed to Checkout
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -411,13 +451,13 @@ const BookPage = () => {
                       </div>
                       <div>
                         <h2 className="text-2xl font-black text-secondary uppercase leading-none">Your Details</h2>
-                        <p className="text-zinc-400 font-bold text-sm mt-1">Please enter your details to continue</p>
+                        <p className="text-zinc-400 text-sm mt-1">Please enter your details to continue</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-secondary uppercase tracking-widest ml-1">Full Name *</label>
+                        <label className="text-[10px] text-secondary uppercase tracking-widest ml-1">Full Name *</label>
                         <div className="relative">
                           <User className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-300" />
                           <input 
@@ -426,12 +466,12 @@ const BookPage = () => {
                             value={formData.fullName}
                             onChange={handleInputChange}
                             placeholder="Shameem abdulkareem"
-                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-bold text-secondary"
+                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-secondary uppercase tracking-widest ml-1">Email Address *</label>
+                        <label className="text-[10px] text-secondary uppercase tracking-widest ml-1">Email Address *</label>
                         <div className="relative">
                           <Mail className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-300" />
                           <input 
@@ -440,12 +480,12 @@ const BookPage = () => {
                             value={formData.email}
                             onChange={handleInputChange}
                             placeholder="shameemoff52@gmail.com"
-                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-bold text-secondary"
+                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-secondary uppercase tracking-widest ml-1">Phone Number *</label>
+                        <label className="text-[10px] text-secondary uppercase tracking-widest ml-1">Phone Number *</label>
                         <div className="relative">
                           <Phone className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-300" />
                           <input 
@@ -454,12 +494,12 @@ const BookPage = () => {
                             value={formData.phone}
                             onChange={handleInputChange}
                             placeholder="6238859953"
-                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-bold text-secondary"
+                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-secondary uppercase tracking-widest ml-1">City / Town *</label>
+                        <label className="text-[10px] text-secondary uppercase tracking-widest ml-1">City / Town *</label>
                         <div className="relative">
                           <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-300" />
                           <input 
@@ -468,12 +508,12 @@ const BookPage = () => {
                             value={formData.city}
                             onChange={handleInputChange}
                             placeholder="koottanad"
-                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-bold text-secondary"
+                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
                       </div>
                       <div className="md:col-span-2 space-y-2">
-                        <label className="text-[10px] font-black text-secondary uppercase tracking-widest ml-1">Address *</label>
+                        <label className="text-[10px] text-secondary uppercase tracking-widest ml-1">Address *</label>
                         <div className="relative">
                           <Home className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-300" />
                           <input 
@@ -482,17 +522,17 @@ const BookPage = () => {
                             value={formData.address}
                             onChange={handleInputChange}
                             placeholder="pattambi"
-                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-bold text-secondary"
+                            className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-secondary uppercase tracking-widest ml-1">State *</label>
+                        <label className="text-[10px] text-secondary uppercase tracking-widest ml-1">State *</label>
                         <select 
                           name="state"
                           value={formData.state}
                           onChange={handleInputChange}
-                          className="w-full px-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-bold text-secondary appearance-none"
+                          className="w-full px-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary appearance-none"
                         >
                           <option>Kerala</option>
                           <option>Tamil Nadu</option>
@@ -500,19 +540,19 @@ const BookPage = () => {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-secondary uppercase tracking-widest ml-1">Pincode *</label>
+                        <label className="text-[10px] text-secondary uppercase tracking-widest ml-1">Pincode *</label>
                         <input 
                           type="text" 
                           name="pincode"
                           value={formData.pincode}
                           onChange={handleInputChange}
                           placeholder="679303"
-                          className="w-full px-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-bold text-secondary"
+                          className="w-full px-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                         />
                       </div>
                     </div>
 
-                    <div className="mt-8 p-4 bg-success/5 rounded-2xl flex items-center gap-4 text-[10px] font-bold text-success">
+                    <div className="mt-8 p-4 bg-success/5 rounded-2xl flex items-center gap-4 text-[10px] text-success">
                       <div className="w-6 h-6 rounded-full bg-success flex items-center justify-center text-white shrink-0">
                         <CheckCircle2 className="w-3 h-3" />
                       </div>
@@ -522,13 +562,13 @@ const BookPage = () => {
                     <div className="mt-12 flex items-center justify-between gap-6">
                       <button 
                         onClick={() => setStep(1)}
-                        className="px-10 py-5 border-2 border-zinc-100 rounded-full font-black text-xs uppercase tracking-widest text-zinc-400 hover:border-secondary hover:text-secondary transition-all flex items-center gap-2"
+                        className="px-10 py-5 border-2 border-zinc-100 rounded-full text-xs uppercase tracking-widest text-zinc-400 hover:border-secondary hover:text-secondary transition-all flex items-center gap-2"
                       >
                         ← Back
                       </button>
                       <button 
                         onClick={() => setStep(3)}
-                        className="flex-grow py-5 bg-primary text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center gap-3 group shadow-xl shadow-primary/20"
+                        className="flex-grow py-5 bg-primary text-white rounded-full text-xs uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center gap-3 group shadow-xl shadow-primary/20"
                       >
                         Continue to Payment
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -546,8 +586,8 @@ const BookPage = () => {
                       <Users className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-[8px] font-black text-zinc-400 uppercase tracking-widest">Adults</p>
-                      <p className="text-sm font-black text-secondary">₹{counts.adult * 799}</p>
+                      <p className="text-[8px] text-zinc-400 uppercase tracking-widest">Adults</p>
+                      <p className="text-sm text-secondary">₹{counts.adult * 799}</p>
                     </div>
                   </div>
                   <div className="w-[1px] h-10 bg-zinc-100 hidden md:block" />
@@ -556,8 +596,8 @@ const BookPage = () => {
                       <span>👦</span>
                     </div>
                     <div>
-                      <p className="text-[8px] font-black text-zinc-400 uppercase tracking-widest">Kids (90-120cm)</p>
-                      <p className="text-sm font-black text-secondary">₹{counts.kids * 599}</p>
+                      <p className="text-[8px] text-zinc-400 uppercase tracking-widest">Kids (90-120cm)</p>
+                      <p className="text-sm text-secondary">₹{counts.kids * 599}</p>
                     </div>
                   </div>
                   <div className="w-[1px] h-10 bg-zinc-100 hidden md:block" />
@@ -566,8 +606,8 @@ const BookPage = () => {
                       <span>👵</span>
                     </div>
                     <div>
-                      <p className="text-[8px] font-black text-zinc-400 uppercase tracking-widest">Senior Citizen</p>
-                      <p className="text-sm font-black text-secondary">₹{counts.senior * 300}</p>
+                      <p className="text-[8px] text-zinc-400 uppercase tracking-widest">Senior Citizen</p>
+                      <p className="text-sm text-secondary">₹{counts.senior * 300}</p>
                     </div>
                   </div>
                   <div className="w-[1px] h-10 bg-zinc-100 hidden md:block" />
@@ -576,8 +616,8 @@ const BookPage = () => {
                       <Sparkles className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-[8px] font-black text-zinc-400 uppercase tracking-widest">Infant / Physically Challenged</p>
-                      <p className="text-sm font-black text-success">FREE</p>
+                      <p className="text-[8px] text-zinc-400 uppercase tracking-widest">Infant / Physically Challenged</p>
+                      <p className="text-sm text-success">FREE</p>
                     </div>
                   </div>
                 </div>
@@ -616,7 +656,7 @@ const BookPage = () => {
                           "Fun for All Age Groups",
                           "Safe, Clean & Family Friendly"
                         ].map((item, i) => (
-                          <li key={i} className="flex items-center gap-3 text-zinc-500 font-bold text-sm">
+                          <li key={i} className="flex items-center gap-3 text-zinc-500 text-sm">
                             <div className="w-5 h-5 rounded-full bg-success-soft flex items-center justify-center text-success">
                               <CheckCircle2 className="w-3 h-3" />
                             </div>
@@ -640,7 +680,7 @@ const BookPage = () => {
                       </div>
                       <div>
                         <h3 className="text-xl font-black text-secondary uppercase leading-none">Your Order Summary</h3>
-                        <p className="text-zinc-400 font-bold text-xs mt-1">Review your selected items</p>
+                        <p className="text-zinc-400 text-xs mt-1">Review your selected items</p>
                       </div>
                     </div>
 
@@ -649,8 +689,8 @@ const BookPage = () => {
                         <CalendarIcon className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">Visit Date</p>
-                        <p className="text-sm font-black text-secondary">{selectedDateFull}</p>
+                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest">Visit Date</p>
+                        <p className="text-sm text-secondary">{selectedDateFull}</p>
                       </div>
                     </div>
 
@@ -658,36 +698,36 @@ const BookPage = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <span className="text-lg">👤</span>
-                          <span className="text-xs font-bold text-zinc-500">Adults ({counts.adult})</span>
+                          <span className="text-xs text-zinc-500">Adults ({counts.adult})</span>
                         </div>
-                        <span className="text-xs font-black text-secondary">₹{counts.adult * 799}</span>
+                        <span className="text-xs text-secondary">₹{counts.adult * 799}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <span className="text-lg">👦</span>
-                          <span className="text-xs font-bold text-zinc-500">Kids ({counts.kids})</span>
+                          <span className="text-xs text-zinc-500">Kids ({counts.kids})</span>
                         </div>
-                        <span className="text-xs font-black text-secondary">₹{counts.kids * 599}</span>
+                        <span className="text-xs text-secondary">₹{counts.kids * 599}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <span className="text-lg">👵</span>
-                          <span className="text-xs font-bold text-zinc-500">Senior Citizen ({counts.senior})</span>
+                          <span className="text-xs text-zinc-500">Senior Citizen ({counts.senior})</span>
                         </div>
-                        <span className="text-xs font-black text-secondary">₹{counts.senior * 300}</span>
+                        <span className="text-xs text-secondary">₹{counts.senior * 300}</span>
                       </div>
                     </div>
 
                     <div className="pt-6 border-t border-dashed border-zinc-200 flex items-center justify-between">
-                      <span className="text-lg font-black text-secondary uppercase">Total Amount</span>
-                      <span className="text-2xl font-black text-success">₹{totalAmount}.00</span>
+                      <span className="text-lg text-secondary uppercase">Total Amount</span>
+                      <span className="text-2xl text-success">₹{totalAmount}.00</span>
                     </div>
 
                     <div className="p-4 bg-secondary/5 rounded-2xl flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-white shrink-0">
                         <Ticket className="w-5 h-5" />
                       </div>
-                      <p className="text-[9px] font-bold text-secondary leading-tight italic">
+                      <p className="text-[9px] text-secondary leading-tight italic">
                         Tickets are valid only for the selected date. Non-refundable & non-transferable.
                       </p>
                     </div>
@@ -697,8 +737,8 @@ const BookPage = () => {
                         <ShieldCheck className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-black text-success uppercase leading-none mb-1">SSL Secured Checkout</p>
-                        <p className="text-[9px] font-bold text-success leading-tight italic">Your payment details are 100% safe with us.</p>
+                        <p className="text-[10px] text-success uppercase leading-none mb-1">SSL Secured Checkout</p>
+                        <p className="text-[9px] text-success leading-tight italic">Your payment details are 100% safe with us.</p>
                       </div>
                     </div>
                   </motion.div>
@@ -713,13 +753,13 @@ const BookPage = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-black text-secondary uppercase leading-none">Need Help Booking?</h4>
-                    <p className="text-zinc-400 font-bold text-xs mt-1">Our team is here to help you!</p>
+                    <p className="text-zinc-400 text-xs mt-1">Our team is here to help you!</p>
                   </div>
                 </div>
                 
                 <a 
                   href="tel:+917511183000"
-                  className="flex items-center justify-center gap-3 py-5 rounded-2xl border-2 border-primary text-primary font-black text-sm transition-all hover:bg-primary/5"
+                  className="flex items-center justify-center gap-3 py-5 rounded-2xl border-2 border-primary text-primary text-sm transition-all hover:bg-primary/5"
                 >
                   <Phone className="w-5 h-5" />
                   Call us: +91 75111 83000
@@ -736,12 +776,12 @@ const BookPage = () => {
           <div className="bg-gradient-to-r from-primary via-accent to-secondary rounded-[50px] p-10 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
             <div className="relative z-10 max-w-xl text-center md:text-left">
                <h2 className="text-3xl md:text-5xl font-black text-white uppercase leading-none mb-4">Your Day of Fun Begins Here</h2>
-               <p className="text-white/80 font-bold mb-8">Adventure • Water Rides • Kids Play • Family Fun <br /> <span className="text-accent">Don't wait in line. Book online and save time!</span></p>
+               <p className="text-white/80 mb-8">Adventure • Water Rides • Kids Play • Family Fun <br /> <span className="text-accent">Don't wait in line. Book online and save time!</span></p>
                <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <button className="px-10 py-5 bg-accent text-foreground rounded-full font-black text-xs uppercase tracking-widest shadow-xl hover:bg-white transition-all flex items-center gap-2">
+                  <button className="px-10 py-5 bg-accent text-foreground rounded-full text-xs uppercase tracking-widest shadow-xl hover:bg-white transition-all flex items-center gap-2">
                     Book Tickets <Ticket className="w-4 h-4" />
                   </button>
-                  <button className="px-10 py-5 bg-white text-secondary rounded-full font-black text-xs uppercase tracking-widest shadow-xl hover:bg-secondary-soft transition-all flex items-center gap-2">
+                  <button className="px-10 py-5 bg-white text-secondary rounded-full text-xs uppercase tracking-widest shadow-xl hover:bg-secondary-soft transition-all flex items-center gap-2">
                     Chat on WhatsApp <MessageCircle className="w-4 h-4 text-success fill-success" />
                   </button>
                </div>
