@@ -1,0 +1,15 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Adventure Packages & Pricing | La La Land Wayanad",
+  description: "Affordable family and group packages for La La Land Adventure Park. View ticket prices for adults, kids, and senior citizens.",
+  keywords: ["La La Land ticket prices", "Wayanad park packages", "adventure park entry fee"],
+};
+
+export default function PackagesLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
+}
