@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "La La Land Adventure Park | Wayanad's Best Adventure Destination",
     description: "Experience 50+ thrilling rides, water activities, and family fun at La La Land Adventure Park in Wayanad.",
-    url: "https://lalalandadventurepark.com",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
     siteName: "La La Land Adventure Park",
     images: [
       {
