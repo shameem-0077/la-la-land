@@ -8,86 +8,27 @@ import { motion } from "framer-motion";
 
 const activityTypes = [
   {
-    title: "Water Activities",
+    title: "Water Rides",
     image: "/water_activities_image_1778049553201.png",
     color: "text-secondary",
-    icon: (
-      <svg viewBox="0 0 40 40" className="w-12 h-12">
-        <circle cx="20" cy="20" r="18" fill="#e0f2fe" />
-        <path d="M10 25 Q15 20 20 25 T30 25" stroke="#02a1a8" strokeWidth="2" fill="none" />
-        <path d="M12 28 Q16 23 20 28 T28 28" stroke="#02a1a8" strokeWidth="2" fill="none" opacity="0.6" />
-        <path d="M15 15 L25 15 L20 10 Z" fill="#02a1a8" />
-      </svg>
-    ),
     link: "/rides?category=water"
   },
   {
-    title: "Outdoor Activities",
+    title: "Outdoor Rides",
     image: "/park_hero_image_1778049530668.png",
     color: "text-accent",
-    icon: (
-      <svg viewBox="0 0 40 40" className="w-12 h-12">
-        <circle cx="20" cy="20" r="18" fill="#fff3cc" />
-        <path d="M20 10 L28 25 L12 25 Z" fill="#ffb902" />
-        <rect x="18" y="25" width="4" height="5" fill="#ffb902" />
-      </svg>
-    ),
     link: "/rides?category=adventure"
   },
   {
-    title: "Tower Activities",
-    image: "/rides_tower_activities_1778054789676.png",
-    color: "text-accent",
-    icon: (
-      <svg viewBox="0 0 40 40" className="w-12 h-12">
-        <circle cx="20" cy="20" r="18" fill="#fff3cc" />
-        <path d="M15 30 L20 10 L25 30" stroke="#ffb902" strokeWidth="2" fill="none" />
-        <rect x="18" y="15" width="4" height="4" fill="#ffb902" />
-        <line x1="12" y1="25" x2="28" y2="25" stroke="#ffb902" strokeWidth="1" />
-      </svg>
-    ),
-    link: "/rides?category=thrill"
-  },
-  {
-    title: "Kids Activities",
+    title: "Kids Rides",
     image: "/rides_kids_activities_1778055058230.png",
     color: "text-primary",
-    icon: (
-      <svg viewBox="0 0 40 40" className="w-12 h-12">
-        <circle cx="20" cy="20" r="18" fill="#edf7d8" />
-        <circle cx="20" cy="20" r="8" stroke="#6ea001" strokeWidth="2" fill="none" />
-        <circle cx="17" cy="18" r="1.5" fill="#6ea001" />
-        <circle cx="23" cy="18" r="1.5" fill="#6ea001" />
-        <path d="M17 23 Q20 26 23 23" stroke="#6ea001" strokeWidth="2" fill="none" />
-      </svg>
-    ),
     link: "/rides?category=kids"
   },
   {
-    title: "Rope Activities",
-    image: "/rides_rope_activities_1778054766682.png",
-    color: "text-accent",
-    icon: (
-      <svg viewBox="0 0 40 40" className="w-12 h-12">
-        <circle cx="20" cy="20" r="18" fill="#fff3cc" />
-        <circle cx="20" cy="20" r="8" stroke="#ffb902" strokeWidth="2" fill="none" />
-        <path d="M20 12 C24 12 28 16 28 20 C28 24 24 28 20 28 C16 28 12 24 12 20" stroke="#ffb902" strokeWidth="2" fill="none" />
-      </svg>
-    ),
-    link: "/rides?category=adventure"
-  },
-  {
-    title: "Amusement Activities",
+    title: "Add-ons",
     image: "/amusement_activities_image_1778049573930.png",
     color: "text-secondary",
-    icon: (
-      <svg viewBox="0 0 40 40" className="w-12 h-12">
-        <circle cx="20" cy="20" r="18" fill="#e0f2fe" />
-        <path d="M12 28 L20 12 L28 28 Z" stroke="#02a1a8" strokeWidth="2" fill="none" />
-        <circle cx="15" cy="28" r="2" fill="#02a1a8" />
-        <circle cx="25" cy="28" r="2" fill="#02a1a8" />
-      </svg>
-    ),
     link: "/rides?category=amusement"
   },
 ];
@@ -145,9 +86,6 @@ const Rides = () => {
 
                   {/* Content Box - Integrated style */}
                   <div className="p-6 md:p-8 flex items-center gap-4 md:gap-6">
-                    <div className="shrink-0 scale-75 md:scale-100">
-                      {activity.icon}
-                    </div>
                     <div className="flex flex-col">
                       <h3 className={`text-lg md:text-xl font-black ${activity.color} leading-none mb-2`}>
                         {activity.title}
