@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { supabase } from "@/lib/supabase";
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -34,13 +36,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return;
     }
 
-    const auth = document.cookie.includes("admin_auth=true");
-    if (!auth) {
-      router.push("/admin/login");
-    } else {
-      setIsAuthenticated(true);
-    }
-    setIsLoading(false);
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        router.push("/admin/login");
+      } else {
+        setIsAuthenticated(true);
+      }
+      setIsLoading(false);
+    };
+
+    checkAuth();
   }, [pathname, router]);
 
   if (pathname === "/admin/login") return <>{children}</>;
@@ -56,8 +63,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { label: "Settings", icon: <Settings className="w-5 h-5" />, href: "/admin/settings" },
   ];
 
-  const handleLogout = () => {
-    document.cookie = "admin_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     router.push("/admin/login");
   };
 
