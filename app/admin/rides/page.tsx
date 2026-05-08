@@ -8,8 +8,8 @@ import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 
 // Helper to convert bytea/Uint8Array to base64 URL
-const getImageUrl = (data: any) => {
-  if (!data) return null;
+const getImageUrl = (data: any): string | undefined => {
+  if (!data) return undefined;
   if (typeof data === 'string' && data.startsWith('http')) return data;
   // If it's a buffer/Uint8Array from bytea
   try {
@@ -18,7 +18,7 @@ const getImageUrl = (data: any) => {
     );
     return `data:image/png;base64,${base64String}`;
   } catch (e) {
-    return null;
+    return undefined;
   }
 };
 
