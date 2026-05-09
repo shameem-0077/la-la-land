@@ -44,20 +44,20 @@ export default function PackagesListingPage() {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-2">Park Packages</h1>
+          <h1 className="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tight mb-2">Park Packages</h1>
           <p className="text-slate-500 text-sm">Manage ticket pricing and entry bundles</p>
         </div>
         <Link 
           href="/admin/packages/new"
-          className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-blue-600/20"
+          className="inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-6 py-4 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-blue-600/20 w-full md:w-auto"
         >
           <Plus className="w-4 h-4" />
           Create Package
         </Link>
       </div>
 
-      <div className="bg-white rounded-[40px] shadow-sm border border-slate-200 overflow-hidden">
-        <div className="p-8 border-b border-slate-100">
+      <div className="bg-white rounded-[32px] md:rounded-[40px] shadow-sm border border-slate-200 overflow-hidden">
+        <div className="p-6 md:p-8 border-b border-slate-100">
           <div className="relative w-full md:w-96 group">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <input 

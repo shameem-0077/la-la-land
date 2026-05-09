@@ -23,7 +23,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
@@ -69,18 +69,36 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   return (
-    <div className="min-h-screen bg-[#f1f5f9] flex">
-      {/* Desktop Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#0f172a] text-white transition-transform duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
+    <div className="min-h-screen bg-[#f1f5f9] flex relative">
+      {/* Mobile Backdrop */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsSidebarOpen(false)}
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 lg:hidden"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Sidebar */}
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#0f172a] text-white transition-transform duration-300 ease-in-out transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
         <div className="h-full flex flex-col p-8">
-          <div className="flex items-center gap-4 mb-12 px-2">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center">
-              <ShieldCheck className="w-6 h-6 text-white" />
+          <div className="flex items-center justify-between mb-12 px-2">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center">
+                <ShieldCheck className="w-6 h-6 text-white" />
+              </div>
+              <div className="leading-none">
+                <p className="text-sm uppercase tracking-tighter">La La Land</p>
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Admin Panel</p>
+              </div>
             </div>
-            <div className="leading-none">
-              <p className="text-sm uppercase tracking-tighter">La La Land</p>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Admin Panel</p>
-            </div>
+            <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2 hover:bg-slate-800 rounded-lg text-slate-400">
+              <X className="w-6 h-6" />
+            </button>
           </div>
 
           <nav className="flex-grow space-y-2">
@@ -90,6 +108,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Link 
                   key={item.label}
                   href={item.href}
+                  onClick={() => setIsSidebarOpen(false)}
                   className={`flex items-center gap-4 px-4 py-4 rounded-2xl text-xs uppercase tracking-widest transition-all group ${
                     isActive ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                   }`}
@@ -119,7 +138,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content Area */}
       <main className="flex-grow flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Top Header */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0">
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-8 shrink-0">
           <div className="flex items-center gap-4 lg:hidden">
             <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-slate-100 rounded-lg">
               <Menu className="w-6 h-6 text-slate-600" />
@@ -152,7 +171,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </header>
 
         {/* Dynamic Page Content */}
-        <div className="flex-grow overflow-y-auto p-8 bg-[#f8fafc]">
+        <div className="flex-grow overflow-y-auto p-4 md:p-8 bg-[#f8fafc]">
           <div className="max-w-7xl mx-auto h-full">
             {children}
           </div>

@@ -51,23 +51,6 @@ const Gallery = () => {
             </motion.div>
           </div>
           
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4"
-          >
-            <div className="text-right hidden sm:block">
-              <p className="text-[10px] text-[#0f172a] uppercase tracking-wider">Follow our Journey</p>
-              <p className="text-[10px] text-zinc-400">@lalalandwayanad</p>
-            </div>
-            <a 
-              href="https://instagram.com" 
-              className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white shadow-xl hover:scale-110 transition-transform"
-            >
-              <InstagramIcon className="w-5 h-5 md:w-6 md:h-6" />
-            </a>
-          </motion.div>
         </div>
 
         {/* Gallery Grid */}
@@ -107,7 +90,25 @@ const Gallery = () => {
         </div>
 
         {/* Bottom Callout */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 flex flex-col items-center gap-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-4"
+          >
+            <div className="text-right">
+              <p className="text-[10px] text-[#0f172a] uppercase tracking-wider">Follow our Journey</p>
+              <p className="text-[10px] text-zinc-400">@lalalandwayanad</p>
+            </div>
+            <a 
+              href="https://instagram.com" 
+              className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white shadow-xl hover:scale-110 transition-transform"
+            >
+              <InstagramIcon className="w-5 h-5 md:w-6 md:h-6" />
+            </a>
+          </motion.div>
+
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

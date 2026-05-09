@@ -82,12 +82,12 @@ const PackagesPage = () => {
         {/* Immersive Background Layer */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/hero-bg-image.png"
+            src="/images/packages-hero-bg-image.png"
             alt="La La Land Adventure Park"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-secondary/20 -z-10" />
-          <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] z-10" />
+          {/* <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] z-10" /> */}
         </div>
 
         <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-40 lg:pb-0">
