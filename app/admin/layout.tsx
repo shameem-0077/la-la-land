@@ -18,7 +18,8 @@ import {
   ChevronRight,
   ShieldCheck,
   MessageSquare,
-  Image as ImageIcon
+  Image as ImageIcon,
+  HardDrive
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -63,6 +64,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { label: "Blog Posts", icon: <FileText className="w-5 h-5" />, href: "/admin/blogs" },
     { label: "Testimonials", icon: <MessageSquare className="w-5 h-5" />, href: "/admin/testimonials" },
     { label: "Gallery", icon: <ImageIcon className="w-5 h-5" />, href: "/admin/gallery" },
+    { label: "Storage", icon: <HardDrive className="w-5 h-5" />, href: "/admin/storage" },
     { label: "Bookings", icon: <Users className="w-5 h-5" />, href: "/admin/bookings" },
     { label: "Settings", icon: <Settings className="w-5 h-5" />, href: "/admin/settings" },
   ];
