@@ -16,7 +16,9 @@ import {
   Bell,
   Search,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  MessageSquare,
+  Image as ImageIcon
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -59,6 +61,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { label: "Rides & Activities", icon: <Map className="w-5 h-5" />, href: "/admin/rides" },
     { label: "Packages", icon: <Ticket className="w-5 h-5" />, href: "/admin/packages" },
     { label: "Blog Posts", icon: <FileText className="w-5 h-5" />, href: "/admin/blogs" },
+    { label: "Testimonials", icon: <MessageSquare className="w-5 h-5" />, href: "/admin/testimonials" },
+    { label: "Gallery", icon: <ImageIcon className="w-5 h-5" />, href: "/admin/gallery" },
     { label: "Bookings", icon: <Users className="w-5 h-5" />, href: "/admin/bookings" },
     { label: "Settings", icon: <Settings className="w-5 h-5" />, href: "/admin/settings" },
   ];
