@@ -20,13 +20,16 @@ async function getRecursiveFiles(supabase: any, bucketName: string, path: string
 
   for (const item of data || []) {
     if (item.id === null) {
-      // It's a folder (id is null for folders in Supabase list results)
+      // It's a folder
       const folderPath = path ? `${path}/${item.name}` : item.name;
       const subFolderFiles = await getRecursiveFiles(supabase, bucketName, folderPath);
       allFiles = [...allFiles, ...subFolderFiles];
     } else {
-      // It's a file
-      allFiles.push(item);
+      // It's a file - add the full path from the bucket root
+      allFiles.push({
+        ...item,
+        fullPath: path ? `${path}/${item.name}` : item.name
+      });
     }
   }
 

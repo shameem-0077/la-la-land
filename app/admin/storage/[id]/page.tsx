@@ -14,11 +14,14 @@ import {
   Shield,
   Search,
   Download,
-  Trash2
+  Trash2,
+  Eye,
+  X
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { getBucketDetails } from "../actions";
+import { supabase } from "@/lib/supabase";
 
 export default function BucketDetailPage() {
   const { id } = useParams();
@@ -26,6 +29,8 @@ export default function BucketDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [supabaseClient] = useState(() => supabase);
 
   useEffect(() => {
     if (id) fetchDetails();
@@ -42,6 +47,16 @@ export default function BucketDetailPage() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const isImage = (fileName: string) => {
+    const ext = fileName.split('.').pop()?.toLowerCase();
+    return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(ext || '');
+  };
+
+  const handleView = (file: any) => {
+    const { data: { publicUrl } } = supabaseClient.storage.from(id as string).getPublicUrl(file.fullPath || file.name);
+    setPreviewImage(publicUrl);
   };
 
   if (isLoading) return <div className="flex items-center justify-center min-h-screen text-xs uppercase tracking-widest text-slate-400">Analyzing Bucket...</div>;
@@ -201,6 +216,15 @@ export default function BucketDetailPage() {
                        <td className="px-8 py-6 text-sm font-medium text-slate-500">{new Date(file.created_at).toLocaleDateString()}</td>
                        <td className="px-8 py-6 text-right">
                           <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                             {isImage(file.name) && (
+                               <button 
+                                 onClick={() => handleView(file)}
+                                 className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all shadow-sm"
+                                 title="View Image"
+                               >
+                                  <Eye className="w-4 h-4" />
+                               </button>
+                             )}
                              <button className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all">
                                 <Download className="w-4 h-4" />
                              </button>
@@ -215,6 +239,45 @@ export default function BucketDetailPage() {
             </table>
          </div>
       </div>
+
+      {/* Image Preview Modal */}
+      {previewImage && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
+           <motion.div 
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             onClick={() => setPreviewImage(null)}
+             className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm" 
+           />
+           <motion.div 
+             initial={{ opacity: 0, scale: 0.9 }}
+             animate={{ opacity: 1, scale: 1 }}
+             className="relative max-w-5xl max-h-full bg-white rounded-[40px] overflow-hidden shadow-2xl z-10"
+           >
+              <button 
+                onClick={() => setPreviewImage(null)}
+                className="absolute top-6 right-6 w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-all flex items-center justify-center z-20 border border-white/20"
+              >
+                 <X className="w-6 h-6" />
+              </button>
+              <img src={previewImage} className="max-w-full max-h-[80vh] object-contain block" alt="Preview" />
+              <div className="p-8 bg-white flex items-center justify-between">
+                 <div>
+                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-black mb-1">Asset Link</p>
+                    <p className="text-sm font-bold text-slate-900 truncate max-w-md">{previewImage}</p>
+                 </div>
+                 <a 
+                   href={previewImage} 
+                   target="_blank" 
+                   className="px-6 py-3 bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2"
+                 >
+                    <ExternalLink className="w-4 h-4" />
+                    Open Full
+                 </a>
+              </div>
+           </motion.div>
+        </div>
+      )}
     </div>
   );
 }
