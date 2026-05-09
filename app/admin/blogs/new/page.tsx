@@ -76,13 +76,13 @@ export default function BlogFormPage() {
     const filePath = `blogs/${fileName}`;
 
     const { error: uploadError } = await supabase.storage
-      .from('ride-images') // Reusing the same bucket or user can create 'blog-images'
+      .from('blog-media')
       .upload(filePath, file);
 
     if (uploadError) throw uploadError;
 
     const { data: { publicUrl } } = supabase.storage
-      .from('ride-images')
+      .from('blog-media')
       .getPublicUrl(filePath);
 
     return publicUrl;
