@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Quote, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/lib/supabase";
 
 const testimonials = [
   {
@@ -34,14 +35,49 @@ const testimonials = [
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [items, setItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Testimonial')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        if (data && data.length > 0) {
+          const mapped = data.map(t => ({
+            name: t.author_name,
+            role: t.author_designation,
+            text: t.content,
+            avatar: t.author_profile || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.author_name)}&background=random`,
+            rating: t.rating || 5
+          }));
+          setItems(mapped);
+        } else {
+          setItems(testimonials);
+        }
+      } catch (err) {
+        console.error("Error fetching testimonials:", err);
+        setItems(testimonials);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
 
   // Auto-play
   useEffect(() => {
+    if (items.length === 0) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1 >= testimonials.length ? 0 : prev + 1));
+      setCurrentIndex((prev) => (prev + 1 >= items.length ? 0 : prev + 1));
     }, 6000);
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, items.length]);
 
   return (
     <section id="testimonials" className="py-12 md:py-16 relative overflow-hidden bg-gradient-to-br from-secondary via-secondary to-purple-800">
@@ -72,80 +108,91 @@ const Testimonials = () => {
 
           {/* Main Review Display */}
           <div className="relative min-h-[300px] flex items-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, scale: 0.98, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 1.02, y: -10 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="w-full"
-              >
-                <div className="relative bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-[40px] md:rounded-[50px] p-6 md:p-14 overflow-hidden group">
-                  {/* Big Quote Mark Icon */}
-                  <Quote className="absolute -top-6 -left-6 w-32 h-32 text-white/5 -rotate-12" />
-                  
-                  <div className="relative z-10 flex flex-col items-center text-center">
-                    {/* Stars */}
-                    <div className="flex gap-1 mb-6">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-[#adff00] text-[#adff00]" />
-                      ))}
-                    </div>
-
-                    <p className="text-xl md:text-2xl text-white leading-tight md:leading-snug mb-10 italic">
-                      "{testimonials[currentIndex].text}"
-                    </p>
-
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 mb-4 shadow-xl">
-                        <img 
-                          src={testimonials[currentIndex].avatar} 
-                          alt={testimonials[currentIndex].name} 
-                          className="w-full h-full object-cover"
-                        />
+            {loading ? (
+              <div className="w-full flex flex-col items-center justify-center py-20 gap-4">
+                <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                <p className="text-white/40 uppercase tracking-widest text-xs">Gathering Guest Stories...</p>
+              </div>
+            ) : items.length > 0 && (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 1.02, y: -10 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="w-full"
+                >
+                  <div className="relative bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-[40px] md:rounded-[50px] p-6 md:p-14 overflow-hidden group">
+                    {/* Big Quote Mark Icon */}
+                    <Quote className="absolute -top-6 -left-6 w-32 h-32 text-white/5 -rotate-12" />
+                    
+                    <div className="relative z-10 flex flex-col items-center text-center">
+                      {/* Stars */}
+                      <div className="flex gap-1 mb-6">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 fill-[#adff00] text-[#adff00]" />
+                        ))}
                       </div>
-                      <h4 className="text-lg font-black text-white mb-0.5 uppercase tracking-wider">
-                        {testimonials[currentIndex].name}
-                      </h4>
-                      <span className="text-[10px] text-[#adff00] uppercase tracking-widest opacity-80">
-                        {testimonials[currentIndex].role}
-                      </span>
+
+                      <p className="text-xl md:text-2xl text-white leading-tight md:leading-snug mb-10 italic">
+                        "{items[currentIndex].text}"
+                      </p>
+
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 mb-4 shadow-xl">
+                          <img 
+                            src={items[currentIndex].avatar} 
+                            alt={items[currentIndex].name} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <h4 className="text-lg font-black text-white mb-0.5 uppercase tracking-wider">
+                          {items[currentIndex].name}
+                        </h4>
+                        <span className="text-[10px] text-[#adff00] uppercase tracking-widest opacity-80">
+                          {items[currentIndex].role}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            )}
 
             {/* Navigation Controls */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between pointer-events-none px-4 md:-px-10 lg:-mx-20">
-              <button 
-                onClick={() => setCurrentIndex((prev) => (prev - 1 < 0 ? testimonials.length - 1 : prev - 1))}
-                className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button 
-                onClick={() => setCurrentIndex((prev) => (prev + 1 >= testimonials.length ? 0 : prev + 1))}
-                className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>
+            {!loading && items.length > 1 && (
+              <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between pointer-events-none px-4 md:-px-10 lg:-mx-20">
+                <button 
+                  onClick={() => setCurrentIndex((prev) => (prev - 1 < 0 ? items.length - 1 : prev - 1))}
+                  className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button 
+                  onClick={() => setCurrentIndex((prev) => (prev + 1 >= items.length ? 0 : prev + 1))}
+                  className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Progress Indicators */}
-          <div className="flex justify-center items-center gap-4 mt-16">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`h-2 rounded-full transition-all duration-500 ${
-                  i === currentIndex ? "bg-[#ff7d00] w-12" : "bg-white/20 w-4 hover:bg-white/40"
-                }`}
-              />
-            ))}
-          </div>
+          {!loading && items.length > 1 && (
+            <div className="flex justify-center items-center gap-4 mt-16">
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  className={`h-2 rounded-full transition-all duration-500 ${
+                    i === currentIndex ? "bg-[#ff7d00] w-12" : "bg-white/20 w-4 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
