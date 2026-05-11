@@ -2,8 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import { Camera, Maximize2 } from "lucide-react";
+import { Camera, Maximize2, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { supabase } from "@/lib/supabase";
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -21,16 +22,40 @@ const InstagramIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const galleryItems = [
-  { title: "Epic Giant Swing", image: "/rides_tower_activities_1778054789676.png", size: "lg" },
-  { title: "Water Park Fun", image: "/water_activities_image_1778049553201.png", size: "sm" },
-  { title: "Kids  Zone", image: "/rides_kids_activities_1778055058230.png", size: "sm" },
-  { title: "Rain Dance Party", image: "/amusement_activities_image_1778049573930.png", size: "sm" },
-  { title: "Thrilling Rope Course", image: "/rides_rope_activities_1778054766682.png", size: "lg" },
-  { title: "Sunset at the Park", image: "/park_hero_image_1778049530668.png", size: "sm" },
-];
-
 const Gallery = () => {
+  const [items, setItems] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Gallery')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        if (data && data.length > 0) {
+          const mapped = data.map((item, i) => ({
+            ...item,
+            // Dynamic size logic for masonry effect: 0, 4, 5, 9...
+            size: (i % 4 === 0) ? 'lg' : 'sm'
+          }));
+          setItems(mapped);
+        } else {
+          setItems(galleryItems);
+        }
+      } catch (err) {
+        console.error("Error fetching gallery:", err);
+        setItems(galleryItems);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGallery();
+  }, []);
+
   return (
     <section id="gallery" className="py-12 md:py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
@@ -55,38 +80,45 @@ const Gallery = () => {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {galleryItems.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`group relative rounded-[30px] md:rounded-[40px] overflow-hidden cursor-pointer shadow-xl aspect-square md:aspect-auto ${
-                item.size === 'lg' 
-                  ? 'lg:col-span-2 lg:row-span-2 md:h-[600px]' 
-                  : 'lg:col-span-1 lg:row-span-1 md:h-[290px]'
-              }`}
-            >
-              <Image 
-                src={item.image} 
-                alt={item.title} 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
-                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-[10px] text-white/70 uppercase tracking-[0.2em] mb-2 block">La La Land Moments</span>
-                  <h3 className="text-2xl font-black text-white leading-tight mb-4">{item.title}</h3>
-                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                    <Maximize2 className="w-5 h-5" />
+          {loading ? (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4">
+              <Loader2 className="w-10 h-10 text-primary animate-spin" />
+              <p className="text-zinc-400 uppercase tracking-widest text-xs">Developing the Film...</p>
+            </div>
+          ) : (
+            items.map((item, i) => (
+              <motion.div
+                key={item.id || i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`group relative rounded-[30px] md:rounded-[40px] overflow-hidden cursor-pointer shadow-xl aspect-square md:aspect-auto ${
+                  item.size === 'lg' 
+                    ? 'lg:col-span-2 lg:row-span-2 md:h-[600px]' 
+                    : 'lg:col-span-1 lg:row-span-1 md:h-[290px]'
+                }`}
+              >
+                <Image 
+                  src={item.image} 
+                  alt={item.title} 
+                  fill 
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span className="text-[10px] text-white/70 uppercase tracking-[0.2em] mb-2 block">La La Land Moments</span>
+                    <h3 className="text-2xl font-black text-white leading-tight mb-4">{item.title}</h3>
+                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+                      <Maximize2 className="w-5 h-5" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))
+          )}
         </div>
 
         {/* Bottom Callout */}
