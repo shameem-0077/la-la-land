@@ -8,57 +8,23 @@ import { Phone, MapPin, Mail, Send, Star, Navigation } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CTA from "@/components/sections/CTA";
+import PageHero from "@/components/sections/PageHero";
 
 const ContactPage = () => {
   return (
     <main className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Replicated from Hero.tsx */}
-      <section className="relative min-h-screen flex flex-col pt-32 overflow-hidden bg-secondary">
-        {/* Immersive Background Layer */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-bg-image.png"
-            alt="La La Land  Park"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-secondary/20 -z-10" />
-          <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] z-10" />
-        </div>
-
-        <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-40 lg:pb-0">
-          {/* Content Overlay */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl text-center lg:text-left flex flex-col gap-8 md:gap-10"
-          >
-            <div className="flex flex-col gap-6">
-              <h1 className="text-4xl md:text-6xl lg:text-[86px] font-black text-white leading-[0.95] tracking-tight uppercase">
-                Contact Us
-              </h1>
-              <div className="inline-block bg-accent text-foreground px-6 py-2 rounded-full text-sm md:text-base w-fit mx-auto lg:mx-0">
-                We'd Love to Hear From You!
-              </div>
-              <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
-                Have questions, need help, or want to plan your perfect day at La La Land? We're here to make it easy!
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-50">
-          <svg viewBox="0 0 1440 160" className="relative block w-full h-[60px] md:h-[140px]" preserveAspectRatio="none">
-            <path 
-              fill="#ffffff" 
-              d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,106.7C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,160L1392,160C1344,160,1248,160,1152,160C1056,160,960,160,864,160C768,160,672,160,576,160C480,160,384,160,288,160C192,160,96,160,48,160L0,160Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
+      <PageHero 
+        title={<>Contact <br /> Us</>}
+        subtitle="Have questions, need help, or want to plan your perfect day at La La Land? We're here to make it easy!"
+        bgImage="/images/hero-bg-image-4.png"
+        badgeText="We'd Love to Hear From You!"
+        primaryBtnText="Send Message"
+        primaryBtnLink="#contact-form"
+        secondaryBtnText="Visit Us"
+        secondaryBtnLink="#map"
+      />
 
       {/* Info Cards */}
       <section className="bg-white py-12 md:py-20 relative z-30">

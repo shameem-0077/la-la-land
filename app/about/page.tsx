@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CTA from "@/components/sections/CTA";
-import AboutHero from "@/components/sections/about/AboutHero";
+import PageHero from "@/components/sections/PageHero";
 import WhoWeAre from "@/components/sections/about/WhoWeAre";
 import VisionMission from "@/components/sections/about/VisionMission";
 import Milestones from "@/components/sections/about/Milestones";
@@ -19,7 +19,14 @@ export default function AboutPage() {
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
       <main className="flex-grow">
-        <AboutHero />
+        <PageHero 
+          title={<>Fun & <br /> Memories...</>}
+          subtitle="La La Land Park is Wayanad's most loved destination for thrill, joy and unforgettable experiences."
+          bgImage="/images/about-us-section.png"
+          badgeText="Discover Our Story"
+          secondaryBtnText="Explore Rides"
+          secondaryBtnLink="/rides"
+        />
         <WhoWeAre />
         <VisionMission />
         <Milestones />

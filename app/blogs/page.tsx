@@ -8,6 +8,7 @@ import { Calendar, User, ArrowRight, Search, Tag } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CTA from "@/components/sections/CTA";
+import PageHero from "@/components/sections/PageHero";
 
 const blogPosts = [
   {
@@ -90,47 +91,16 @@ const BlogPage = () => {
     <main className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex flex-col pt-32 overflow-hidden bg-secondary">
-        {/* Immersive Background Layer */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-bg-image-4.png"
-            alt="La La Land Blog"
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
-          />
-          <div className="absolute inset-0 bg-secondary/40 -z-10" />
-        </div>
-
-        <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl text-center lg:text-left"
-          >
-            <div className="flex flex-col gap-6">
-              <h1 className="text-4xl md:text-6xl lg:text-[86px] font-black text-white leading-[0.95] tracking-tight uppercase">
-                The <span className="text-primary"></span> <br />
-                Journal
-              </h1>
-              <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
-                Stories, tips, and updates from the heart of La La Land. Stay tuned for the latest thrills and family fun.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-50">
-          <svg viewBox="0 0 1440 160" className="relative block w-full h-[60px] md:h-[140px]" preserveAspectRatio="none">
-            <path 
-              fill="#ffffff" 
-              d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,106.7C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,160L1392,160C1344,160,1248,160,1152,160C1056,160,960,160,864,160C768,160,672,160,576,160C480,160,384,160,288,160C192,160,96,160,48,160L0,160Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
+      <PageHero 
+        title={<>The <br /> Journal</>}
+        subtitle="Stories, tips, and updates from the heart of La La Land. Stay tuned for the latest thrills and family fun."
+        bgImage="/images/hero-bg-image-4.png"
+        badgeText="La La Land Blog"
+        primaryBtnText="Read Latest"
+        primaryBtnLink="#featured"
+        secondaryBtnText="Book Tickets"
+        secondaryBtnLink="/book"
+      />
 
       {/* Blog Search & Categories */}
       <section className="bg-white py-12 relative z-30">
