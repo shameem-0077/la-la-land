@@ -33,51 +33,21 @@ const testimonials = [
   },
 ];
 
-const Testimonials = () => {
+interface TestimonialsProps {
+  initialItems?: any[];
+}
+
+const Testimonials = ({ initialItems = [] }: TestimonialsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [items, setItems] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('Testimonial')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        if (data && data.length > 0) {
-          const mapped = data.map(t => ({
-            name: t.author_name,
-            role: t.author_designation,
-            text: t.content,
-            avatar: t.author_profile || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.author_name)}&background=random`,
-            rating: t.rating || 5
-          }));
-          setItems(mapped);
-        } else {
-          setItems(testimonials);
-        }
-      } catch (err) {
-        console.error("Error fetching testimonials:", err);
-        setItems(testimonials);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  }, []);
 
   // Auto-play
   useEffect(() => {
-    if (items.length === 0) return;
+    if (initialItems.length === 0) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1 >= items.length ? 0 : prev + 1));
+      setCurrentIndex((prev) => (prev + 1 >= initialItems.length ? 0 : prev + 1));
     }, 6000);
     return () => clearInterval(timer);
-  }, [currentIndex, items.length]);
+  }, [currentIndex, initialItems.length]);
 
   return (
     <section id="testimonials" className="py-12 md:py-16 relative overflow-hidden bg-gradient-to-br from-secondary via-secondary to-purple-800">
@@ -108,12 +78,7 @@ const Testimonials = () => {
 
           {/* Main Review Display */}
           <div className="relative min-h-[300px] flex items-center">
-            {loading ? (
-              <div className="w-full flex flex-col items-center justify-center py-20 gap-4">
-                <Loader2 className="w-10 h-10 text-primary animate-spin" />
-                <p className="text-white/40 uppercase tracking-widest text-xs">Gathering Guest Stories...</p>
-              </div>
-            ) : items.length > 0 && (
+            {initialItems.length > 0 ? (
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentIndex}
@@ -136,41 +101,45 @@ const Testimonials = () => {
                       </div>
 
                       <p className="text-xl md:text-2xl text-white leading-tight md:leading-snug mb-10 italic">
-                        "{items[currentIndex].text}"
+                        "{initialItems[currentIndex].text}"
                       </p>
 
                       <div className="flex flex-col items-center">
                         <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 mb-4 shadow-xl">
                           <img 
-                            src={items[currentIndex].avatar} 
-                            alt={items[currentIndex].name} 
+                            src={initialItems[currentIndex].avatar} 
+                            alt={initialItems[currentIndex].name} 
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <h4 className="text-lg font-black text-white mb-0.5 uppercase tracking-wider">
-                          {items[currentIndex].name}
+                          {initialItems[currentIndex].name}
                         </h4>
                         <span className="text-[10px] text-[#adff00] uppercase tracking-widest opacity-80">
-                          {items[currentIndex].role}
+                          {initialItems[currentIndex].role}
                         </span>
                       </div>
                     </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
+            ) : (
+              <div className="w-full flex flex-col items-center justify-center py-20 bg-white/5 rounded-[40px] border border-white/10">
+                <p className="text-white/40 uppercase tracking-widest text-xs">No testimonials yet</p>
+              </div>
             )}
 
             {/* Navigation Controls */}
-            {!loading && items.length > 1 && (
+            {initialItems.length > 1 && (
               <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between pointer-events-none px-4 md:-px-10 lg:-mx-20">
                 <button 
-                  onClick={() => setCurrentIndex((prev) => (prev - 1 < 0 ? items.length - 1 : prev - 1))}
+                  onClick={() => setCurrentIndex((prev) => (prev - 1 < 0 ? initialItems.length - 1 : prev - 1))}
                   className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button 
-                  onClick={() => setCurrentIndex((prev) => (prev + 1 >= items.length ? 0 : prev + 1))}
+                  onClick={() => setCurrentIndex((prev) => (prev + 1 >= initialItems.length ? 0 : prev + 1))}
                   className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -180,9 +149,9 @@ const Testimonials = () => {
           </div>
 
           {/* Progress Indicators */}
-          {!loading && items.length > 1 && (
+          {initialItems.length > 1 && (
             <div className="flex justify-center items-center gap-4 mt-16">
-              {items.map((_, i) => (
+              {initialItems.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentIndex(i)}

@@ -22,38 +22,11 @@ const InstagramIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const Gallery = () => {
-  const [items, setItems] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
+interface GalleryProps {
+  initialItems?: any[];
+}
 
-  React.useEffect(() => {
-    const fetchGallery = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('Gallery')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        if (data && data.length > 0) {
-          const mapped = data.map((item, i) => ({
-            ...item,
-            size: (i % 4 === 0) ? 'lg' : 'sm'
-          }));
-          setItems(mapped);
-        } else {
-          setItems([]);
-        }
-      } catch (err) {
-        console.error("Error fetching gallery:", err);
-        setItems([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGallery();
-  }, []);
+const Gallery = ({ initialItems = [] }: GalleryProps) => {
 
   return (
     <section id="gallery" className="py-12 md:py-16 bg-white overflow-hidden">
@@ -78,13 +51,8 @@ const Gallery = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {loading ? (
-            <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4">
-              <Loader2 className="w-10 h-10 text-primary animate-spin" />
-              <p className="text-zinc-400 uppercase tracking-widest text-xs">Developing the Film...</p>
-            </div>
-          ) : items.length > 0 ? (
-            items.map((item, i) => (
+          {initialItems.length > 0 ? (
+            initialItems.map((item, i) => (
               <motion.div
                 key={item.id || i}
                 initial={{ opacity: 0, y: 20 }}

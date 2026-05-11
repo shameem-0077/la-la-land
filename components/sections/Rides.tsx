@@ -34,34 +34,11 @@ const activityTypes = [
   },
 ];
 
-const Rides = () => {
-  const [categories, setCategories] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
+interface RidesProps {
+  initialCategories?: any[];
+}
 
-  React.useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('RideCategory')
-          .select('*')
-          .order('created_at', { ascending: true });
-        
-        if (error) throw error;
-        if (data && data.length > 0) {
-          setCategories(data);
-        } else {
-          setCategories(activityTypes); // Fallback
-        }
-      } catch (err) {
-        console.error("Error fetching categories:", err);
-        setCategories(activityTypes); // Fallback
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+const Rides = ({ initialCategories = [] }: RidesProps) => {
 
   return (
     <section id="rides" className="relative py-12 md:py-16 bg-white overflow-hidden">
@@ -92,13 +69,8 @@ const Rides = () => {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-          {loading ? (
-            <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4">
-              <Loader2 className="w-10 h-10 text-primary animate-spin" />
-              <p className="text-zinc-400 uppercase tracking-widest text-xs">Loading Adventures...</p>
-            </div>
-          ) : (
-            categories.map((activity, i) => (
+          {initialCategories.length > 0 ? (
+            initialCategories.map((activity, i) => (
               <motion.div
                 key={activity.id || i}
                 initial={{ opacity: 0, y: 30 }}
@@ -135,6 +107,10 @@ const Rides = () => {
                 </Link>
               </motion.div>
             ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 bg-zinc-50 rounded-[40px] border-2 border-dashed border-zinc-100">
+              <p className="text-zinc-400 uppercase tracking-widest text-[10px]">No categories found</p>
+            </div>
           )}
         </div>
       </div>

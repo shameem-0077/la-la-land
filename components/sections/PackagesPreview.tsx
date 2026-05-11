@@ -29,42 +29,11 @@ const packages = [
   }
 ];
 
-const PackagesPreview = () => {
-  const [dynamicPackages, setDynamicPackages] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
+interface PackagesPreviewProps {
+  initialPackages?: any[];
+}
 
-  React.useEffect(() => {
-    const fetchPackages = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('Package')
-          .select('*')
-          .order('created_at', { ascending: true });
-
-        if (error) throw error;
-        if (data && data.length > 0) {
-          const mapped = data.map((pkg, i) => ({
-            ...pkg,
-            price: pkg.amount,
-            badge: pkg.tag_title || (i === 0 ? "Most Popular" : "Special"),
-            features: Array.isArray(pkg.features) ? pkg.features : [],
-            color: pkg.slug.includes('kids') ? 'bg-accent' : 'bg-secondary',
-            icon: pkg.slug.includes('kids') ? <Sparkles className="w-6 h-6" /> : <Zap className="w-6 h-6" />
-          }));
-          setDynamicPackages(mapped);
-        } else {
-          setDynamicPackages(packages);
-        }
-      } catch (err) {
-        console.error("Error fetching packages:", err);
-        setDynamicPackages(packages);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPackages();
-  }, []);
+const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
 
   return (
     <section id="packages" className="py-12 md:py-16 bg-cream relative overflow-hidden">
@@ -92,13 +61,8 @@ const PackagesPreview = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {loading ? (
-            <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4">
-              <Loader2 className="w-10 h-10 text-primary animate-spin" />
-              <p className="text-secondary/40 uppercase tracking-widest text-xs">Loading Best Deals...</p>
-            </div>
-          ) : (
-            dynamicPackages.map((pkg, i) => (
+          {initialPackages.length > 0 ? (
+            initialPackages.map((pkg, i) => (
               <motion.div
                 key={pkg.id || pkg.title}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
@@ -162,6 +126,10 @@ const PackagesPreview = () => {
                 </div>
               </motion.div>
             ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 bg-zinc-50 rounded-[40px] border-2 border-dashed border-zinc-100">
+              <p className="text-zinc-400 uppercase tracking-widest text-[10px]">No packages found</p>
+            </div>
           )}
         </div>
 
