@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import PageHero from "@/components/sections/PageHero";
 
 const BookPage = () => {
   const [step, setStep] = useState(1);
@@ -171,86 +172,19 @@ const BookPage = () => {
     <main className="min-h-screen bg-zinc-50 flex flex-col">
       <Header />
 
-      {/* Hero Section - Dynamic */}
-      <section className="relative pt-32 pb-40 md:pb-52 overflow-hidden bg-secondary">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/hero-bg-image.png" 
-            alt=" Park" 
-            className="w-full h-full object-cover opacity-30"
-          />
-          <div className="absolute inset-0 bg-secondary/40" />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            key={step}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="max-w-4xl"
-          >
-            {step === 1 ? (
-              <>
-                <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6 uppercase tracking-tight">
-                  Book Your  <br />
-                  in Just a Few Clicks!
-                </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl">
-                  Get ready for unlimited fun with 40+ activities, exciting water rides,  zones & more.
-                </p>
-              </>
-            ) : (
-              <>
-                <div className="flex items-center gap-10">
-                   <div className="hidden lg:block w-48 h-32 relative">
-                      {/* Abstract Park Illustration */}
-                      <div className="absolute bottom-0 left-0 w-16 h-16 bg-primary rounded-full blur-xl opacity-50" />
-                      <div className="absolute bottom-4 left-4 w-12 h-20 bg-accent rounded-t-full" />
-                      <div className="absolute bottom-0 left-16 w-20 h-10 bg-success rounded-t-full" />
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-secondary rounded-full opacity-20" />
-                   </div>
-                   <div>
-                    <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-2 uppercase tracking-tight">
-                      BOOK YOUR PASS
-                    </h1>
-                    <p className="text-sm md:text-base text-white/70 uppercase tracking-widest mb-10">
-                      40+ Activities • Water Rides •  Zones • Kids Area
-                    </p>
-                   </div>
-                </div>
-              </>
-            )}
-
-            <div className="flex flex-wrap gap-6 text-white text-[10px] md:text-xs uppercase tracking-widest">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-success" />
-                Instant Confirmation
-              </div>
-              <div className="flex items-center gap-2">
-                <Lock className="w-5 h-5 text-success" />
-                Secure Payment
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-5 h-5 text-success" />
-                Email Ticket
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
-          <svg viewBox="0 0 1440 160" className="relative block w-full h-[60px] md:h-[140px]" preserveAspectRatio="none">
-            <path 
-              fill="#f8fafc" 
-              d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,106.7C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,160L1392,160C1344,160,1248,160,1152,160C1056,160,960,160,864,160C768,160,672,160,576,160C480,160,384,160,288,160C192,160,96,160,48,160L0,160Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
+      <PageHero 
+        title={step === 1 ? <>Book Your Pass <br /> In Just a Few Clicks!</> : <>Complete Your <br /> Booking</>}
+        subtitle={step === 1 ? "Get ready for unlimited fun with 40+ activities, exciting water rides, zones & more." : "Almost there! Provide your details to secure your spot at La La Land Park."}
+        bgImage="/images/hero-bg-image-4.png"
+        badgeText="Ticket Booking"
+        primaryBtnText="Instant Confirmation"
+        primaryBtnLink="#booking-form"
+        secondaryBtnText="View Pricing"
+        secondaryBtnLink="/packages"
+      />
 
       {/* Main Content */}
-      <section className="relative z-30 -mt-24 md:-mt-32 pb-20">
+      <section className="relative z-30 -mt-12 md:-mt-20 pb-20">
         <div className="container mx-auto px-4 max-w-6xl">
           
           {/* Stepper Card - Professional Redesign */}

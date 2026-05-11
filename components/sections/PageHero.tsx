@@ -39,7 +39,7 @@ const PageHero = ({
         {/* <div className="absolute inset-0 bg-gradient-to-r from-secondary/60 via-secondary/30 to-transparent z-0" /> */}
       </div>
 
-      <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-40 lg:pb-0">
+      <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-52 lg:pb-24">
         {/* Content Overlay */}
         <motion.div 
           initial={{ opacity: 0, x: -50 }}

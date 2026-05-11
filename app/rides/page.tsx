@@ -10,6 +10,7 @@ import { MessageCircle, Ticket, ChevronDown, Filter, Zap, Droplets, Mountain, Sh
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import PageHero from "@/components/sections/PageHero";
+import { supabase } from "@/lib/supabase";
 
 const categories = [
   { id: "all", label: "All", icon: <Filter className="w-4 h-4" /> },
@@ -59,12 +60,38 @@ function RidesContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const [activeTab, setActiveTab] = useState("all");
+  const [dynamicCategories, setDynamicCategories] = useState(categories);
 
   useEffect(() => {
-    if (categoryParam && categories.some(cat => cat.id === categoryParam)) {
+    const fetchCategories = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('RideCategory')
+          .select('slug, name')
+          .order('created_at', { ascending: true });
+
+        if (error) throw error;
+        if (data && data.length > 0) {
+          const mapped = data.map(cat => ({
+            id: cat.slug,
+            label: cat.name,
+            icon: <Star className="w-4 h-4" /> // Default icon for dynamic cats
+          }));
+          setDynamicCategories([categories[0], ...mapped]);
+        }
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    if (categoryParam && dynamicCategories.some(cat => cat.id === categoryParam)) {
       setActiveTab(categoryParam);
     }
-  }, [categoryParam]);
+  }, [categoryParam, dynamicCategories]);
 
   const filteredRides = activeTab === "all" 
     ? ridesData 
@@ -73,9 +100,9 @@ function RidesContent() {
   return (
     <>
       <PageHero 
-        title={<>Endless s. <br /> Unforgettable Memories.</>}
+        title={<>Endless Fun <br /> Unforgettable Memories.</>}
         subtitle="Explore 50+ thrilling rides, water fun, activities & kids' favorites for all ages."
-        bgImage="/images/rides-page-hero.JPG"
+        bgImage="/images/rides-page-hero.png"
         badgeText="Rides & Attractions"
         secondaryBtnText="Explore More"
         secondaryBtnLink="#all"
@@ -85,7 +112,7 @@ function RidesContent() {
       <section className="py-4 md:py-12 bg-white sticky top-16 z-30 shadow-sm border-b border-zinc-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar gap-4 pb-2 md:pb-0 scroll-smooth">
-            {categories.map((cat) => (
+            {dynamicCategories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
