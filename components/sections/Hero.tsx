@@ -21,7 +21,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         {/* Main Park Image - Using standard img for guaranteed visibility */}
         <img
-          src="/images/hero-bg-image-3.png"
+          src="/images/hero-bg-image-4.png"
           alt="La La Land  Park"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />

@@ -79,25 +79,12 @@ const Footer = () => {
                 <Youtube />
               </Link>
             </div>
-            <div className="mt-4">
-              <p className="text-white/40 text-[10px] uppercase tracking-[0.2em] mb-4">Subscribe for Updates</p>
-              <div className="flex bg-white/5 rounded-full p-1 border border-white/10">
-                <input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  className="bg-transparent border-none focus:outline-none px-4 text-sm w-full"
-                />
-                <button className="bg-primary p-3 rounded-full hover:bg-white transition-colors text-secondary">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                </button>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-16 md:mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/30 uppercase tracking-[0.2em]">
-          <p>© 2024 La La Land  Park. All Rights Reserved.</p>
+          <p>© 2026 La La Land  Park. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>

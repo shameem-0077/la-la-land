@@ -82,7 +82,7 @@ const PackagesPage = () => {
         {/* Immersive Background Layer */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/packages-hero-bg-image.png"
+            src="/images/packages-hero-bg.png"
             alt="La La Land  Park"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />

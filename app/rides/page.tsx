@@ -75,7 +75,7 @@ function RidesContent() {
       <section className="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden bg-secondary">
         <div className="absolute inset-0 z-0">
           <img
-            src="/rides_hero_v2.png"
+            src="/images/rides-page-hero.JPG"
             alt="Endless s"
             className="w-full h-full object-cover"
           />

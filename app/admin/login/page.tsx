@@ -135,7 +135,7 @@ const AdminLoginPage = () => {
         </div>
         
         <p className="text-center mt-8 text-[10px] text-slate-500 uppercase tracking-[0.2em]">
-          &copy; 2024 La La Land  Park. Secure Access.
+          &copy; 2026 La La Land  Park. Secure Access.
         </p>
       </motion.div>
     </main>

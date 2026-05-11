@@ -95,12 +95,11 @@ const BlogPage = () => {
         {/* Immersive Background Layer */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/hero-bg-image.png"
+            src="/images/hero-bg-image-4.png"
             alt="La La Land Blog"
             className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
           />
           <div className="absolute inset-0 bg-secondary/40 -z-10" />
-          <div className="absolute inset-0 bg-white/5 backdrop-blur-[2px] z-10" />
         </div>
 
         <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-20">

@@ -37,22 +37,27 @@ const BookPage = () => {
     senior: 0
   });
 
-  const [selectedDate, setSelectedDate] = useState("21-05-2025");
-  const [selectedDateFull, setSelectedDateFull] = useState("Thu, 21 May 2025");
+  const today = new Date();
+  const [selectedDate, setSelectedDate] = useState(
+    `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`
+  );
+  const [selectedDateFull, setSelectedDateFull] = useState(
+    today.toLocaleDateString('en-US', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })
+  );
 
   const [formData, setFormData] = useState({
-    fullName: "Shameem abdulkareem",
-    email: "shameemoff52@gmail.com",
-    phone: "6238859953",
-    city: "koottanad",
-    address: "pattambi",
-    state: "Kerala",
-    pincode: "679303"
+    fullName: "",
+    email: "",
+    phone: "",
+    city: "",
+    address: "",
+    state: "",
+    pincode: ""
   });
 
   const totalAmount = (counts.adult * 799) + (counts.kids * 599) + (counts.senior * 300);
 
-  const [currentMonth, setCurrentMonth] = useState(new Date(2025, 4, 1)); // May 2025
+  const [currentMonth, setCurrentMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
 
   const ticketTypes = [
     {
@@ -96,20 +101,28 @@ const BookPage = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Simple calendar generator for May 2025
-  const daysInMonth = 31;
-  const startDay = 4; // Thursday for May 1st 2025
+  // Dynamic calendar generator
+  const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+  const getStartDay = (year: number, month: number) => new Date(year, month, 1).getDay();
+
+  const daysInMonth = getDaysInMonth(currentMonth.getFullYear(), currentMonth.getMonth());
+  const startDay = getStartDay(currentMonth.getFullYear(), currentMonth.getMonth());
   const calendarDays = Array.from({ length: 42 }, (_, i) => {
     const day = i - startDay + 1;
     return day > 0 && day <= daysInMonth ? day : null;
   });
 
   const handleDateSelect = (day: number) => {
-    const dateStr = `${day < 10 ? '0' + day : day}-05-2025`;
+    const dateObj = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    
+    // Check if date is in the past
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (dateObj < today) return;
+
+    const dateStr = `${day.toString().padStart(2, '0')}-${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}-${currentMonth.getFullYear()}`;
     setSelectedDate(dateStr);
     
-    // Thu, 21 May 2025 format
-    const dateObj = new Date(2025, 4, day);
     const options: Intl.DateTimeFormatOptions = { 
       weekday: 'short', 
       day: '2-digit', 
@@ -117,6 +130,18 @@ const BookPage = () => {
       year: 'numeric' 
     };
     setSelectedDateFull(dateObj.toLocaleDateString('en-US', options));
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+  };
+
+  const prevMonth = () => {
+    const today = new Date();
+    const prevDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+    // Don't go back before the current month
+    if (prevDate < new Date(today.getFullYear(), today.getMonth(), 1)) return;
+    setCurrentMonth(prevDate);
   };
 
   // Sync full date when short date is typed manually
@@ -399,9 +424,22 @@ const BookPage = () => {
                       {/* Calendar Widget */}
                       <div className="bg-zinc-50 rounded-3xl p-6">
                         <div className="flex items-center justify-between mb-6">
-                          <button className="text-zinc-400 hover:text-secondary transition-colors"><ChevronLeft className="w-5 h-5" /></button>
-                          <h4 className="text-sm font-black text-secondary uppercase tracking-widest">May 2025</h4>
-                          <button className="text-zinc-400 hover:text-secondary transition-colors"><ChevronRight className="w-5 h-5" /></button>
+                          <button 
+                            onClick={prevMonth}
+                            className="text-zinc-400 hover:text-secondary transition-colors disabled:opacity-20"
+                            disabled={currentMonth.getMonth() === today.getMonth() && currentMonth.getFullYear() === today.getFullYear()}
+                          >
+                            <ChevronLeft className="w-5 h-5" />
+                          </button>
+                          <h4 className="text-sm font-black text-secondary uppercase tracking-widest">
+                            {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                          </h4>
+                          <button 
+                            onClick={nextMonth}
+                            className="text-zinc-400 hover:text-secondary transition-colors"
+                          >
+                            <ChevronRight className="w-5 h-5" />
+                          </button>
                         </div>
                         
                         <div className="grid grid-cols-7 gap-2 mb-2">
@@ -411,20 +449,32 @@ const BookPage = () => {
                         </div>
                         
                         <div className="grid grid-cols-7 gap-2">
-                          {calendarDays.map((day, i) => (
-                            <button 
-                              key={i}
-                              disabled={!day}
-                              onClick={() => day && handleDateSelect(day)}
-                              className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] transition-all ${
-                                day && parseInt(selectedDate.split('-')[0]) === day 
-                                  ? 'bg-primary text-white shadow-lg' 
-                                  : day ? 'text-secondary hover:bg-primary/5' : 'text-transparent cursor-default'
-                              }`}
-                            >
-                              {day}
-                            </button>
-                          ))}
+                          {calendarDays.map((day, i) => {
+                            const dateObj = day ? new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day) : null;
+                            const isPast = dateObj ? dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate()) : false;
+                            const isSelected = day && parseInt(selectedDate.split('-')[0]) === day && 
+                                             parseInt(selectedDate.split('-')[1]) === currentMonth.getMonth() + 1 &&
+                                             parseInt(selectedDate.split('-')[2]) === currentMonth.getFullYear();
+
+                            return (
+                              <button 
+                                key={i}
+                                disabled={!day || isPast}
+                                onClick={() => day && handleDateSelect(day)}
+                                className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] transition-all ${
+                                  isSelected
+                                    ? 'bg-primary text-white shadow-lg' 
+                                    : day 
+                                      ? isPast 
+                                        ? 'text-zinc-200 cursor-not-allowed' 
+                                        : 'text-secondary hover:bg-primary/5' 
+                                      : 'text-transparent cursor-default'
+                                }`}
+                              >
+                                {day}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -465,7 +515,7 @@ const BookPage = () => {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleInputChange}
-                            placeholder="Shameem abdulkareem"
+                            placeholder="Enter your name"
                             className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
@@ -479,7 +529,7 @@ const BookPage = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            placeholder="shameemoff52@gmail.com"
+                            placeholder="enter your email"
                             className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
@@ -493,7 +543,7 @@ const BookPage = () => {
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
-                            placeholder="6238859953"
+                            placeholder="Enter your phone number"
                             className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
@@ -507,7 +557,7 @@ const BookPage = () => {
                             name="city"
                             value={formData.city}
                             onChange={handleInputChange}
-                            placeholder="koottanad"
+                            placeholder="Enter your city"
                             className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
@@ -521,7 +571,7 @@ const BookPage = () => {
                             name="address"
                             value={formData.address}
                             onChange={handleInputChange}
-                            placeholder="pattambi"
+                            placeholder="Enter your address"
                             className="w-full pl-16 pr-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                           />
                         </div>
@@ -546,7 +596,7 @@ const BookPage = () => {
                           name="pincode"
                           value={formData.pincode}
                           onChange={handleInputChange}
-                          placeholder="679303"
+                          placeholder="Enter your pincode"
                           className="w-full px-6 py-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-secondary"
                         />
                       </div>

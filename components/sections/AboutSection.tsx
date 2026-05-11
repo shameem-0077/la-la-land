@@ -73,18 +73,12 @@ const AboutSection = () => {
               {/* Main Image with Premium Frame */}
               <div className="rounded-[40px] md:rounded-[60px] overflow-hidden border-[8px] md:border-[12px] border-zinc-50 shadow-2xl relative">
                 <Image 
-                  src="/about_hero_v2.png" 
+                  src="/images/about-us-section.png" 
                   alt="La La Land Park" 
                   width={600} 
                   height={700} 
                   className="w-full object-cover aspect-[4/5]"
                 />
-                
-                {/* Floating Stat Badge */}
-                <div className="absolute bottom-6 -left-4 md:bottom-10 md:-left-10 bg-[#ff7d00] text-white p-6 md:p-8 rounded-[30px] md:rounded-[40px] shadow-2xl">
-                  <div className="text-2xl md:text-4xl font-black mb-1">10+</div>
-                  <div className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] opacity-80 leading-none">Years of Smiles</div>
-                </div>
               </div>
 
               {/* Decorative Bursts */}

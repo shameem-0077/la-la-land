@@ -32,7 +32,7 @@ const AboutHero = () => {
             Discover Our Story
           </span>
           <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.95] mb-8 tracking-tighter">
-            , Fun & <br />
+            Fun & <br />
             Memories...
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-10 max-w-lg leading-relaxed">
