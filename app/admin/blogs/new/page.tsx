@@ -132,7 +132,7 @@ export default function BlogFormPage() {
             <h1 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
               {isEdit ? "Edit Post" : "New Story"}
             </h1>
-            <p className="text-slate-500 text-xs uppercase tracking-widest mt-1">Adventure Journal Content</p>
+            <p className="text-slate-500 text-xs uppercase tracking-widest mt-1"> Journal Content</p>
           </div>
         </div>
         <button onClick={handleSubmit} disabled={isLoading} className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-300 text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20">
@@ -225,7 +225,7 @@ export default function BlogFormPage() {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">Tags (Comma separated)</label>
-                  <input name="tags" value={formData.tags} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 text-sm font-medium" placeholder="Adventure, Thrills, Family" />
+                  <input name="tags" value={formData.tags} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 text-sm font-medium" placeholder=", Thrills, Family" />
                 </div>
 
                 <div className="space-y-2">

@@ -37,7 +37,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-              La La Land Adventure Park - Wayanad's ultimate destination for thrills, laughter, and family-friendly adventures.
+              La La Land  Park - Wayanad's ultimate destination for thrills, laughter, and family-friendly s.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-16 md:mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/30 uppercase tracking-[0.2em]">
-          <p>© 2024 La La Land Adventure Park. All Rights Reserved.</p>
+          <p>© 2024 La La Land  Park. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>

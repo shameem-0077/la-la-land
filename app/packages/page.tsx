@@ -13,11 +13,11 @@ const packages = [
   {
     title: "Common Package",
     price: "540",
-    description: "Our most popular choice for adults and teens. Access to the core adventure park experience.",
+    description: "Our most popular choice for adults and teens. Access to the core  park experience.",
     features: [
       "All Dry Rides included",
       "Water Park Access",
-      "Adventure Zone Access",
+      " Zone Access",
       "Standard Timings (10AM - 6PM)",
       "Safety Gear Included",
       "Access to Food Court"
@@ -31,7 +31,7 @@ const packages = [
   {
     title: "Kids Package",
     price: "399",
-    description: "Specially designed fun for our little adventurers. Focused on safety and gentle thrills.",
+    description: "Specially designed fun for our little rs. Focused on safety and gentle thrills.",
     features: [
       "Kids Zone Access",
       "Mini Water Slides",
@@ -47,7 +47,7 @@ const packages = [
     popular: false
   },
   {
-    title: "Group Adventure",
+    title: "Group ",
     price: "499",
     description: "Perfect for school trips, corporate outings, and large family gatherings (Min 15 people).",
     features: [
@@ -83,7 +83,7 @@ const PackagesPage = () => {
         <div className="absolute inset-0 z-0">
           <img
             src="/images/packages-hero-bg-image.png"
-            alt="La La Land Adventure Park"
+            alt="La La Land  Park"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-secondary/20 -z-10" />
@@ -100,7 +100,7 @@ const PackagesPage = () => {
           >
             <div className="flex flex-col gap-6">
               <h1 className="text-4xl md:text-6xl lg:text-[86px] font-black text-white leading-[0.95] tracking-tight uppercase">
-                Adventure <br />
+                 <br />
                 <span className="text-primary">Packages</span>
               </h1>
               <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">

@@ -151,7 +151,7 @@ const BookPage = () => {
         <div className="absolute inset-0 z-0">
           <img 
             src="/images/hero-bg-image.png" 
-            alt="Adventure Park" 
+            alt=" Park" 
             className="w-full h-full object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-secondary/40" />
@@ -167,11 +167,11 @@ const BookPage = () => {
             {step === 1 ? (
               <>
                 <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6 uppercase tracking-tight">
-                  Book Your Adventure <br />
+                  Book Your  <br />
                   in Just a Few Clicks!
                 </h1>
                 <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl">
-                  Get ready for unlimited fun with 40+ activities, exciting water rides, adventure zones & more.
+                  Get ready for unlimited fun with 40+ activities, exciting water rides,  zones & more.
                 </p>
               </>
             ) : (
@@ -189,7 +189,7 @@ const BookPage = () => {
                       BOOK YOUR PASS
                     </h1>
                     <p className="text-sm md:text-base text-white/70 uppercase tracking-widest mb-10">
-                      40+ Activities • Water Rides • Adventure Zones • Kids Area
+                      40+ Activities • Water Rides •  Zones • Kids Area
                     </p>
                    </div>
                 </div>
@@ -651,7 +651,7 @@ const BookPage = () => {
                       <ul className="space-y-4">
                         {[
                           "40+ Thrilling Rides & Activities",
-                          "Water Rides & Adventure Zones",
+                          "Water Rides &  Zones",
                           "Kids Play Area",
                           "Fun for All Age Groups",
                           "Safe, Clean & Family Friendly"
@@ -776,7 +776,7 @@ const BookPage = () => {
           <div className="bg-gradient-to-r from-primary via-accent to-secondary rounded-[50px] p-10 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
             <div className="relative z-10 max-w-xl text-center md:text-left">
                <h2 className="text-3xl md:text-5xl font-black text-white uppercase leading-none mb-4">Your Day of Fun Begins Here</h2>
-               <p className="text-white/80 mb-8">Adventure • Water Rides • Kids Play • Family Fun <br /> <span className="text-accent">Don't wait in line. Book online and save time!</span></p>
+               <p className="text-white/80 mb-8"> • Water Rides • Kids Play • Family Fun <br /> <span className="text-accent">Don't wait in line. Book online and save time!</span></p>
                <div className="flex flex-col sm:flex-row items-center gap-4">
                   <button className="px-10 py-5 bg-accent text-foreground rounded-full text-xs uppercase tracking-widest shadow-xl hover:bg-white transition-all flex items-center gap-2">
                     Book Tickets <Ticket className="w-4 h-4" />

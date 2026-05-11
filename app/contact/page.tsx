@@ -20,7 +20,7 @@ const ContactPage = () => {
         <div className="absolute inset-0 z-0">
           <img
             src="/images/hero-bg-image.png"
-            alt="La La Land Adventure Park"
+            alt="La La Land  Park"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-secondary/20 -z-10" />
@@ -98,7 +98,7 @@ const ContactPage = () => {
               <div>
                 <h3 className="text-xl font-black text-secondary mb-2 uppercase">Visit Us</h3>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  La La Land Adventure Park, <br />
+                  La La Land  Park, <br />
                   Vythiri, Wayanad - 673576 <br />
                   Kerala, India
                 </p>
@@ -235,7 +235,7 @@ const ContactPage = () => {
                 </div>
                 
                 <div className="mb-6">
-                  <p className="text-secondary mb-1">La La Land Adventure Park</p>
+                  <p className="text-secondary mb-1">La La Land  Park</p>
                   <p className="text-zinc-500 text-sm leading-relaxed">
                     Vythiri, Wayanad - 673576 <br />
                     Kerala, India

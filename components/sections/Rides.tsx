@@ -17,7 +17,7 @@ const activityTypes = [
     title: "Outdoor Rides",
     image: "/park_hero_image_1778049530668.png",
     color: "text-accent",
-    link: "/rides?category=adventure"
+    link: "/rides?category="
   },
   {
     title: "Kids Rides",
@@ -57,7 +57,7 @@ const Rides = () => {
             </h2>
           </div>
           <p className="text-base md:text-xl text-zinc-500 px-4">
-            Adventure. Splash. Laughter. Repeat.
+            Fun. Splash. Laughter. Repeat.
           </p>
         </div>
 

@@ -15,7 +15,7 @@ const CTA = () => {
           <div className="absolute right-0 bottom-0 w-[450px] h-[450px] pointer-events-none z-0 hidden md:block">
             <Image
               src="/cta_tower.png"
-              alt="Adventure Park Tower"
+              alt=" Park Tower"
               fill
               className="object-contain object-bottom"
             />
@@ -28,8 +28,8 @@ const CTA = () => {
                 Direct Booking
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
-                Plan Your <br className="hidden md:block" />
-                Adventure Today
+                Plan Your Fun <br className="hidden md:block" />
+                 Today
               </h2>
               
               <p className="text-white text-lg md:text-xl mb-8">

@@ -12,7 +12,7 @@ import CTA from "@/components/sections/CTA";
 const blogPosts = [
   {
     id: 1,
-    title: "Top 5 Thrilling Rides at La La Land Adventure Park",
+    title: "Top 5 Thrilling Rides at La La Land  Park",
     excerpt: "Looking for an adrenaline rush? From high-speed coasters to gravity-defying drops, here are the top 5 rides you absolutely cannot miss on your next visit.",
     image: "/images/blogs/thrilling-rides.png",
     category: "Thrills",
@@ -112,7 +112,7 @@ const BlogPage = () => {
           >
             <div className="flex flex-col gap-6">
               <h1 className="text-4xl md:text-6xl lg:text-[86px] font-black text-white leading-[0.95] tracking-tight uppercase">
-                The <span className="text-primary">Adventure</span> <br />
+                The <span className="text-primary"></span> <br />
                 Journal
               </h1>
               <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">

@@ -18,7 +18,7 @@ const ridesData: Record<string, any> = {
     desc: "Take a refreshing break and dive into fun at our sparkling swimming pool. Perfect for all ages and every mood!",
     heroImage: "/swimming_pool_hero.png",
     details: "Dive into pure relaxation and joy at our Swimming Pool, a refreshing retreat set amidst a lively and natural atmosphere. Perfect for families, friends, and solo visitors alike, the pool offers a space to unwind, cool off, and enjoy carefree moments away from routine life.",
-    extraText: "Whether you prefer a calm soak, playful splashing, or simply lounging by the water, the experience is designed to suit all moods and age groups. The soothing environment and cheerful vibe make it an ideal spot to relax after a day of adventure or to spend quality time with loved ones.",
+    extraText: "Whether you prefer a calm soak, playful splashing, or simply lounging by the water, the experience is designed to suit all moods and age groups. The soothing environment and cheerful vibe make it an ideal spot to relax after a day of  or to spend quality time with loved ones.",
     thrillLevel: "High Fun",
     heightReq: "Min 36\"",
     intensity: "Moderate",

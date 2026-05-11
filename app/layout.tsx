@@ -9,21 +9,21 @@ const baloo = Baloo_2({
 });
 
 export const metadata: Metadata = {
-  title: "La La Land Adventure Park | Wayanad's Best Adventure Destination",
-  description: "Experience 50+ thrilling rides, water activities, and family fun at La La Land Adventure Park in Wayanad. Book your tickets for an unforgettable day!",
-  keywords: ["Wayanad adventure park", "best rides in Wayanad", "water park Kerala", "family entertainment center Wayanad", "La La Land park", "theme park Kerala"],
+  title: "La La Land  Park | Wayanad's Best  Destination",
+  description: "Experience 50+ thrilling rides, water activities, and family fun at La La Land  Park in Wayanad. Book your tickets for an unforgettable day!",
+  keywords: ["Wayanad  park", "best rides in Wayanad", "water park Kerala", "family entertainment center Wayanad", "La La Land park", "theme park Kerala"],
   authors: [{ name: "La La Land Team" }],
   openGraph: {
-    title: "La La Land Adventure Park | Wayanad's Best Adventure Destination",
-    description: "Experience 50+ thrilling rides, water activities, and family fun at La La Land Adventure Park in Wayanad.",
+    title: "La La Land  Park | Wayanad's Best  Destination",
+    description: "Experience 50+ thrilling rides, water activities, and family fun at La La Land  Park in Wayanad.",
     url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-    siteName: "La La Land Adventure Park",
+    siteName: "La La Land  Park",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "La La Land Adventure Park",
+        alt: "La La Land  Park",
       },
     ],
     locale: "en_US",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "La La Land Adventure Park | Wayanad",
+    title: "La La Land  Park | Wayanad",
     description: "Experience 50+ thrilling rides and family fun in Wayanad.",
     images: ["/og-image.png"],
   },

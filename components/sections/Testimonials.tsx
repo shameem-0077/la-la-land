@@ -9,13 +9,13 @@ const testimonials = [
   {
     name: "Preetha Sidharth",
     role: "Visitor",
-    text: "An excellent choice for kids and adults to spend a day in nature and for playing. Staff were very friendly and helpful. The food in the restaurant was top quality as well as the service. God sure was in a good mood when he made this Adventures theme park.",
+    text: "An excellent choice for kids and adults to spend a day in nature and for playing. Staff were very friendly and helpful. The food in the restaurant was top quality as well as the service. God sure was in a good mood when he made this s theme park.",
     avatar: "https://i.pravatar.cc/150?u=preetha",
   },
   {
     name: "Jimish Bathia",
     role: "Visitor",
-    text: "Nice place for the kids. We entered the park for 1 hour but ended up spending 5 hours. Kids loved all the adventures and the staff is super polite and helpful. Nice customized food prepared thanks to the park manager Mr. Sajid. Definitely a must stop place if you go with kids.",
+    text: "Nice place for the kids. We entered the park for 1 hour but ended up spending 5 hours. Kids loved all the s and the staff is super polite and helpful. Nice customized food prepared thanks to the park manager Mr. Sajid. Definitely a must stop place if you go with kids.",
     avatar: "https://i.pravatar.cc/150?u=jimish",
   },
   {

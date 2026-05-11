@@ -26,7 +26,7 @@ const TwitterX = () => (
 const blogPosts = [
   {
     id: 1,
-    title: "Top 5 Thrilling Rides at La La Land Adventure Park",
+    title: "Top 5 Thrilling Rides at La La Land  Park",
     content: `
       <p>Are you ready for the ultimate adrenaline rush? La La Land is home to some of the most heart-pumping, gravity-defying rides in the region. Whether you're a seasoned thrill-seeker or just looking to step out of your comfort zone, these five attractions are guaranteed to leave you breathless.</p>
       
@@ -58,7 +58,7 @@ const blogPosts = [
     id: 2,
     title: "Planning Your Perfect Family Day Out: A Complete Guide",
     content: `
-      <p>Taking the whole family to an adventure park can be a daunting task, but with a little planning, it can be the highlight of your year. At La La Land, we've designed our park to be inclusive and fun for all ages. Here's how to make your visit seamless.</p>
+      <p>Taking the whole family to an  park can be a daunting task, but with a little planning, it can be the highlight of your year. At La La Land, we've designed our park to be inclusive and fun for all ages. Here's how to make your visit seamless.</p>
       
       <h2>Start Early</h2>
       <p>The best way to beat the crowds and the heat is to arrive at least 30 minutes before the gates open. This gives you a head start on the most popular rides and allows you to find a good 'home base' in our shaded seating areas.</p>
@@ -102,7 +102,7 @@ const blogPosts = [
     id: 4,
     title: "Safety First: Our Commitment to Your Well-being",
     content: `
-      <p>At La La Land, your safety is our absolute priority. We believe that the best adventure is a safe one. Here's a look behind the scenes at how we keep our park running safely every single day.</p>
+      <p>At La La Land, your safety is our absolute priority. We believe that the best  is a safe one. Here's a look behind the scenes at how we keep our park running safely every single day.</p>
       
       <h2>Daily Inspections</h2>
       <p>Every single ride in our park undergoes a rigorous multi-point inspection every morning before the first guest arrives. Our team of certified engineers checks mechanical, electrical, and hydraulic systems to ensure everything is in perfect working order.</p>
@@ -124,10 +124,10 @@ const blogPosts = [
     id: 5,
     title: "Delicious Eats: A Foodie's Tour of La La Land",
     content: `
-      <p>Adventure works up an appetite! We've curated a diverse range of dining options that go far beyond standard park fare. From gourmet burgers to traditional street food, there's something for every palate.</p>
+      <p> works up an appetite! We've curated a diverse range of dining options that go far beyond standard park fare. From gourmet burgers to traditional street food, there's something for every palate.</p>
       
       <h2>The Grand Food Court</h2>
-      <p>Our central hub features international cuisines including Italian, Mexican, and Asian. Don't miss our signature 'Adventure Burger' – a towering masterpiece that's a favorite among our regular visitors.</p>
+      <p>Our central hub features international cuisines including Italian, Mexican, and Asian. Don't miss our signature ' Burger' – a towering masterpiece that's a favorite among our regular visitors.</p>
       
       <h2>Sweet Treats</h2>
       <p>Need a quick energy boost? Visit 'Sugar Rush' for colorful cotton candy, artisanal ice creams, and our world-famous churros. Our dessert chefs are always coming up with new, seasonal treats to surprise you.</p>
@@ -152,7 +152,7 @@ const blogPosts = [
       <p>Let us handle the stress! Our birthday packages include a dedicated host, themed decorations, customized meals, and priority access to select rides. Every birthday child gets a special 'King of the Park' badge!</p>
       
       <h2>Corporate Team Building</h2>
-      <p>Take your team out of the office and into the adventure. We offer private meeting spaces followed by tailored team-building activities that utilize our park's unique attractions to foster collaboration and fun.</p>
+      <p>Take your team out of the office and into the . We offer private meeting spaces followed by tailored team-building activities that utilize our park's unique attractions to foster collaboration and fun.</p>
 
       <h2>School Excursions</h2>
       <p>We provide educational tours that focus on the physics of our rides and the biology of our landscaped zones, making it the perfect 'fun-learning' day out for students of all ages.</p>
@@ -264,7 +264,7 @@ const BlogDetailPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {["Adventure", "Family Fun", "Water Park"].map((tag) => (
+                    {["", "Family Fun", "Water Park"].map((tag) => (
                       <span key={tag} className="px-4 py-2 bg-zinc-50 rounded-lg text-zinc-400 text-[10px] uppercase tracking-widest">
                         #{tag}
                       </span>
@@ -277,7 +277,7 @@ const BlogDetailPage = () => {
               <div className="lg:w-1/4">
                 <div className="sticky top-32 space-y-10">
                   <div className="bg-secondary rounded-[30px] p-8 text-white">
-                    <h4 className="text-xl font-black uppercase mb-4 leading-tight">Ready for your own adventure?</h4>
+                    <h4 className="text-xl font-black uppercase mb-4 leading-tight">Ready for your own ?</h4>
                     <p className="text-white/70 text-sm mb-6">Book your tickets online and save up to 20% on group bookings!</p>
                     <Link 
                       href="/packages"
@@ -311,7 +311,7 @@ const BlogDetailPage = () => {
       <section className="py-20 bg-zinc-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black text-secondary uppercase mb-4 tracking-tight">More Adventures</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-secondary uppercase mb-4 tracking-tight">More s</h2>
             <div className="w-20 h-2 bg-primary mx-auto rounded-full" />
           </div>
 

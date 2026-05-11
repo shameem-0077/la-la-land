@@ -13,7 +13,7 @@ import { useSearchParams } from "next/navigation";
 const categories = [
   { id: "all", label: "All", icon: <Filter className="w-4 h-4" /> },
   { id: "water", label: "Water", icon: <Droplets className="w-4 h-4" /> },
-  { id: "adventure", label: "Adventure", icon: <Mountain className="w-4 h-4" /> },
+  { id: "", label: "", icon: <Mountain className="w-4 h-4" /> },
   { id: "thrill", label: "Thrill", icon: <Zap className="w-4 h-4" /> },
   { id: "family", label: "Family", icon: <Users className="w-4 h-4" /> },
   { id: "kids", label: "Kids", icon: <Baby className="w-4 h-4" /> },
@@ -24,16 +24,16 @@ const ridesData = [
   { title: "Swimming Pool", category: "water", age: "All Ages", image: "/water_activities_image_1778049553201.png" },
   { title: "Rain Dance", category: "water", age: "All Ages", image: "/water_activities_image_1778049553201.png" },
   { title: "360° Cycle", category: "thrill", age: "8+ Years", image: "/park_hero_image_1778049530668.png" },
-  { title: "Rope Course", category: "adventure", age: "8+ Years", image: "/rides_rope_activities_1778054766682.png" },
-  { title: "Giant Swing", category: "adventure", age: "12+ Years", image: "/rides_tower_activities_1778054789676.png" },
-  { title: "Couple Zip Line", category: "adventure", age: "12+ Years", image: "/about_zipline.png" },
+  { title: "Rope Course", category: "", age: "8+ Years", image: "/rides_rope_activities_1778054766682.png" },
+  { title: "Giant Swing", category: "", age: "12+ Years", image: "/rides_tower_activities_1778054789676.png" },
+  { title: "Couple Zip Line", category: "", age: "12+ Years", image: "/about_zipline.png" },
   { title: "Wall Climbing", category: "thrill", age: "8+ Years", image: "/park_hero_image_1778049530668.png" },
-  { title: "Rock Climbing", category: "adventure", age: "8+ Years", image: "/rides_rope_activities_1778054766682.png" },
-  { title: "Rope Bridge", category: "adventure", age: "8+ Years", image: "/rides_rope_activities_1778054766682.png" },
+  { title: "Rock Climbing", category: "", age: "8+ Years", image: "/rides_rope_activities_1778054766682.png" },
+  { title: "Rope Bridge", category: "", age: "8+ Years", image: "/rides_rope_activities_1778054766682.png" },
   { title: "Multi Lane Slide", category: "water", age: "All Ages", image: "/water_activities_image_1778049553201.png" },
   { title: "Pendulum Slide", category: "water", age: "All Ages", image: "/water_activities_image_1778049553201.png" },
   { title: "Bumper Cars", category: "amusement", age: "All Ages", image: "/amusement_activities_image_1778049573930.png" },
-  { title: "Zero Gravity", category: "adventure", age: "8+ Years", image: "/rides_tower_activities_1778054789676.png" },
+  { title: "Zero Gravity", category: "", age: "8+ Years", image: "/rides_tower_activities_1778054789676.png" },
   { title: "Kids Play Room", category: "kids", age: "3+ Years", image: "/rides_kids_activities_1778055058230.png" },
   { title: "Ferris Wheel", category: "amusement", age: "All Ages", image: "/amusement_activities_image_1778049573930.png" },
   { title: "Sky Roller", category: "thrill", age: "10+ Years", image: "/rides_tower_activities_1778054789676.png" },
@@ -76,7 +76,7 @@ function RidesContent() {
         <div className="absolute inset-0 z-0">
           <img
             src="/rides_hero_v2.png"
-            alt="Endless Adventures"
+            alt="Endless s"
             className="w-full h-full object-cover"
           />
           {/* Atmosphere Overlay */}
@@ -94,11 +94,11 @@ function RidesContent() {
               Rides & Attractions
             </span>
             <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.95] mb-8 tracking-tighter">
-              Endless Adventures.<br />
+              Endless s.<br />
               Unforgettable Memories.
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-10 max-w-lg leading-relaxed">
-              Explore 50+ thrilling rides, water fun, adventure activities & kids' favorites for all ages.
+              Explore 50+ thrilling rides, water fun,  activities & kids' favorites for all ages.
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -187,7 +187,7 @@ function RidesContent() {
                       <div className="absolute top-4 left-4">
                         <span className={`px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest text-white shadow-lg ${
                           ride.category === 'water' ? 'bg-primary' :
-                          ride.category === 'adventure' ? 'bg-success' :
+                          ride.category === '' ? 'bg-success' :
                           ride.category === 'thrill' ? 'bg-secondary' :
                           ride.category === 'amusement' ? 'bg-secondary' :
                           'bg-accent text-foreground'
@@ -247,7 +247,7 @@ function RidesContent() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "Giant Swing", category: "Adventure", desc: "Experience 360 degrees of pure adrenaline.", img: "/rides_tower_activities_1778054789676.png" },
+              { title: "Giant Swing", category: "", desc: "Experience 360 degrees of pure adrenaline.", img: "/rides_tower_activities_1778054789676.png" },
               { title: "Couple Zip Line", category: "Thrill", desc: "Soar across the park with your partner.", img: "/about_zipline.png" },
               { title: "Pendulum Slide", category: "Water", desc: "The ultimate water gravity experience.", img: "/water_activities_image_1778049553201.png" }
             ].map((ride, i) => (

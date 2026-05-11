@@ -28,7 +28,7 @@ const VisionMission = () => {
               <h3 className="text-3xl font-black text-primary uppercase">Our Vision</h3>
             </div>
             <p className="text-xl text-zinc-500 leading-relaxed">
-              To be Wayanad's most loved family adventure destination, creating joyful memories for every visitor through innovation, safety, and care.
+              To be Wayanad's most loved family  destination, creating joyful memories for every visitor through innovation, safety, and care.
             </p>
           </motion.div>
 

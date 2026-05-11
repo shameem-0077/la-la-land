@@ -23,11 +23,11 @@ const WhoWeAre = () => {
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-primary leading-tight mb-8 uppercase">
               Wayanad's Ultimate <br />
-              Adventure Destination
+               Destination
             </h2>
             <div className="space-y-6 text-zinc-500 leading-relaxed">
               <p>
-                We are Wayanad's most popular adventure & amusement park, offering over 50+ attractions for all age groups. From thrill-seekers to toddlers, we provide a complete day of joy in the heart of nature. Our park is designed to bring families together through shared experiences, laughter, and a touch of adrenaline.
+                We are Wayanad's most popular  & amusement park, offering over 50+ attractions for all age groups. From thrill-seekers to toddlers, we provide a complete day of joy in the heart of nature. Our park is designed to bring families together through shared experiences, laughter, and a touch of adrenaline.
               </p>
               <p>
                 We operate in full compliance with all applicable government regulations and hold all required licenses and approvals. Our operations are regularly reviewed to meet safety, environmental, and quality standards. This ensures a secure, well-managed, and enjoyable experience for every visitor.
@@ -53,7 +53,7 @@ const WhoWeAre = () => {
               viewport={{ once: true }}
               className="absolute top-0 right-0 w-[60%] h-[55%] rounded-[30px] overflow-hidden shadow-2xl z-10"
             >
-              <Image src="/about_zipline.png" alt="Adventure" fill className="object-cover" />
+              <Image src="/about_zipline.png" alt="" fill className="object-cover" />
             </motion.div>
             
             {/* Left Image */}

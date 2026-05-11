@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const badges = [
   { icon: <Droplets className="w-8 h-8 text-secondary" />, title: "Fun & Splash", sub: "Water Rides" },
-  { icon: <Mountain className="w-8 h-8 text-secondary" />, title: "Nature & Thrill", sub: "Outdoor Adventure" },
+  { icon: <Mountain className="w-8 h-8 text-secondary" />, title: "Nature & Thrill", sub: "Outdoor " },
   { icon: <Baby className="w-8 h-8 text-secondary" />, title: "Safe & Play", sub: "Kids Activities" },
   { icon: <Tag className="w-8 h-8 text-secondary" />, title: "Best Value", sub: "Affordable Packages" },
 ];
@@ -22,7 +22,7 @@ const Hero = () => {
         {/* Main Park Image - Using standard img for guaranteed visibility */}
         <img
           src="/images/hero-bg-image-3.png"
-          alt="La La Land Adventure Park"
+          alt="La La Land  Park"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
         {/* Sky Color Fallback (if image fails to load) */}
@@ -43,11 +43,11 @@ const Hero = () => {
         >
           <div className="flex flex-col gap-6">
             <h1 className="text-4xl md:text-6xl lg:text-[86px] font-black text-white leading-[0.95] tracking-tight">
-              Best Adventure Park in
+              Best  Park in
               <span className="text-accent"> Wayanad.</span>
             </h1>
             <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
-              Adventures for all ages. Memories for a lifetime.
+              Rides & Fun for all ages. Memories for a lifetime.
             </p>
           </div>
           

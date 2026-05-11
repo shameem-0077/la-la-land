@@ -13,7 +13,7 @@ const navItems = [
     dropdown: [
       { name: "All Rides", href: "/rides" },
       { name: "Water Rides", href: "/rides?category=water" },
-      { name: "Outdoor Rides", href: "/rides?category=adventure" },
+      { name: "Outdoor Rides", href: "/rides?category=" },
       { name: "Kids Rides", href: "/rides?category=kids" },
       { name: "Add-ons", href: "/rides?category=amusement" },
     ]
@@ -193,7 +193,7 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-4 w-full py-5 bg-primary text-white rounded-[25px] font-black uppercase tracking-widest shadow-2xl shadow-primary/30 mb-6"
               >
-                Book Your Adventure Now
+                Book Your  Now
                 <Ticket className="w-5 h-5 fill-white" />
               </NextLink>
               

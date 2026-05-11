@@ -26,7 +26,7 @@ const AboutSection = () => {
                 <span className="text-primary italic">La La Land</span>
               </h2>
               <p className="text-base md:text-lg text-zinc-500 leading-relaxed mb-8 md:mb-10 max-w-2xl mx-auto lg:mx-0">
-                La La Land is more than just an adventure park. It's a sanctuary of joy where 
+                La La Land is more than just an  park. It's a sanctuary of joy where 
                 thrilling rides, lush landscapes, and family moments come together. From the 
                 highest swings to the biggest splashes, we create memories that last a lifetime.
               </p>

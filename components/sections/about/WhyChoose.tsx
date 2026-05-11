@@ -64,7 +64,7 @@ const WhyChoose = () => {
             </div>
           </div>
           <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
-            We combine the thrill of adventure with the comfort of world-class facilities to ensure your day is perfect.
+            We combine the thrill of  with the comfort of world-class facilities to ensure your day is perfect.
           </p>
         </div>
 

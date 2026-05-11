@@ -24,7 +24,7 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 const galleryItems = [
   { title: "Epic Giant Swing", image: "/rides_tower_activities_1778054789676.png", size: "lg" },
   { title: "Water Park Fun", image: "/water_activities_image_1778049553201.png", size: "sm" },
-  { title: "Kids Adventure Zone", image: "/rides_kids_activities_1778055058230.png", size: "sm" },
+  { title: "Kids  Zone", image: "/rides_kids_activities_1778055058230.png", size: "sm" },
   { title: "Rain Dance Party", image: "/amusement_activities_image_1778049573930.png", size: "sm" },
   { title: "Thrilling Rope Course", image: "/rides_rope_activities_1778054766682.png", size: "lg" },
   { title: "Sunset at the Park", image: "/park_hero_image_1778049530668.png", size: "sm" },
@@ -46,7 +46,7 @@ const Gallery = () => {
                 Visual Tour
               </span>
               <h2 className="text-3xl md:text-5xl font-black text-secondary leading-tight">
-                Adventure in <span className="text-primary-dark">Frames</span>
+                 in <span className="text-primary-dark">Frames</span>
               </h2>
             </motion.div>
           </div>

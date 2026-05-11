@@ -10,7 +10,7 @@ const packages = [
     title: "Common Package",
     price: "540",
     description: "Our most popular choice for adults and teens.",
-    features: ["All Dry Rides included", "Water Park Access", "Adventure Zone Access", "Standard Timings"],
+    features: ["All Dry Rides included", "Water Park Access", " Zone Access", "Standard Timings"],
     color: "bg-secondary",
     accent: "text-primary",
     badge: "Most Popular",
@@ -19,7 +19,7 @@ const packages = [
   {
     title: "Kids Package",
     price: "399",
-    description: "Specially designed fun for our little adventurers.",
+    description: "Specially designed fun for our little rs.",
     features: ["Kids Zone Access", "Mini Water Slides", "Safe Play Area", "Complimentary Gift"],
     color: "bg-accent",
     accent: "text-white",
@@ -46,7 +46,7 @@ const PackagesPreview = () => {
               Ticketing
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-secondary leading-tight">
-              Adventure <span className="text-primary">Packages</span>
+               <span className="text-primary">Packages</span>
             </h2>
             <p className="text-lg text-secondary/60 max-w-2xl mx-auto mt-4">
               Choose the perfect plan for your group and save more with our bundled park packages.

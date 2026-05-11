@@ -8,7 +8,7 @@ const milestones = [
   {
     date: "March 2021",
     title: "Foundation",
-    desc: "The dream began with a vision to create a sustainable yet thrilling destination. The foundation was laid to transform this landscape into an adventure haven.",
+    desc: "The dream began with a vision to create a sustainable yet thrilling destination. The foundation was laid to transform this landscape into an  haven.",
     icon: <Flag className="w-8 h-8" />,
     color: "text-success",
     bgColor: "bg-success-soft"
@@ -56,7 +56,7 @@ const Milestones = () => {
             </div>
           </div>
           <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
-            Tracing our path from a visionary concept to becoming Wayanad's most trusted adventure park.
+            Tracing our path from a visionary concept to becoming Wayanad's most trusted  park.
           </p>
         </div>
 

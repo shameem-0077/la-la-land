@@ -180,7 +180,7 @@ export default function PackageFormPage() {
                 onChange={(e) => setFeaturesText(e.target.value)} 
                 rows={10} 
                 className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm font-medium resize-none leading-relaxed" 
-                placeholder="All Dry Rides included&#10;Water Park Access&#10;Adventure Zone Access..." 
+                placeholder="All Dry Rides included&#10;Water Park Access&#10; Zone Access..." 
               />
             </div>
           </div>

@@ -10,8 +10,8 @@ import WhyChoose from "@/components/sections/about/WhyChoose";
 import Licenses from "@/components/sections/about/Licenses";
 
 export const metadata: Metadata = {
-  title: "About Us | La La Land Adventure Park Wayanad",
-  description: "Learn about the vision, mission, and journey of Wayanad's premier adventure destination. Discover why thousands choose La La Land for family fun.",
+  title: "About Us | La La Land  Park Wayanad",
+  description: "Learn about the vision, mission, and journey of Wayanad's premier  destination. Discover why thousands choose La La Land for family fun.",
 };
 
 export default function AboutPage() {
