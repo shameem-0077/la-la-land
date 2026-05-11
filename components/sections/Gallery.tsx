@@ -38,16 +38,15 @@ const Gallery = () => {
         if (data && data.length > 0) {
           const mapped = data.map((item, i) => ({
             ...item,
-            // Dynamic size logic for masonry effect: 0, 4, 5, 9...
             size: (i % 4 === 0) ? 'lg' : 'sm'
           }));
           setItems(mapped);
         } else {
-          setItems(galleryItems);
+          setItems([]);
         }
       } catch (err) {
         console.error("Error fetching gallery:", err);
-        setItems(galleryItems);
+        setItems([]);
       } finally {
         setLoading(false);
       }
@@ -78,14 +77,13 @@ const Gallery = () => {
           
         </div>
 
-        {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {loading ? (
             <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4">
               <Loader2 className="w-10 h-10 text-primary animate-spin" />
               <p className="text-zinc-400 uppercase tracking-widest text-xs">Developing the Film...</p>
             </div>
-          ) : (
+          ) : items.length > 0 ? (
             items.map((item, i) => (
               <motion.div
                 key={item.id || i}
@@ -118,6 +116,12 @@ const Gallery = () => {
                 </div>
               </motion.div>
             ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 bg-zinc-50 rounded-[40px] border-2 border-dashed border-zinc-100">
+              <Camera className="w-12 h-12 text-zinc-200 mb-4" />
+              <p className="text-zinc-400 uppercase tracking-widest text-[10px]">No moments captured yet</p>
+              <p className="text-zinc-300 text-xs mt-1">Check back later for new park memories!</p>
+            </div>
           )}
         </div>
 
