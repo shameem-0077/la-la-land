@@ -27,22 +27,29 @@ export default function BlogFormPage() {
   const editorRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [categories, setCategories] = useState<any[]>([]);
 
   const [formData, setFormData] = useState({
     title: "",
     sub_description: "",
     content: "",
     cover_image: "",
-    category: "Thrills",
+    category_id: "",
     author: "",
     tags: ""
   });
 
   useEffect(() => {
+    fetchCategories();
     if (isEdit) {
       fetchBlogData();
     }
   }, [isEdit]);
+
+  const fetchCategories = async () => {
+    const { data } = await supabase.from("BlogCategory").select("id, name").order("name");
+    if (data) setCategories(data);
+  };
 
   const fetchBlogData = async () => {
     setIsLoading(true);
@@ -230,13 +237,17 @@ export default function BlogFormPage() {
 
                 <div className="space-y-2">
                   <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">Category</label>
-                  <input 
-                    name="category" 
-                    value={formData.category} 
+                  <select 
+                    name="category_id" 
+                    value={formData.category_id} 
                     onChange={handleInputChange} 
-                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 text-sm font-medium" 
-                    placeholder="e.g. Thrills, Family" 
-                  />
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-100 text-sm font-medium focus:bg-white transition-all outline-none appearance-none"
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((cat) => (
+                      <option key={cat.id} value={cat.id}>{cat.name}</option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="space-y-2">

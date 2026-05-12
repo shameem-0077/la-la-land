@@ -18,11 +18,20 @@ export default function BlogsListingPage() {
     setIsLoading(true);
     const { data, error } = await supabase
       .from("Blog")
-      .select("*")
+      .select(`
+        *,
+        BlogCategory (
+          name
+        )
+      `)
       .order("created_at", { ascending: false });
 
     if (!error) {
-      setBlogs(data || []);
+      const flattenedBlogs = (data || []).map(blog => ({
+        ...blog,
+        category_name: blog.BlogCategory?.name || "Uncategorized"
+      }));
+      setBlogs(flattenedBlogs);
     }
     setIsLoading(false);
   };
@@ -38,7 +47,7 @@ export default function BlogsListingPage() {
 
   const filteredBlogs = blogs.filter(blog => 
     blog.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    blog.category?.toLowerCase().includes(searchTerm.toLowerCase())
+    blog.category_name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -131,7 +140,7 @@ export default function BlogsListingPage() {
                     </td>
                     <td className="px-8 py-6">
                       <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-widest border border-emerald-100">
-                        {blog.category}
+                        {blog.category_name}
                       </span>
                     </td>
                     <td className="px-8 py-6">
