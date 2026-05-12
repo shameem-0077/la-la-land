@@ -762,9 +762,9 @@ const BookPage = () => {
                <h2 className="text-3xl md:text-5xl font-black text-white uppercase leading-none mb-4">Your Day of Fun Begins Here</h2>
                <p className="text-white/80 mb-8"> • Water Rides • Kids Play • Family Fun <br /> <span className="text-accent">Don't wait in line. Book online and save time!</span></p>
                <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <button className="px-10 py-5 bg-accent text-foreground rounded-full text-xs uppercase tracking-widest shadow-xl hover:bg-white transition-all flex items-center gap-2">
+                  {/* <button className="px-10 py-5 bg-accent text-foreground rounded-full text-xs uppercase tracking-widest shadow-xl hover:bg-white transition-all flex items-center gap-2">
                     Book Tickets <Ticket className="w-4 h-4" />
-                  </button>
+                  </button> */}
                   <button className="px-10 py-5 bg-white text-secondary rounded-full text-xs uppercase tracking-widest shadow-xl hover:bg-secondary-soft transition-all flex items-center gap-2">
                     Chat on WhatsApp <MessageCircle className="w-4 h-4 text-success fill-success" />
                   </button>

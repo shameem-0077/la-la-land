@@ -117,7 +117,7 @@ const Header = () => {
           )}
 
           {/* Book Button */}
-          <NextLink
+          {/* <NextLink
             href="/book"
             className={`flex items-center gap-2 md:gap-3 px-5 md:px-10 py-2.5 md:py-4 rounded-full font-black text-[9px] md:text-xs transition-all shadow-xl uppercase tracking-widest group ${
               scrolled || isMobileMenuOpen
@@ -128,7 +128,7 @@ const Header = () => {
             <span className="hidden xs:inline">Book Tickets</span>
             <span className="xs:hidden">Book</span>
             <Ticket className="w-4 h-4 group-hover:rotate-12 transition-transform fill-current" />
-          </NextLink>
+          </NextLink> */}
 
           {/* Hamburger Menu Toggle */}
           <button 

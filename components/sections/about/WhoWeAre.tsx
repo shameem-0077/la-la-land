@@ -34,13 +34,13 @@ const WhoWeAre = () => {
               </p>
             </div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="mt-10">
-              <Link 
+              {/* <Link 
                 href="/book" 
                 className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white py-4 px-10 rounded-full shadow-lg transition-all text-sm tracking-wider uppercase"
               >
                 Book Tickets
                 <Ticket className="w-5 h-5" />
-              </Link>
+              </Link> */}
             </motion.div>
           </motion.div>
 

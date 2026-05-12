@@ -157,11 +157,11 @@ export default function RideDetailClient({ ride }: RideDetailClientProps) {
         <div className="bg-secondary/90 backdrop-blur-2xl rounded-full p-2 pl-8 border border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] flex items-center justify-between">
            <div className="hidden sm:block">
               <p className="text-white text-sm font-black uppercase tracking-widest leading-none">Ready to Play?</p>
-              <p className="text-white/60 text-[10px] uppercase tracking-widest">Book tickets for {ride.title}</p>
+              {/* <p className="text-white/60 text-[10px] uppercase tracking-widest">Book tickets for {ride.title}</p> */}
            </div>
-           <Link href="/book" className="bg-primary text-white py-4 px-10 rounded-full font-black uppercase tracking-widest text-xs hover:scale-105 transition-all shadow-xl">
+           {/* <Link href="/book" className="bg-primary text-white py-4 px-10 rounded-full font-black uppercase tracking-widest text-xs hover:scale-105 transition-all shadow-xl">
               Get Tickets
-           </Link>
+           </Link> */}
         </div>
       </motion.div>
     </>

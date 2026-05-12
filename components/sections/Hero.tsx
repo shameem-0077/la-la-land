@@ -53,13 +53,13 @@ const Hero = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 justify-center lg:justify-start">
-            <Link
+            {/* <Link
               href="/book"
               className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-primary text-white rounded-full text-xs md:text-sm uppercase tracking-widest hover:bg-primary-dark transition-all shadow-2xl"
             >
               Book Tickets
               <Ticket className="w-5 h-5 fill-current" />
-            </Link>
+            </Link> */}
             <Link
               href="/rides"
               className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-white text-secondary rounded-full text-xs md:text-sm uppercase tracking-widest hover:bg-muted transition-all shadow-xl shadow-black/5 group"

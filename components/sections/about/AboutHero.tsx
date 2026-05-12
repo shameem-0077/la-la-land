@@ -41,13 +41,13 @@ const AboutHero = () => {
           
           <div className="flex flex-wrap gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
+              {/* <Link 
                 href="/book" 
                 className="flex items-center gap-3 bg-primary hover:bg-primary-dark text-white py-4 px-10 rounded-full shadow-2xl shadow-primary/40 transition-all text-xs tracking-widest uppercase"
               >
                 Book Tickets
                 <Ticket className="w-5 h-5 fill-white" />
-              </Link>
+              </Link> */}
             </motion.div>
           </div>
         </motion.div>

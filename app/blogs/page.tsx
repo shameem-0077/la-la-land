@@ -79,7 +79,7 @@ const BlogPage = () => {
         badgeText="La La Land Blog"
         primaryBtnText="Read Latest"
         primaryBtnLink="#featured"
-        secondaryBtnText="Book Tickets"
+        // secondaryBtnText="Book Tickets"
         secondaryBtnLink="/book"
       />
 

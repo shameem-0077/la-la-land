@@ -39,7 +39,7 @@ const CTA = () => {
 
             {/* Right Buttons */}
             <div className="flex flex-col gap-3 md:gap-4 w-full md:min-w-[320px] lg:w-auto items-center">
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full max-w-[280px]">
+              {/* <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full max-w-[280px]">
                 <Link 
                   href="/book" 
                   className="flex items-center justify-center gap-3 bg-white text-primary hover:bg-muted py-3.5 md:py-5 px-8 md:px-10 rounded-xl md:rounded-full shadow-2xl transition-all text-xs md:text-sm tracking-wider uppercase w-full"
@@ -47,7 +47,7 @@ const CTA = () => {
                   Book Tickets Now
                   <Ticket className="w-4 h-4 md:w-5 md:h-5" />
                 </Link>
-              </motion.div>
+              </motion.div> */}
 
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full max-w-[280px]">
                 <Link 
