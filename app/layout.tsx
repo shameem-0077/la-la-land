@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "La La Land  Park",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "La La Land  Park",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "La La Land  Park | Wayanad",
     description: "Experience 50+ thrilling rides and family fun in Wayanad.",
-    images: ["/og-image.png"],
+    images: ["/og-image.webp"],
   },
   robots: {
     index: true,
