@@ -179,20 +179,6 @@ const BlogDetailPage = () => {
                       View Packages
                     </Link>
                   </div>
-
-                  <div>
-                    <h4 className="text-sm font-black text-secondary uppercase tracking-[0.2em] mb-6 border-b border-zinc-100 pb-4">Recent Stories</h4>
-                    <div className="space-y-6">
-                      {relatedPosts.map((rp) => (
-                        <Link key={rp.id} href={`/blogs/${rp.slug}`} className="group block">
-                          <span className="text-[10px] text-primary uppercase tracking-widest mb-1 block font-bold">{rp.category_name}</span>
-                          <h5 className="text-sm font-black text-secondary leading-tight group-hover:text-primary transition-colors line-clamp-2 uppercase">
-                            {rp.title}
-                          </h5>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
