@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { supabase } from "@/lib/supabase";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -38,7 +39,13 @@ export default async function RidesPage() {
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
       <main className="flex-grow">
-        <RidesClient initialCategories={categories} initialRides={rides} />
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center bg-white">
+            <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+          </div>
+        }>
+          <RidesClient initialCategories={categories} initialRides={rides} />
+        </Suspense>
       </main>
       <CTA />
       <Footer />
