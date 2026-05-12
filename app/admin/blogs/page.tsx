@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Plus, Search, Edit2, Trash2, FileText, Calendar, User, Eye, Tag } from "lucide-react";
+import { Plus, Search, Edit2, Trash2, FileText, Calendar, User, Eye, Tag, Layers } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 export default function BlogsListingPage() {
@@ -54,6 +54,17 @@ export default function BlogsListingPage() {
         >
           <Plus className="w-4 h-4" />
           Create Post
+        </Link>
+      </div>
+
+      <div className="flex gap-2 p-1.5 bg-slate-200/50 rounded-2xl md:rounded-[24px] w-full md:w-fit overflow-x-auto no-scrollbar whitespace-nowrap">
+        <Link href="/admin/blogs" className="flex items-center gap-3 px-6 md:px-8 py-3 rounded-xl md:rounded-[18px] text-[10px] font-black uppercase tracking-widest transition-all bg-white text-blue-600 shadow-sm shrink-0">
+          <FileText className="w-4 h-4" />
+          All Stories
+        </Link>
+        <Link href="/admin/blogs/categories" className="flex items-center gap-3 px-6 md:px-8 py-3 rounded-xl md:rounded-[18px] text-[10px] font-black uppercase tracking-widest transition-all text-slate-400 hover:text-slate-600 shrink-0">
+          <Layers className="w-4 h-4" />
+          Blog Categories
         </Link>
       </div>
 
