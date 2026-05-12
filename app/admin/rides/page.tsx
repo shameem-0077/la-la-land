@@ -69,10 +69,24 @@ export default function RidesListingPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this ride?")) {
-      const { error } = await supabase.from("Ride").delete().eq("id", id);
-      if (!error) {
+    if (confirm("Are you sure you want to delete this ride? This will also remove all associated features and gallery images.")) {
+      try {
+        // 1. Delete related features
+        const { error: featError } = await supabase.from("RideFeature").delete().eq("ride_id", id);
+        if (featError) throw featError;
+
+        // 2. Delete related images
+        const { error: imgError } = await supabase.from("RideImage").delete().eq("ride_id", id);
+        if (imgError) throw imgError;
+
+        // 3. Delete the ride itself
+        const { error: rideError } = await supabase.from("Ride").delete().eq("id", id);
+        if (rideError) throw rideError;
+
         setRides(rides.filter(r => r.id !== id));
+      } catch (error: any) {
+        console.error("Delete error:", error);
+        alert("Failed to delete ride: " + error.message);
       }
     }
   };

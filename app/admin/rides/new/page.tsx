@@ -56,10 +56,10 @@ export default function RideFormPage() {
 
   useEffect(() => {
     fetchCategories();
-    if (isEdit) {
+    if (params.id) {
       fetchRideData();
     }
-  }, [isEdit]);
+  }, [params.id]);
 
   const fetchCategories = async () => {
     const { data } = await supabase.from("RideCategory").select("id, name").order("name");
@@ -102,28 +102,51 @@ export default function RideFormPage() {
 
   const fetchRideData = async () => {
     setIsLoading(true);
-    const { data: rideData, error: rideError } = await supabase
-      .from("Ride")
-      .select("*")
-      .eq("id", params.id)
-      .single();
-
-    if (!rideError && rideData) {
-      setFormData(rideData);
-      
-      const { data: featureData } = await supabase
-        .from("RideFeature")
+    try {
+      const { data: rideData, error: rideError } = await supabase
+        .from("Ride")
         .select("*")
-        .eq("ride_id", params.id);
-      if (featureData) setFeatures(featureData);
+        .eq("id", params.id)
+        .single();
 
-      const { data: imageData } = await supabase
-        .from("RideImage")
-        .select("*")
-        .eq("ride_id", params.id);
-      if (imageData) setRideImages(imageData.map(img => ({ ...img, url: img.image })));
+      if (!rideError && rideData) {
+        setFormData(rideData);
+        
+        const { data: featureData } = await supabase
+          .from("RideFeature")
+          .select("*")
+          .eq("ride_id", params.id);
+        
+        if (featureData) {
+          // Deduplicate existing features from DB by name
+          const uniqueFetchedFeatures = featureData.reduce((acc: any[], current: any) => {
+            const exists = acc.find(item => item.name === current.name);
+            if (!exists) return acc.concat([current]);
+            return acc;
+          }, []);
+          setFeatures(uniqueFetchedFeatures);
+        }
+
+        const { data: imageData } = await supabase
+          .from("RideImage")
+          .select("*")
+          .eq("ride_id", params.id);
+        
+        if (imageData) {
+          // Deduplicate existing images from DB by image path
+          const uniqueFetchedImages = imageData.reduce((acc: any[], current: any) => {
+            const exists = acc.find(item => item.image === current.image);
+            if (!exists) return acc.concat([current]);
+            return acc;
+          }, []);
+          setRideImages(uniqueFetchedImages.map(img => ({ ...img, url: img.image, image: img.image })));
+        }
+      }
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   // Helper to upload to Supabase Storage
@@ -188,45 +211,123 @@ export default function RideFormPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLoading) return; // Guard against double submission
     setIsLoading(true);
 
     try {
+      // 1. Sanitize formData for Supabase update/insert
+      const { id, created_at, ...dataToSave } = formData as any;
+      delete (dataToSave as any).RideCategory;
+
       const { data: savedRide, error: rideError } = isEdit 
-        ? await supabase.from("Ride").update(formData).eq("id", params.id).select().single()
-        : await supabase.from("Ride").insert([formData]).select().single();
+        ? await supabase.from("Ride").update(dataToSave).eq("id", params.id).select().single()
+        : await supabase.from("Ride").insert([dataToSave]).select().single();
 
       if (rideError) throw rideError;
       const rideId = savedRide.id;
 
+      // 2. Handle related data with a robust Sync strategy
+      // This is much safer than delete-all and insert-all
+      
+      // --- SYNC FEATURES ---
+      // Deduplicate features in state by name first
+      const uniqueFeatures = features.reduce((acc: any[], current: any) => {
+        const exists = acc.find(item => item.name === current.name);
+        if (!exists && current.name?.trim()) {
+          return acc.concat([current]);
+        }
+        return acc;
+      }, []);
+
       if (isEdit) {
-        await supabase.from("RideFeature").delete().eq("ride_id", rideId);
-        await supabase.from("RideImage").delete().eq("ride_id", rideId);
+        // 1. Identify which features to keep (those that already have a valid DB ID)
+        const featuresWithId = uniqueFeatures.filter(f => f.id && typeof f.id === 'string');
+        const featureIdsToKeep = featuresWithId.map(f => f.id);
+
+        // 2. Delete features that are no longer in our list
+        const deleteQuery = supabase.from("RideFeature").delete().eq("ride_id", rideId);
+        if (featureIdsToKeep.length > 0) {
+          await deleteQuery.not("id", "in", `(${featureIdsToKeep.join(',')})`);
+        } else {
+          await deleteQuery;
+        }
+
+        // 3. Upsert the current set
+        if (uniqueFeatures.length > 0) {
+          const featuresToUpsert = uniqueFeatures.map(f => ({
+            ...(f.id && typeof f.id === 'string' ? { id: f.id } : {}),
+            name: f.name,
+            icon: f.icon,
+            ride_id: rideId
+          }));
+          const { error: featError } = await supabase.from("RideFeature").upsert(featuresToUpsert);
+          if (featError) throw featError;
+        }
+      } else {
+        // New ride: just insert
+        if (uniqueFeatures.length > 0) {
+          const featuresToInsert = uniqueFeatures.map(f => ({
+            name: f.name,
+            icon: f.icon,
+            ride_id: rideId
+          }));
+          const { error: featError } = await supabase.from("RideFeature").insert(featuresToInsert);
+          if (featError) throw featError;
+        }
       }
 
-      if (features.length > 0) {
-        const featuresToSave = features.map(f => ({ 
-          name: f.name, 
-          icon: f.icon, 
-          ride_id: rideId 
+      // --- SYNC GALLERY IMAGES ---
+      const uniqueImages = rideImages.reduce((acc: any[], current: any) => {
+        const currentPath = current.image || current.url;
+        const exists = acc.find(item => (item.image || item.url) === currentPath);
+        if (!exists && currentPath) {
+          return acc.concat([current]);
+        }
+        return acc;
+      }, []);
+
+      if (isEdit) {
+        // 1. Identify which images to keep
+        const imagesWithId = uniqueImages.filter(img => img.id && typeof img.id === 'string');
+        const imageIdsToKeep = imagesWithId.map(img => img.id);
+
+        // 2. Delete images that are no longer in our list
+        const deleteImgQuery = supabase.from("RideImage").delete().eq("ride_id", rideId);
+        if (imageIdsToKeep.length > 0) {
+          await deleteImgQuery.not("id", "in", `(${imageIdsToKeep.join(',')})`);
+        } else {
+          await deleteImgQuery;
+        }
+
+        if (uniqueImages.length > 0) {
+          const imagesToUpsert = uniqueImages.map(img => ({
+            ...(img.id && typeof img.id === 'string' ? { id: img.id } : {}),
+            image: img.image || img.url,
+            ride_id: rideId
+          }));
+          const { error: imgError } = await supabase.from("RideImage").upsert(imagesToUpsert);
+          if (imgError) throw imgError;
+        }
+      } else {
+      // New ride: just insert
+      if (uniqueImages.length > 0) {
+        const imagesToInsert = uniqueImages.map(img => ({
+          image: img.image || img.url,
+          ride_id: rideId
         }));
-        await supabase.from("RideFeature").insert(featuresToSave);
+        const { error: imgError } = await supabase.from("RideImage").insert(imagesToInsert);
+        if (imgError) throw imgError;
       }
-
-      if (rideImages.length > 0) {
-        const imagesToSave = rideImages.map(img => ({ 
-          image: img.image, 
-          ride_id: rideId 
-        }));
-        await supabase.from("RideImage").insert(imagesToSave);
-      }
-
-      router.push("/admin/rides");
-    } catch (error: any) {
-      alert(error.message);
-    } finally {
-      setIsLoading(false);
     }
-  };
+
+    router.push("/admin/rides");
+  } catch (error: any) {
+    console.error("Submission error:", error);
+    alert("Failed to save ride: " + error.message);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const addFeature = () => setFeatures([...features, { name: "", icon: "" }]);
   const removeFeature = (idx: number) => setFeatures(features.filter((_, i) => i !== idx));

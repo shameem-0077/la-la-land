@@ -28,10 +28,19 @@ export default function RideCategoriesPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this category?")) {
-      const { error } = await supabase.from("RideCategory").delete().eq("id", id);
-      if (!error) {
+    if (confirm("Are you sure you want to delete this category? Note: You cannot delete a category that still has rides assigned to it.")) {
+      try {
+        const { error } = await supabase.from("RideCategory").delete().eq("id", id);
+        if (error) {
+          if (error.code === '23503') {
+            throw new Error("Cannot delete this category because it is still being used by one or more rides. Please reassign or delete those rides first.");
+          }
+          throw error;
+        }
         setCategories(categories.filter(c => c.id !== id));
+      } catch (error: any) {
+        console.error("Delete error:", error);
+        alert(error.message || "Failed to delete category");
       }
     }
   };
