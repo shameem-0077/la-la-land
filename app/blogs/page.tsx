@@ -177,7 +177,7 @@ const BlogPage = () => {
 
                     <div>
                       <Link 
-                        href={`/blogs/${featuredPost.id}`}
+                        href={`/blogs/${featuredPost.slug}`}
                         className="inline-flex items-center gap-4 bg-primary text-white px-10 py-5 rounded-full text-xs uppercase tracking-[0.2em] hover:bg-primary-dark transition-all shadow-xl group/btn"
                       >
                         Read Featured Story
@@ -233,7 +233,7 @@ const BlogPage = () => {
 
                       <div className="mt-auto">
                         <Link 
-                          href={`/blogs/${post.id}`}
+                          href={`/blogs/${post.slug}`}
                           className="inline-flex items-center gap-3 text-secondary text-xs uppercase tracking-[0.2em] group/btn"
                         >
                           Read Full Story

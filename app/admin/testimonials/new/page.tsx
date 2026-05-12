@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Save, Star, User, Quote, Shield, Camera, UploadCloud, X } from "lucide-react";
+import { ArrowLeft, Save, Star, User, Quote, Shield, Camera, UploadCloud, X, Grid, Check } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
@@ -11,6 +11,9 @@ export default function NewTestimonialPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [showMediaLibrary, setShowMediaLibrary] = useState(false);
+  const [libraryItems, setLibraryItems] = useState<any[]>([]);
+  const [isLoadingLibrary, setIsLoadingLibrary] = useState(false);
   const [formData, setFormData] = useState({
     author_name: "",
     author_designation: "Visitor",
@@ -38,6 +41,40 @@ export default function NewTestimonialPage() {
 
     return publicUrl;
   };
+
+  const fetchLibraryItems = async () => {
+    setIsLoadingLibrary(true);
+    try {
+      const { data, error } = await supabase.storage
+        .from('testimonial-profiles')
+        .list('profiles', {
+          limit: 100,
+          offset: 0,
+          sortBy: { column: 'name', order: 'desc' },
+        });
+
+      if (error) throw error;
+
+      const itemsWithUrls = data.map(file => {
+        const { data: { publicUrl } } = supabase.storage
+          .from('testimonial-profiles')
+          .getPublicUrl(`profiles/${file.name}`);
+        return { ...file, url: publicUrl };
+      });
+
+      setLibraryItems(itemsWithUrls);
+    } catch (error: any) {
+      console.error("Error fetching library:", error.message);
+    } finally {
+      setIsLoadingLibrary(false);
+    }
+  };
+
+  React.useEffect(() => {
+    if (showMediaLibrary) {
+      fetchLibraryItems();
+    }
+  }, [showMediaLibrary]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -98,59 +135,63 @@ export default function NewTestimonialPage() {
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white p-8 md:p-10 rounded-[32px] md:rounded-[40px] shadow-sm border border-slate-200">
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold">Reviewer Name</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. John Doe"
-                  value={formData.author_name}
-                  onChange={(e) => setFormData({ ...formData, author_name: e.target.value })}
-                  className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold">Role / Designation</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. Visitor, Parent, Local Guide"
-                    value={formData.author_designation}
-                    onChange={(e) => setFormData({ ...formData, author_designation: e.target.value })}
-                    className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
-                  />
+             <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold">Author Name</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g. John Doe"
+                      value={formData.author_name}
+                      onChange={(e) => setFormData({ ...formData, author_name: e.target.value })}
+                      className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold">Designation</label>
+                    <input 
+                      type="text"
+                      placeholder="e.g. Visitor"
+                      value={formData.author_designation}
+                      onChange={(e) => setFormData({ ...formData, author_designation: e.target.value })}
+                      className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
+                    />
+                  </div>
                 </div>
+
                 <div className="space-y-2">
                   <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold">Rating</label>
-                  <div className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                    {[1, 2, 3, 4, 5].map((star) => (
+                  <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-2xl w-fit border border-slate-100">
+                    {[1, 2, 3, 4, 5].map((num) => (
                       <button
-                        key={star}
+                        key={num}
                         type="button"
-                        onClick={() => setFormData({ ...formData, rating: star })}
-                        className="transition-transform hover:scale-125"
+                        onClick={() => setFormData({ ...formData, rating: num })}
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                          formData.rating >= num 
+                            ? "bg-yellow-400 text-white shadow-lg shadow-yellow-400/30" 
+                            : "bg-white text-slate-300 hover:text-slate-400"
+                        }`}
                       >
-                        <Star className={`w-5 h-5 ${star <= formData.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'}`} />
+                        <Star className={`w-5 h-5 ${formData.rating >= num ? "fill-current" : ""}`} />
                       </button>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold">Testimonial Content</label>
-                <textarea 
-                  required
-                  rows={6}
-                  placeholder="What did they say about the park?"
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm resize-none"
-                />
-              </div>
-            </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold">Testimonial Content</label>
+                  <textarea 
+                    required
+                    rows={6}
+                    placeholder="What did they say about the park?"
+                    value={formData.content}
+                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                    className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm resize-none"
+                  />
+                </div>
+             </div>
           </div>
         </div>
 
@@ -158,36 +199,23 @@ export default function NewTestimonialPage() {
           <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm space-y-6">
             <div className="space-y-4">
               <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1 font-bold text-center block">Author Profile Image</label>
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative group w-32 h-32">
-                  <div className="w-full h-full rounded-full bg-slate-50 border-2 border-dashed border-slate-200 flex items-center justify-center overflow-hidden transition-all group-hover:border-blue-400">
-                    {isUploading ? (
-                      <UploadCloud className="w-8 h-8 text-blue-500 animate-bounce" />
-                    ) : formData.author_profile ? (
-                      <img src={formData.author_profile} className="w-full h-full object-cover" />
-                    ) : (
-                      <Camera className="w-8 h-8 text-slate-300" />
-                    )}
-                    <input 
-                      type="file" 
-                      accept="image/*"
-                      onChange={handleFileUpload}
-                      className="absolute inset-0 opacity-0 cursor-pointer" 
-                    />
-                  </div>
-                  {formData.author_profile && (
-                    <button 
-                      type="button"
-                      onClick={() => setFormData({ ...formData, author_profile: "" })}
-                      className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  )}
+              <div className="flex flex-col items-center gap-6">
+                <div className="relative group w-32 h-32 rounded-full bg-slate-50 border-2 border-dashed border-slate-200 overflow-hidden flex items-center justify-center">
+                    {isUploading ? <UploadCloud className="w-8 h-8 text-blue-500 animate-bounce" /> : formData.author_profile ? <img src={formData.author_profile} className="w-full h-full object-cover" /> : <Camera className="w-8 h-8 text-slate-200" />}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                       <button type="button" onClick={() => setShowMediaLibrary(true)} className="w-8 h-8 rounded-full bg-white text-blue-600 flex items-center justify-center hover:scale-110 transition-transform"><Grid className="w-4 h-4" /></button>
+                       <label className="w-8 h-8 rounded-full bg-white text-slate-600 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                          <UploadCloud className="w-4 h-4" />
+                          <input type="file" onChange={handleFileUpload} className="hidden" accept="image/*" />
+                       </label>
+                    </div>
                 </div>
                 <div className="text-center">
+                  <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest leading-relaxed mb-1">
+                    {formData.author_profile ? "Photo Selected" : "No Photo"}
+                  </p>
                   <p className="text-[10px] text-slate-400 uppercase tracking-widest leading-relaxed">
-                    {isUploading ? "Uploading..." : "Tap to upload profile"}
+                    {isUploading ? "Uploading..." : "Library or Upload"}
                   </p>
                 </div>
               </div>
@@ -205,39 +233,84 @@ export default function NewTestimonialPage() {
             </div>
 
             <div className="pt-4 border-t border-slate-50">
-               <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-4 font-bold">Preview</p>
-               <div className="p-6 rounded-2xl bg-slate-900 text-white relative overflow-hidden">
-                  <Quote className="absolute -top-2 -left-2 w-10 h-10 text-white/10 -rotate-12" />
-                  <p className="text-[10px] italic mb-4 line-clamp-3">"{formData.content || 'Visitor text will appear here...'}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
-                       {formData.author_profile ? <img src={formData.author_profile} className="w-full h-full object-cover" /> : <User className="w-4 h-4" />}
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase">{formData.author_name || 'Visitor Name'}</p>
-                      <p className="text-[8px] text-primary">{formData.author_designation}</p>
-                    </div>
-                  </div>
-               </div>
+              <button 
+                type="submit"
+                disabled={isLoading || isUploading}
+                className="w-full py-5 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-300 text-white rounded-[20px] text-xs font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all flex items-center justify-center gap-3"
+              >
+                {isLoading ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Save className="w-4 h-4" />}
+                Publish Testimonial
+              </button>
             </div>
           </div>
-
-          <button 
-            type="submit"
-            disabled={isLoading || isUploading}
-            className="w-full py-5 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-300 text-white rounded-[24px] text-xs font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all flex items-center justify-center gap-3 group"
-          >
-            {isLoading ? (
-              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            ) : (
-              <>
-                <Save className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                Publish Testimonial
-              </>
-            )}
-          </button>
         </div>
       </form>
+
+      {/* Media Library Modal */}
+      {showMediaLibrary && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onClick={() => setShowMediaLibrary(false)}
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            className="relative w-full max-w-5xl bg-white rounded-[40px] shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
+          >
+            <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+               <div>
+                 <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">Testimonial Media Library</h2>
+                 <p className="text-xs text-slate-500 uppercase tracking-widest mt-1">Select an existing profile photo or upload new</p>
+               </div>
+               <button onClick={() => setShowMediaLibrary(false)} className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-red-500 transition-all">
+                 <X className="w-5 h-5" />
+               </button>
+            </div>
+
+            <div className="flex-grow overflow-y-auto p-8">
+              {isLoadingLibrary ? (
+                <div className="h-64 flex flex-col items-center justify-center gap-4 text-blue-500">
+                   <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+                   <p className="text-[10px] font-black uppercase tracking-widest">Loading assets...</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                   {/* Upload Trigger in Grid */}
+                   <label className="aspect-square rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-slate-50 hover:border-blue-300 transition-all group">
+                     <UploadCloud className="w-8 h-8 text-slate-300 group-hover:text-blue-500 transition-colors" />
+                     <p className="text-[10px] font-black text-slate-400 group-hover:text-blue-600 uppercase tracking-widest">Upload New</p>
+                     <input type="file" onChange={(e) => { handleFileUpload(e); setShowMediaLibrary(false); }} className="hidden" accept="image/*" />
+                   </label>
+
+                   {libraryItems.map((item, index) => (
+                     <div 
+                       key={index}
+                       onClick={() => {
+                         setFormData(prev => ({ ...prev, author_profile: item.url }));
+                         setShowMediaLibrary(false);
+                       }}
+                       className="group relative aspect-square rounded-3xl overflow-hidden bg-slate-100 cursor-pointer border-4 border-transparent hover:border-blue-500 transition-all"
+                     >
+                       <img src={item.url} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                       <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/20 transition-all flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100 shadow-xl">
+                             <Check className="w-5 h-5" />
+                          </div>
+                       </div>
+                       <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+                          <p className="text-[8px] font-bold text-white uppercase truncate">{item.name}</p>
+                       </div>
+                     </div>
+                   ))}
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }
