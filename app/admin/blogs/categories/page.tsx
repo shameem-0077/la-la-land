@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Search, Edit2, Trash2, FileText, Layers, Image as ImageIcon } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 export default function BlogCategoriesPage() {
   const [categories, setCategories] = useState<any[]>([]);

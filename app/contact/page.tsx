@@ -9,6 +9,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CTA from "@/components/sections/CTA";
 import PageHero from "@/components/sections/PageHero";
+import { getOptimizedImage } from "@/lib/utils";
 
 const ContactPage = () => {
   return (
@@ -18,7 +19,7 @@ const ContactPage = () => {
       <PageHero 
         title={<>Contact <br /> Us</>}
         subtitle="Have questions, need help, or want to plan your perfect day at La La Land? We're here to make it easy!"
-        bgImage="/images/hero-bg-image-4.png"
+        bgImage={getOptimizedImage("/images/hero-bg-image-4.png")}
         badgeText="We'd Love to Hear From You!"
         primaryBtnText="Send Message"
         primaryBtnLink="#contact-form"
@@ -162,18 +163,18 @@ const ContactPage = () => {
             >
               <div className="space-y-4">
                 <div className="rounded-[30px] overflow-hidden aspect-square relative shadow-xl">
-                  <Image src="/park_hero_image_1778049530668.png" alt="Ride" fill className="object-cover" />
+                  <Image src={getOptimizedImage("/park_hero_image_1778049530668.png")} alt="Ride" fill className="object-cover" />
                 </div>
                 <div className="rounded-[30px] overflow-hidden aspect-[4/3] relative shadow-xl">
-                  <Image src="/water_activities_image_1778049553201.png" alt="Splash" fill className="object-cover" />
+                  <Image src={getOptimizedImage("/water_activities_image_1778049553201.png")} alt="Splash" fill className="object-cover" />
                 </div>
               </div>
               <div className="space-y-4 pt-8">
                 <div className="rounded-[30px] overflow-hidden aspect-[3/4] relative shadow-xl">
-                  <Image src="/rides_tower_activities_1778054789676.png" alt="Thrill" fill className="object-cover" />
+                  <Image src={getOptimizedImage("/rides_tower_activities_1778054789676.png")} alt="Thrill" fill className="object-cover" />
                 </div>
                 <div className="rounded-[30px] overflow-hidden aspect-square relative shadow-xl">
-                  <Image src="/amusement_activities_image_1778049573930.png" alt="Fun" fill className="object-cover" />
+                  <Image src={getOptimizedImage("/amusement_activities_image_1778049573930.png")} alt="Fun" fill className="object-cover" />
                 </div>
               </div>
             </motion.div>

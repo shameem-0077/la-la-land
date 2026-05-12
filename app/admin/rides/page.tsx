@@ -6,11 +6,12 @@ import { Plus, Search, Filter, Edit2, Eye, Trash2, Map, Waves, Zap, Users, Image
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
+import { getOptimizedImage } from "@/lib/utils";
 
 // Helper to convert bytea/Uint8Array to base64 URL
 const getImageUrl = (data: any): string | undefined => {
   if (!data) return undefined;
-  if (typeof data === 'string' && data.startsWith('http')) return data;
+  if (typeof data === 'string' && data.startsWith('http')) return getOptimizedImage(data);
   // If it's a buffer/Uint8Array from bytea
   try {
     const base64String = btoa(

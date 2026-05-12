@@ -22,6 +22,7 @@ import {
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 export default function BlogFormPage() {
   const router = useRouter();
@@ -255,7 +256,7 @@ export default function BlogFormPage() {
                    </div>
                  ) : formData.cover_image ? (
                    <>
-                     <img src={formData.cover_image} className="w-full h-full object-cover" />
+                     <img src={getOptimizedImage(formData.cover_image)} className="w-full h-full object-cover" />
                      <button type="button" onClick={() => setFormData(prev => ({ ...prev, cover_image: "" }))} className="absolute top-4 right-4 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-red-500 shadow-lg opacity-0 group-hover:opacity-100 transition-all">
                        <X className="w-4 h-4" />
                      </button>
@@ -329,7 +330,7 @@ export default function BlogFormPage() {
                             }}
                             className="group relative aspect-square rounded-3xl overflow-hidden bg-slate-100 cursor-pointer border-4 border-transparent hover:border-blue-500 transition-all"
                           >
-                            <img src={item.url} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <img src={getOptimizedImage(item.url)} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/20 transition-all flex items-center justify-center">
                                <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100 shadow-xl">
                                   <Check className="w-5 h-5" />

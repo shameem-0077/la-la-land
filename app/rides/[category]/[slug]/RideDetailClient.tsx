@@ -7,6 +7,7 @@ import { MessageCircle, Ticket, Users, Clock, ShieldCheck, Waves, Info, ChevronL
 import { motion, AnimatePresence } from "framer-motion";
 
 import PageHero from "@/components/sections/PageHero";
+import { getOptimizedImage } from "@/lib/utils";
 
 interface RideDetailClientProps {
   ride: any;
@@ -107,7 +108,7 @@ export default function RideDetailClient({ ride }: RideDetailClientProps) {
                       {ride.gallery.map((item: any, i: number) => (
                         <div key={i} className="min-w-full h-full relative">
                           <Image 
-                            src={item.image} 
+                            src={getOptimizedImage(item.image)} 
                             alt={item.title} 
                             fill 
                             className="object-cover" 

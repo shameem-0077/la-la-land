@@ -7,6 +7,7 @@ import { ChevronDown, Filter, Zap, Droplets, Mountain, Users, Star, ArrowRight }
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import PageHero from "@/components/sections/PageHero";
+import { getOptimizedImage } from "@/lib/utils";
 
 const defaultIcons: Record<string, React.ReactNode> = {
   all: <Filter className="w-4 h-4" />,
@@ -101,7 +102,7 @@ export default function RidesClient({ initialCategories, initialRides }: RidesCl
                     className="block bg-white rounded-[40px] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] transition-all duration-500 h-full"
                   >
                     <div className="relative h-[220px] w-full">
-                      <Image src={ride.image} alt={ride.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <Image src={getOptimizedImage(ride.image)} alt={ride.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute top-4 left-4">
                         <span className={`px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest text-white shadow-lg ${
                           ride.category === 'water' ? 'bg-primary' :

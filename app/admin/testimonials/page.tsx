@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Search, Edit2, Trash2, MessageSquare, Star, User, Eye } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 export default function TestimonialsListingPage() {
   const [testimonials, setTestimonials] = useState<any[]>([]);
@@ -107,7 +108,7 @@ export default function TestimonialsListingPage() {
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-2xl bg-slate-100 overflow-hidden relative shrink-0 border border-slate-200">
                           {t.author_profile ? (
-                            <img src={t.author_profile} alt={t.author_name} className="w-full h-full object-cover" />
+                            <img src={getOptimizedImage(t.author_profile)} alt={t.author_name} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-slate-300">
                               <User className="w-6 h-6" />

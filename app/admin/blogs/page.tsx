@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Search, Edit2, Trash2, FileText, Calendar, User, Eye, Tag, Layers } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 export default function BlogsListingPage() {
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -122,7 +123,7 @@ export default function BlogsListingPage() {
                       <div className="flex items-center gap-4">
                         <div className="w-16 h-16 rounded-2xl bg-slate-100 overflow-hidden relative shrink-0 border border-slate-200">
                           {blog.cover_image ? (
-                            <img src={blog.cover_image} alt={blog.title} className="w-full h-full object-cover" />
+                            <img src={getOptimizedImage(blog.cover_image)} alt={blog.title} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-slate-300">
                               <FileText className="w-6 h-6" />

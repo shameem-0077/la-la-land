@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Quote, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 const testimonials = [
   {
@@ -107,7 +108,7 @@ const Testimonials = ({ initialItems = [] }: TestimonialsProps) => {
                       <div className="flex flex-col items-center">
                         <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 mb-4 shadow-xl">
                           <img 
-                            src={initialItems[currentIndex].avatar} 
+                            src={getOptimizedImage(initialItems[currentIndex].avatar)} 
                             alt={initialItems[currentIndex].name} 
                             className="w-full h-full object-cover"
                           />

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Search, Edit2, Trash2, Image as ImageIcon, Eye } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 export default function GalleryListingPage() {
   const [images, setImages] = useState<any[]>([]);
@@ -89,7 +90,7 @@ export default function GalleryListingPage() {
           ) : (
             filteredImages.map((img) => (
               <div key={img.id} className="group relative aspect-square rounded-3xl overflow-hidden bg-slate-100 border border-slate-200">
-                 <img src={img.image} alt={img.title} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
+                 <img src={getOptimizedImage(img.image)} alt={img.title} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
                  <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
                     <p className="text-white font-bold text-xs uppercase tracking-tight mb-4">{img.title}</p>
                     <div className="flex items-center gap-2">

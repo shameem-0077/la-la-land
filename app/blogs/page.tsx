@@ -11,6 +11,7 @@ import CTA from "@/components/sections/CTA";
 import PageHero from "@/components/sections/PageHero";
 
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 const BlogPage = () => {
   const [activeCategory, setActiveCategory] = React.useState("All");
@@ -74,7 +75,7 @@ const BlogPage = () => {
       <PageHero 
         title={<>The <br /> Journal</>}
         subtitle="Stories, tips, and updates from the heart of La La Land. Stay tuned for the latest thrills and family fun."
-        bgImage="/images/hero-bg-image-4.png"
+        bgImage={getOptimizedImage("/images/hero-bg-image-4.png")}
         badgeText="La La Land Blog"
         primaryBtnText="Read Latest"
         primaryBtnLink="#featured"
@@ -145,7 +146,7 @@ const BlogPage = () => {
                 >
                   <div className="lg:w-3/5 relative overflow-hidden">
                     <img 
-                      src={featuredPost.cover_image} 
+                      src={getOptimizedImage(featuredPost.cover_image)} 
                       alt={featuredPost.title}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
@@ -200,7 +201,7 @@ const BlogPage = () => {
                   >
                     <div className="relative h-64 overflow-hidden">
                       <img 
-                        src={post.cover_image} 
+                        src={getOptimizedImage(post.cover_image)} 
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />

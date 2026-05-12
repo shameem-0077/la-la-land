@@ -10,6 +10,7 @@ import CTA from "@/components/sections/CTA";
 import PageHero from "@/components/sections/PageHero";
 import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 // Custom SVG Icons for Social Media
 const Instagram = () => (
@@ -106,7 +107,7 @@ const BlogDetailPage = () => {
       <PageHero 
         title={post.title}
         subtitle={post.sub_description}
-        bgImage={post.cover_image}
+        bgImage={getOptimizedImage(post.cover_image)}
         badgeText={post.category_name}
         primaryBtnText="Share Story"
         primaryBtnLink="#"
@@ -205,7 +206,7 @@ const BlogDetailPage = () => {
                 className="bg-white rounded-[40px] overflow-hidden shadow-xl border border-zinc-50 group hover:shadow-2xl transition-all duration-500"
               >
                 <div className="relative h-48 overflow-hidden">
-                  <img src={p.cover_image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={getOptimizedImage(p.cover_image)} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
                 <div className="p-8">
                   <span className="text-[10px] text-primary uppercase tracking-widest mb-2 block font-bold">{p.category_name}</span>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import NextLink from "next/link";
 import { MessageCircle, Ticket, Menu, X, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getOptimizedImage } from "@/lib/utils";
 
 const navItems = [
   { name: "About Us", href: "/about" },
@@ -46,7 +47,7 @@ const Header = () => {
         {/* Logo */}
         <NextLink href="/" className="flex items-center group relative z-[110]" onClick={() => setIsMobileMenuOpen(false)}>
           <img 
-            src="/images/header-logo.png" 
+            src={getOptimizedImage("/images/header-logo.png")} 
             alt="La La Land Logo" 
             className="h-12 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />

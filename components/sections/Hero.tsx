@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Ticket, MessageCircle, Droplets, Mountain, Baby, Tag, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { getOptimizedImage } from "@/lib/utils";
 
 const badges = [
   { icon: <Droplets className="w-8 h-8 text-secondary" />, title: "Fun & Splash", sub: "Water Rides" },
@@ -21,7 +22,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         {/* Main Park Image - Using standard img for guaranteed visibility */}
         <img
-          src="/images/hero-bg-image-4.png"
+          src={getOptimizedImage("/images/hero-bg-image-4.png")}
           alt="La La Land  Park"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />

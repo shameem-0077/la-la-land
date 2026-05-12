@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Camera, Maximize2, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
+import { getOptimizedImage } from "@/lib/utils";
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -66,7 +67,7 @@ const Gallery = ({ initialItems = [] }: GalleryProps) => {
                 }`}
               >
                 <Image 
-                  src={item.image} 
+                  src={getOptimizedImage(item.image)} 
                   alt={item.title} 
                   fill 
                   className="object-cover transition-transform duration-700 group-hover:scale-110"

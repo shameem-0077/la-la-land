@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { getOptimizedImage } from "@/lib/utils";
 
 // Custom SVG Icons for Social Media
 const Instagram = () => (
@@ -29,7 +30,7 @@ const Footer = () => {
           <div className="flex flex-col gap-6">
             <Link href="/" className="inline-block group">
               <img 
-                src="/images/header-logo.png" 
+                src={getOptimizedImage("/images/header-logo.png")} 
                 alt="La La Land Logo" 
                 width={180} 
                 height={80} 

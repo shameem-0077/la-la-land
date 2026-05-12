@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Ticket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { getOptimizedImage } from "@/lib/utils";
 
 interface PageHeroProps {
   title: React.ReactNode;
@@ -31,7 +32,7 @@ const PageHero = ({
       {/* Immersive Background Layer */}
       <div className="absolute inset-0 z-0 w-full">
         <img
-          src={bgImage}
+          src={getOptimizedImage(bgImage)}
           alt={badgeText}
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
