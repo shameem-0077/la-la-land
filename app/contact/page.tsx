@@ -153,31 +153,6 @@ const ContactPage = () => {
                 </button>
               </form>
             </motion.div>
-
-            {/* Image Grid */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-4"
-            >
-              <div className="space-y-4">
-                <div className="rounded-[30px] overflow-hidden aspect-square relative shadow-xl">
-                  <Image src={getOptimizedImage("/park_hero_image_1778049530668.png")} alt="Ride" fill className="object-cover" />
-                </div>
-                <div className="rounded-[30px] overflow-hidden aspect-[4/3] relative shadow-xl">
-                  <Image src={getOptimizedImage("/water_activities_image_1778049553201.png")} alt="Splash" fill className="object-cover" />
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="rounded-[30px] overflow-hidden aspect-[3/4] relative shadow-xl">
-                  <Image src={getOptimizedImage("/rides_tower_activities_1778054789676.png")} alt="Thrill" fill className="object-cover" />
-                </div>
-                <div className="rounded-[30px] overflow-hidden aspect-square relative shadow-xl">
-                  <Image src={getOptimizedImage("/amusement_activities_image_1778049573930.png")} alt="Fun" fill className="object-cover" />
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>

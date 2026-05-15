@@ -67,7 +67,7 @@ const AboutSection = () => {
                 className="absolute bottom-4 right-0 w-[65%] sm:w-[62%] aspect-[4/3] rounded-[24px] md:rounded-[28px] overflow-hidden shadow-2xl border-4 border-white z-20"
               >
                 <Image
-                  src="/images/hero-bg-image-4.png"
+                  src="/images/hero-bg-image-4.webp"
                   alt="La La Park Adventures"
                   fill
                   className="object-cover"
