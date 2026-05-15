@@ -37,14 +37,7 @@ export default function RideDetailClient({ ride }: RideDetailClientProps) {
     <>
       <PageHero 
         badgeText={ride.category}
-        title={
-          <>
-            {ride.title.split(' ')[0]} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              {ride.title.split(' ').slice(1).join(' ')}
-            </span>
-          </>
-        }
+        title={ride.title}
         subtitle={ride.tagline}
         bgImage={ride.heroImage}
         primaryBtnText="Secure Passes"
@@ -147,23 +140,6 @@ export default function RideDetailClient({ ride }: RideDetailClientProps) {
           </div>
         </div>
       </section>
-
-      {/* Sticky Quick Book Footer */}
-      <motion.div 
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-4xl"
-      >
-        <div className="bg-secondary/90 backdrop-blur-2xl rounded-full p-2 pl-8 border border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] flex items-center justify-between">
-           <div className="hidden sm:block">
-              <p className="text-white text-sm font-black uppercase tracking-widest leading-none">Ready to Play?</p>
-              {/* <p className="text-white/60 text-[10px] uppercase tracking-widest">Book tickets for {ride.title}</p> */}
-           </div>
-           {/* <Link href="/book" className="bg-primary text-white py-4 px-10 rounded-full font-black uppercase tracking-widest text-xs hover:scale-105 transition-all shadow-xl">
-              Get Tickets
-           </Link> */}
-        </div>
-      </motion.div>
     </>
   );
 }
