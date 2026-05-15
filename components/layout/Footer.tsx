@@ -20,7 +20,7 @@ const Youtube = () => (
 
 const Footer = () => {
   return (
-    <footer className="bg-[#111c44] text-white py-16 md:py-20 relative overflow-hidden">
+    <footer className="bg-dark-green text-white py-16 md:py-20 relative overflow-hidden">
       {/* Decorative background circle */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       
@@ -31,14 +31,14 @@ const Footer = () => {
             <Link href="/" className="inline-block group">
               <img 
                 src={getOptimizedImage("/images/header-logo.png")} 
-                alt="La La Land Logo" 
+                alt="La La Park Logo" 
                 width={180} 
                 height={80} 
                 className="h-16 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-              La La Land  Park - Wayanad's ultimate destination for thrills, laughter, and family-friendly s.
+              La La Park - Wayanad's ultimate destination for thrills, laughter, and family-friendly s.
             </p>
           </div>
 
@@ -85,7 +85,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-16 md:mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/30 uppercase tracking-[0.2em]">
-          <p>© 2026 La La Land  Park. All Rights Reserved.</p>
+          <p>© 2026 La La Park. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>

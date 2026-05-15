@@ -17,9 +17,9 @@ const ContactPage = () => {
       <Header />
 
       <PageHero 
-        title={<>Contact <br /> Us</>}
-        subtitle="Have questions, need help, or want to plan your perfect day at La La Land? We're here to make it easy!"
-        bgImage={getOptimizedImage("/images/hero-bg-image-4.png")}
+        title={<>Contact Us</>}
+        subtitle="Have questions, need help, or want to plan your perfect day at La La Park? We're here to make it easy!"
+        bgImage={getOptimizedImage("/images/hero-bg-image-4.webp")}
         badgeText="We'd Love to Hear From You!"
         primaryBtnText="Send Message"
         primaryBtnLink="#contact-form"
@@ -65,7 +65,7 @@ const ContactPage = () => {
               <div>
                 <h3 className="text-xl font-black text-secondary mb-2 uppercase">Visit Us</h3>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  La La Land  Park, <br />
+                  La La Park, <br />
                   Vythiri, Wayanad - 673576 <br />
                   Kerala, India
                 </p>
@@ -202,7 +202,7 @@ const ContactPage = () => {
                 </div>
                 
                 <div className="mb-6">
-                  <p className="text-secondary mb-1">La La Land  Park</p>
+                  <p className="text-secondary mb-1">La La Park</p>
                   <p className="text-zinc-500 text-sm leading-relaxed">
                     Vythiri, Wayanad - 673576 <br />
                     Kerala, India

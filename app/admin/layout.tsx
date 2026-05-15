@@ -98,7 +98,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <ShieldCheck className="w-6 h-6 text-white" />
               </div>
               <div className="leading-none">
-                <p className="text-sm uppercase tracking-tighter">La La Land</p>
+                <p className="text-sm uppercase tracking-tighter">La La Park</p>
                 <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Admin Panel</p>
               </div>
             </div>

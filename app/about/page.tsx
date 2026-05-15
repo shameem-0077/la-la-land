@@ -10,8 +10,8 @@ import WhyChoose from "@/components/sections/about/WhyChoose";
 import Licenses from "@/components/sections/about/Licenses";
 
 export const metadata: Metadata = {
-  title: "About Us | La La Land  Park Wayanad",
-  description: "Learn about the vision, mission, and journey of Wayanad's premier  destination. Discover why thousands choose La La Land for family fun.",
+  title: "About Us | La La Park Wayanad",
+  description: "Learn about the vision, mission, and journey of Wayanad's premier  destination. Discover why thousands choose La La for family fun.",
 };
 
 export default function AboutPage() {
@@ -20,8 +20,8 @@ export default function AboutPage() {
       <Header />
       <main className="flex-grow">
         <PageHero 
-          title={<>Fun & <br /> Memories...</>}
-          subtitle="La La Land Park is Wayanad's most loved destination for thrill, joy and unforgettable experiences."
+          title={<>Fun & Memories...</>}
+          subtitle="La La Park is Wayanad's most loved destination for thrill, joy and unforgettable experiences."
           bgImage="/images/about-us-section.png"
           badgeText="Discover Our Story"
           secondaryBtnText="Explore Rides"
@@ -31,7 +31,6 @@ export default function AboutPage() {
         <VisionMission />
         <Milestones />
         <WhyChoose />
-        <Licenses />
         <CTA />
       </main>
       <Footer />

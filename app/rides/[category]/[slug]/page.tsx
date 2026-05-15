@@ -22,7 +22,7 @@ async function getRideData(slug: string) {
   return {
     title: ride.title,
     category: ride.RideCategory?.name || "Attraction",
-    tagline: ride.sub_title || "Experience the magic of La La Land",
+    tagline: ride.sub_title || "Experience the magic of La La Park",
     details: ride.about_description,
     aboutTitle: ride.about_title,
     heroImage: ride.cover_image,

@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { Check, Ticket, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { Check, Ticket, Star } from "lucide-react";
 import Link from "next/link";
 
-interface PackagesPreviewProps {
-  initialPackages?: any[];
+interface PackagesContentProps {
+  packages: any[];
+  inclusions: any[];
 }
 
 /* Carnival colour palette per card */
@@ -27,57 +28,40 @@ const ZigZag = ({ color }: { color: string }) => (
   </svg>
 );
 
-const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
+const PackagesContent = ({ packages, inclusions }: PackagesContentProps) => {
   return (
-    <section
-      id="packages"
-      className="relative py-20 md:py-28 overflow-hidden"
-      style={{ background: "#FFF6E7" }}
-    >
+    <div style={{ background: "#FFF6E7" }} className="relative overflow-hidden">
+      
       {/* Decorative background polka dots */}
       <div
         className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{ backgroundImage: "radial-gradient(#142127 2px, transparent 2px)", backgroundSize: "28px 28px" }}
       />
 
-      {/* Festive banner strings */}
-      <div className="absolute top-0 left-0 right-0 overflow-hidden h-16 pointer-events-none opacity-20">
-        <svg viewBox="0 0 1440 64" preserveAspectRatio="none" className="w-full h-full">
-          <path d="M0,10 Q180,50 360,10 Q540,50 720,10 Q900,50 1080,10 Q1260,50 1440,10" fill="none" stroke="#FD2B12" strokeWidth="2" />
-          {[60,180,300,420,540,660,780,900,1020,1140,1260,1380].map((x) => (
-            <polygon key={x} points={`${x},14 ${x-10},38 ${x+10},38`} fill={x%2===0?"#FD2B12":"#FFBB00"} opacity="0.9" />
-          ))}
-        </svg>
-      </div>
+      {/* Inclusions Row */}
+      <section className="py-12 relative z-30">
+        <div className="container mx-auto px-6">
+          <div className="bg-white rounded-[40px] shadow-xl border border-[#E5DCCB] p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+            {inclusions.map((item, i) => (
+              <div key={i} className="flex flex-col items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-[#005EFE]/5 flex items-center justify-center text-[#005EFE]">
+                  {item.icon}
+                </div>
+                <div>
+                  <h4 className="text-xl font-black text-[#142127] uppercase">{item.title}</h4>
+                  <p className="text-[#142127]/50 text-sm">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <div className="container mx-auto px-6 lg:px-10 relative z-10">
-
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-14 md:mb-20"
-        >
-          <span className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#FD2B12] text-white text-[10px] uppercase tracking-[0.25em] mb-5 font-black shadow-lg shadow-[#FD2B12]/30">
-            <Star className="w-3 h-3 fill-[#FFBB00] text-[#FFBB00]" />
-            Step Right Up!
-            <Star className="w-3 h-3 fill-[#FFBB00] text-[#FFBB00]" />
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-[62px] font-black text-[#142127] leading-tight tracking-tighter">
-            Choose Your{" "}
-            <span className="text-[#FD2B12]">Adventure</span>{" "}
-            Pass
-          </h2>
-          <p className="text-base md:text-lg text-[#142127]/55 mt-4  mx-auto">
-            More rides, more memories, more value. Pick the pass that suits your crew!
-          </p>
-        </motion.div>
-
-        {/* Carnival Ticket Cards */}
-        {initialPackages.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {initialPackages.map((pkg, i) => {
+      {/* Packages Grid - The Carnival Ticket Design */}
+      <section className="py-20 relative z-10">
+        <div className="container mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {packages.map((pkg, i) => {
               const t = cardThemes[i % cardThemes.length];
               return (
                 <motion.div
@@ -90,7 +74,7 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
                   className="relative"
                 >
                   {/* Main ticket body */}
-                  <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ backgroundColor: t.bg }}>
+                  <div className="rounded-2xl overflow-hidden shadow-2xl flex flex-col h-full" style={{ backgroundColor: t.bg }}>
 
                     {/* Top stub section */}
                     <div className="px-7 pt-7 pb-5 flex items-start justify-between">
@@ -100,7 +84,7 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
                         style={{ backgroundColor: t.accent, color: t.text === "#fff" ? "#142127" : "#fff" }}
                       >
                         <Ticket className="w-3 h-3" />
-                        {pkg.badge || (i === 0 ? "Best Value" : "Family Fun")}
+                        {pkg.badge || pkg.tag_title}
                       </div>
 
                       {/* Stars */}
@@ -125,7 +109,7 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
 
                     {/* Price section — stub */}
                     <div
-                      className="px-7 py-5 flex items-center justify-between"
+                      className="px-7 py-6 flex items-center justify-between"
                       style={{ backgroundColor: t.stub }}
                     >
                       <div>
@@ -134,7 +118,7 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
                         </p>
                         <div className="flex items-baseline gap-1">
                           <span className="text-2xl font-black" style={{ color: t.text, opacity: 0.7 }}>₹</span>
-                          <span className="text-5xl md:text-6xl font-black leading-none" style={{ color: t.accent }}>
+                          <span className="text-5xl font-black leading-none" style={{ color: t.accent }}>
                             {pkg.price || pkg.amount}
                           </span>
                           <span className="text-sm ml-1 font-semibold" style={{ color: t.text, opacity: 0.6 }}>/ person</span>
@@ -143,10 +127,10 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
 
                       {/* Circular hole decoration */}
                       <div
-                        className="w-16 h-16 rounded-full border-4 flex items-center justify-center"
+                        className="w-14 h-14 rounded-full border-4 flex items-center justify-center"
                         style={{ borderColor: t.accent, borderStyle: "dashed" }}
                       >
-                        <Ticket className="w-6 h-6" style={{ color: t.accent }} />
+                        <Ticket className="w-5 h-5" style={{ color: t.accent }} />
                       </div>
                     </div>
 
@@ -156,13 +140,13 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
                     </div>
 
                     {/* Features */}
-                    <div className="px-7 pt-4 pb-5">
+                    <div className="px-7 pt-5 pb-6 flex-grow">
                       {pkg.description && (
-                        <p className="text-sm mb-4 leading-relaxed" style={{ color: t.text, opacity: 0.7 }}>
+                        <p className="text-sm mb-5 leading-relaxed" style={{ color: t.text, opacity: 0.7 }}>
                           {pkg.description}
                         </p>
                       )}
-                      <div className="space-y-2.5">
+                      <div className="space-y-3">
                         {(Array.isArray(pkg.features) ? pkg.features : []).map((feature: string) => (
                           <div key={feature} className="flex items-center gap-2.5">
                             <div
@@ -191,32 +175,77 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
                     </div>
                   </div>
 
-                  {/* Decorative corner stars */}
+                  {/* Decorative corner accents */}
                   <div className="absolute -top-3 -right-3 text-2xl pointer-events-none">⭐</div>
-                  <div className="absolute -bottom-2 -left-2 text-xl pointer-events-none">🎪</div>
                 </motion.div>
               );
             })}
           </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-24 bg-white rounded-[24px] border-2 border-dashed border-[#E5DCCB] max-w-5xl mx-auto">
-            <p className="text-[#B9BEC1] uppercase tracking-widest text-xs">No packages found</p>
-          </div>
-        )}
-
-        {/* Footer link */}
-        <div className="mt-14 text-center">
-          <Link
-            href="/packages"
-            className="inline-flex items-center gap-2 text-[#142127]/50 hover:text-[#FD2B12] transition-colors text-sm uppercase tracking-widest group font-black"
-          >
-            🎡 View All Packages
-            <Ticket className="w-4 h-4 transition-transform group-hover:rotate-12" />
-          </Link>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Essential Information */}
+      <section className="py-24 relative z-20">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-[#142127] uppercase tracking-tighter">Essential Information</h2>
+            <div className="w-20 h-1.5 bg-[#FD2B12] mx-auto mt-4 rounded-full" />
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="bg-white p-10 rounded-[40px] shadow-xl border border-[#E5DCCB]">
+              <h4 className="text-xl font-black text-[#142127] mb-6 uppercase flex items-center gap-3">
+                <div className="w-2 h-8 bg-[#FD2B12] rounded-full" />
+                Entry Policies
+              </h4>
+              <ul className="space-y-4 text-[#142127]/60">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#FD2B12] font-bold">•</span>
+                  Free entry for children below 3ft height.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#FD2B12] font-bold">•</span>
+                  Senior citizen discounts available at counter.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#FD2B12] font-bold">•</span>
+                  Outside food & drinks are not permitted.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#FD2B12] font-bold">•</span>
+                  Proper swimwear required for water attractions.
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white p-10 rounded-[40px] shadow-xl border border-[#E5DCCB]">
+              <h4 className="text-xl font-black text-[#142127] mb-6 uppercase flex items-center gap-3">
+                <div className="w-2 h-8 bg-[#005EFE] rounded-full" />
+                Park Timings
+              </h4>
+              <ul className="space-y-4 text-[#142127]/60">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#005EFE] font-bold">•</span>
+                  Monday - Friday: 10:00 AM - 6:00 PM
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#005EFE] font-bold">•</span>
+                  Saturday - Sunday: 10:00 AM - 7:00 PM
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#005EFE] font-bold">•</span>
+                  Water Park closes 30 mins prior to main park.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#005EFE] font-bold">•</span>
+                  Counter bookings close at 4:30 PM.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
-export default PackagesPreview;
+export default PackagesContent;

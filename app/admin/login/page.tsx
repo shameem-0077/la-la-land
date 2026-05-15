@@ -59,7 +59,7 @@ const AdminLoginPage = () => {
                <ShieldCheck className="w-10 h-10 text-blue-500 group-hover:scale-110 transition-transform" />
             </div>
             <h1 className="text-3xl font-black text-white uppercase tracking-tight mb-2">Admin Portal</h1>
-            <p className="text-slate-400 text-sm">Sign in to manage La La Land content</p>
+            <p className="text-slate-400 text-sm">Sign in to manage La La Park content</p>
           </div>
 
           {error && (
@@ -135,7 +135,7 @@ const AdminLoginPage = () => {
         </div>
         
         <p className="text-center mt-8 text-[10px] text-slate-500 uppercase tracking-[0.2em]">
-          &copy; 2026 La La Land  Park. Secure Access.
+          &copy; 2026 La La Park. Secure Access.
         </p>
       </motion.div>
     </main>

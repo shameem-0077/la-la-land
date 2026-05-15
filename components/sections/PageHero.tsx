@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Ticket, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { getOptimizedImage } from "@/lib/utils";
 
@@ -22,74 +22,78 @@ const PageHero = ({
   subtitle,
   bgImage,
   badgeText,
-  primaryBtnText = "Book Tickets",
-  primaryBtnLink = "/book",
+  primaryBtnText,
+  primaryBtnLink,
   secondaryBtnText,
   secondaryBtnLink
 }: PageHeroProps) => {
   return (
-    <section className="relative h-screen min-h-[600px] w-full flex flex-col pt-32 overflow-hidden bg-secondary">
-      {/* Immersive Background Layer */}
-      <div className="absolute inset-0 z-0 w-full">
-        <img
-          src={getOptimizedImage(bgImage)}
-          alt={badgeText}
-          className="absolute inset-0 w-full h-full object-cover object-center"
+    <section className="relative w-full min-h-[100dvh] md:h-screen flex items-center justify-center overflow-hidden">
+      
+      {/* --- Background Image (No Blur on Mobile, High Quality) --- */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={getOptimizedImage(bgImage)} 
+          alt="Lala Land Hero" 
+          className="w-full h-full object-cover md:blur-[1px] md:scale-[1.01] brightness-[0.7] md:brightness-[0.65]" 
         />
-        <div className="absolute inset-0 bg-secondary/30 -z-10" />
-        {/* <div className="absolute inset-0 bg-gradient-to-r from-secondary/60 via-secondary/30 to-transparent z-0" /> */}
       </div>
 
-      <div className="container mx-auto px-4 flex-grow flex items-center relative z-10 pb-52 lg:pb-24">
-        {/* Content Overlay */}
-        <motion.div 
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl text-center lg:text-left flex flex-col gap-8 md:gap-10"
+      {/* --- Content Area --- */}
+      <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center py-20">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-5xl"
         >
-          <div className="flex flex-col gap-6">
-            <span className="inline-block px-5 py-2 rounded-full bg-accent text-foreground text-[10px] uppercase tracking-[0.2em] mb-6 shadow-xl shadow-accent/20 w-fit mx-auto lg:mx-0">
-              {badgeText}
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-[86px] font-black text-white leading-[0.95] tracking-tight uppercase">
-              {title}
-            </h1>
-            <p className="text-lg md:text-2xl text-white/80 max-w-xl mx-auto lg:mx-0">
-              {subtitle}
-            </p>
+          {/* Top Badge: Floating Pill */}
+          <div className="mb-6 flex items-center justify-center">
+             <span className="px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] md:text-[12px] font-black tracking-[0.3em] uppercase shadow-2xl">
+                {badgeText}
+             </span>
           </div>
-          
-          <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 justify-center lg:justify-start">
-            <Link
-              href={primaryBtnLink}
-              className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-primary text-white rounded-full text-xs md:text-sm uppercase tracking-widest hover:bg-primary-dark transition-all shadow-2xl"
-            >
-              {primaryBtnText}
-              <Ticket className="w-5 h-5 fill-current" />
-            </Link>
+
+          {/* Headline: Powerful & Cinematic */}
+          <h1 
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.05] md:leading-[1.1] mb-8 max-w-[1000px] mx-auto tracking-tighter"
+            style={{ textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}
+          >
+             {title}
+          </h1>
+
+          {/* Subtitle: High Contrast */}
+          <p 
+            className="text-sm md:text-lg text-white font-medium leading-relaxed max-w-[700px] mx-auto mb-10 px-4 opacity-90"
+            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}
+          >
+             {subtitle}
+          </p>
+
+          {/* Buttons: High Impact */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
+            {primaryBtnText && primaryBtnLink && (
+              <Link
+                href={primaryBtnLink}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-12 py-5 bg-[#FFBB00] text-[#142127] rounded-full text-xs md:text-sm font-black transition-all hover:bg-white hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,187,0,0.3)] uppercase tracking-widest"
+              >
+                {primaryBtnText}
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            )}
+            
             {secondaryBtnText && secondaryBtnLink && (
               <Link
                 href={secondaryBtnLink}
-                className="w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-4 md:px-10 md:py-5 bg-white text-secondary rounded-full text-xs md:text-sm uppercase tracking-widest hover:bg-muted transition-all shadow-xl shadow-black/5 group"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-12 py-5 bg-white/10 backdrop-blur-xl border border-white/30 text-white rounded-full text-xs md:text-sm font-black transition-all hover:bg-white/20 uppercase tracking-widest"
               >
                 {secondaryBtnText}
-                <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
             )}
           </div>
         </motion.div>
       </div>
 
-      {/* Wave Divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
-        <svg viewBox="0 0 1440 160" className="relative block w-full h-[60px] md:h-[140px]" preserveAspectRatio="none">
-          <path 
-            fill="#ffffff" 
-            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,106.7C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,160L1392,160C1344,160,1248,160,1152,160C1056,160,960,160,864,160C768,160,672,160,576,160C480,160,384,160,288,160C192,160,96,160,48,160L0,160Z"
-          ></path>
-        </svg>
-      </div>
     </section>
   );
 };

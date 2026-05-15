@@ -174,7 +174,7 @@ const BookPage = () => {
 
       <PageHero 
         title={step === 1 ? <>Book Your Pass <br /> In Just a Few Clicks!</> : <>Complete Your <br /> Booking</>}
-        subtitle={step === 1 ? "Get ready for unlimited fun with 40+ activities, exciting water rides, zones & more." : "Almost there! Provide your details to secure your spot at La La Land Park."}
+        subtitle={step === 1 ? "Get ready for unlimited fun with 40+ activities, exciting water rides, zones & more." : "Almost there! Provide your details to secure your spot at La La Park."}
         bgImage="/images/hero-bg-image-4.png"
         badgeText="Ticket Booking"
         primaryBtnText="Instant Confirmation"

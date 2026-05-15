@@ -55,7 +55,7 @@ const WhyChoose = () => {
               <div className="w-2 h-2 bg-secondary rounded-full" />
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-primary leading-none uppercase">
-              Why Choose La La Land?
+              Why Choose La La Park?
             </h2>
             <div className="flex items-center gap-1 opacity-40">
               <div className="w-2 h-2 bg-secondary rounded-full" />

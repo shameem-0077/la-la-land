@@ -73,10 +73,10 @@ const BlogPage = () => {
       <Header />
 
       <PageHero 
-        title={<>The <br /> Journal</>}
-        subtitle="Stories, tips, and updates from the heart of La La Land. Stay tuned for the latest thrills and family fun."
-        bgImage={getOptimizedImage("/images/hero-bg-image-4.png")}
-        badgeText="La La Land Blog"
+        title={<>The Journal</>}
+        subtitle="Stories, tips, and updates from the heart of La La Park. Stay tuned for the latest thrills and family fun."
+        bgImage={getOptimizedImage("/images/hero-bg-image-4.webp")}
+        badgeText="La La Park Blog"
         primaryBtnText="Read Latest"
         primaryBtnLink="#featured"
         // secondaryBtnText="Book Tickets"

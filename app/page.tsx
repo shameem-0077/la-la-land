@@ -1,13 +1,14 @@
 import { supabase } from "@/lib/supabase";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import Hero from "@/components/sections/Hero";
+import PageHero from "@/components/sections/PageHero";
 import AboutSection from "@/components/sections/AboutSection";
 import Rides from "@/components/sections/Rides";
 import PackagesPreview from "@/components/sections/PackagesPreview";
 import Gallery from "@/components/sections/Gallery";
 import Testimonials from "@/components/sections/Testimonials";
 import CTA from "@/components/sections/CTA";
+import ScrollingPark from "@/components/sections/ScrollingPark";
 
 async function getGalleryData() {
   const { data } = await supabase
@@ -55,6 +56,7 @@ async function getTestimonialsData() {
     role: t.author_designation,
     text: t.content,
     avatar: t.author_profile || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.author_name)}&background=random`,
+    rating: t.rating,
   }));
 }
 
@@ -71,12 +73,22 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <Hero />
+        <PageHero
+          title={<>Your ultimate destination for thrills, smiles &amp; celebration</>}
+          subtitle="Step into a place where every moment is filled with joy, color, and adventure. Rides, splashes & laughter for every age — all in the heart of Wayanad."
+          bgImage="/images/hero-bg-image-4.webp"
+          badgeText="Welcome To A World Of Wonder"
+          primaryBtnText="Explore Rides"
+          primaryBtnLink="/rides"
+          secondaryBtnText="View Packages"
+          secondaryBtnLink="/packages"
+        />
         <AboutSection />
         <Rides initialCategories={rides} />
         <PackagesPreview initialPackages={packages} />
         <Gallery initialItems={galleryItems} />
         <Testimonials initialItems={testimonials} />
+        {/* <ScrollingPark /> */}
         <CTA />
       </main>
       <Footer />

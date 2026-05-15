@@ -13,7 +13,7 @@ const AboutHero = () => {
       <div className="absolute inset-0 z-0">
         <img
           src="/about_hero_v2.png"
-          alt="About La La Land"
+          alt="About La La Park"
           className="w-full h-full object-cover"
         />
         {/* Atmosphere Overlay */}
@@ -36,7 +36,7 @@ const AboutHero = () => {
             Memories...
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-10 max-w-lg leading-relaxed">
-            La La Land  Park is Wayanad's most loved destination for thrill, joy and unforgettable experiences.
+            La La Park is Wayanad's most loved destination for thrill, joy and unforgettable experiences.
           </p>
           
           <div className="flex flex-wrap gap-4">

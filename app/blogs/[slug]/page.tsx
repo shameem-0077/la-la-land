@@ -166,22 +166,6 @@ const BlogDetailPage = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Sidebar */}
-              <div className="lg:w-1/4">
-                <div className="sticky top-32 space-y-10">
-                  <div className="bg-secondary rounded-[30px] p-8 text-white">
-                    <h4 className="text-xl font-black uppercase mb-4 leading-tight">Ready for your own thrills?</h4>
-                    <p className="text-white/70 text-sm mb-6">Book your tickets online and save up to 20% on group bookings!</p>
-                    <Link 
-                      href="/packages"
-                      className="block w-full py-4 bg-primary text-white text-center rounded-2xl text-xs uppercase tracking-widest font-black hover:scale-105 transition-transform"
-                    >
-                      View Packages
-                    </Link>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

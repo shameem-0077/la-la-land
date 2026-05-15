@@ -3,116 +3,108 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Ticket } from "lucide-react";
 import { motion } from "framer-motion";
-import { supabase } from "@/lib/supabase";
 import { getOptimizedImage } from "@/lib/utils";
-
-const activityTypes = [
-  {
-    title: "Water Rides",
-    image: "/water_activities_image_1778049553201.png",
-    color: "text-secondary",
-    link: "/rides?category=water"
-  },
-  {
-    title: "Outdoor Rides",
-    image: "/park_hero_image_1778049530668.png",
-    color: "text-accent",
-    link: "/rides?category="
-  },
-  {
-    title: "Kids Rides",
-    image: "/rides_kids_activities_1778055058230.png",
-    color: "text-primary",
-    link: "/rides?category=kids"
-  },
-  {
-    title: "Add-ons",
-    image: "/amusement_activities_image_1778049573930.png",
-    color: "text-secondary",
-    link: "/rides?category=amusement"
-  },
-];
 
 interface RidesProps {
   initialCategories?: any[];
 }
 
+const accentColors = [
+  { bg: "bg-[#FD2B12]", text: "text-white" },
+  { bg: "bg-[#005EFE]", text: "text-white" },
+  { bg: "bg-[#76A700]", text: "text-white" },
+  { bg: "bg-[#FFBB00]", text: "text-[#142127]" },
+  { bg: "bg-[#FF7D01]", text: "text-white" },
+  { bg: "bg-[#00A9BE]", text: "text-white" },
+];
+
 const Rides = ({ initialCategories = [] }: RidesProps) => {
-
   return (
-    <section id="rides" className="relative py-12 md:py-16 bg-white overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-60 -z-10" />
+    <section id="rides" className="relative py-24 md:py-32 bg-[#FFF6E7] overflow-hidden">
       
-      {/* Long Paper Plane Trail */}
-      <div className="absolute top-0 right-0 w-full h-full pointer-events-none opacity-20 -z-10">
-        <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M1400,50 C1200,100 1300,300 1000,400 C700,500 800,700 400,800" stroke="#fd4b01" strokeWidth="2" strokeDasharray="8 8" />
-          <g transform="translate(1400, 50) rotate(-15)">
-            <path d="M0,0 L-20,5 -15,-10 Z" fill="#fd4b01" />
-          </g>
-        </svg>
-      </div>
+      {/* Absolute minimal background */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FFBB00]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#005EFE]/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center mb-6 md:mb-16">
-          <div className="flex items-center gap-4 md:gap-6 mb-4">
-            <h2 className="text-3xl md:text-[54px] font-black text-secondary leading-none uppercase tracking-tighter">
-              Rides & Activities
-            </h2>
-          </div>
-          <p className="text-base md:text-xl text-zinc-500 px-4">
-            Fun. Splash. Laughter. Repeat.
+      <div className="container mx-auto px-6 lg:px-10 relative z-10">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-20 md:mb-28"
+        >
+          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white text-[#FD2B12] text-[10px] uppercase tracking-[0.2em] mb-5 font-bold border border-[#E5DCCB] shadow-sm">
+            <Ticket className="w-3 h-3" />
+            Park Attractions
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-[62px] font-black text-[#142127] leading-tight tracking-tighter">
+            Choose Your{" "}
+            <span className="text-[#005EFE]">Adventure</span>
+          </h2>
+          <p className="text-base md:text-lg text-[#142127]/50 mt-4 max-w-xl mx-auto">
+            From high-speed thrills to cool splashes — there&apos;s something for everyone at La La Park.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-          {initialCategories.length > 0 ? (
-            initialCategories.map((activity, i) => (
-              <motion.div
-                key={activity.id || i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group"
-              >
-                <Link href={`/rides?category=${activity.slug}`} className="block h-full px-2 md:px-0">
-                  <div className="bg-white rounded-[40px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.06)] border border-zinc-50 flex flex-col h-full transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] hover:-translate-y-2">
-                    {/* Image Top */}
-                    <div className="relative h-[220px] md:h-[280px] w-full">
+        {/* Circular Badge Grid */}
+        {initialCategories.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16 md:gap-y-24">
+            {initialCategories.map((cat, i) => {
+              const accent = accentColors[i % accentColors.length];
+              return (
+                <motion.div
+                  key={cat.id || i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
+                >
+                  <Link href={`/rides?category=${cat.slug}`} className="block relative group w-full max-w-[280px] mx-auto">
+                    
+                    {/* The Circle */}
+                    <div className="w-full aspect-square rounded-full border-[8px] border-white shadow-[0_12px_24px_rgba(20,33,39,0.08)] overflow-hidden relative group-hover:shadow-[0_20px_40px_rgba(20,33,39,0.15)] transition-all duration-500 group-hover:-translate-y-2">
                       <Image
-                        src={getOptimizedImage(activity.cover_image || activity.image)}
-                        alt={activity.name || activity.title}
+                        src={getOptimizedImage(cat.cover_image || cat.image || "")}
+                        alt={cat.name || "Ride Category"}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
+                      <div className="absolute inset-0 bg-[#142127]/10 group-hover:bg-transparent transition-colors duration-500" />
                     </div>
 
-                    {/* Content Box - Integrated style */}
-                    <div className="p-6 md:p-8 flex items-center gap-4 md:gap-6">
-                      <div className="flex flex-col">
-                        <h3 className={`text-lg md:text-xl font-black ${activity.color || 'text-secondary'} leading-none mb-2`}>
-                          {activity.name || activity.title}
+                    {/* The Badge Ribbon */}
+                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[85%] z-10">
+                      <div className={`py-3.5 px-4 rounded-full text-center shadow-lg border-4 border-white transition-transform duration-500 group-hover:scale-105 ${accent.bg}`}>
+                        <h3 className={`text-xs md:text-sm font-black uppercase tracking-widest whitespace-nowrap overflow-hidden text-ellipsis ${accent.text}`}>
+                          {cat.name}
                         </h3>
-                        <div className="flex items-center gap-2 text-xs text-zinc-400 group-hover:text-primary transition-all">
-                          View All 
-                          <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
-                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))
-          ) : (
-            <div className="col-span-full flex flex-col items-center justify-center py-20 bg-zinc-50 rounded-[40px] border-2 border-dashed border-zinc-100">
-              <p className="text-zinc-400 uppercase tracking-widest text-[10px]">No categories found</p>
-            </div>
-          )}
+
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-24 bg-white rounded-[32px] border-2 border-dashed border-[#E5DCCB]">
+            <p className="text-[#B9BEC1] uppercase tracking-widest text-[10px] font-bold">No categories found</p>
+          </div>
+        )}
+
+        {/* View All */}
+        <div className="mt-20 md:mt-28 text-center">
+          <Link
+            href="/rides"
+            className="inline-flex items-center gap-2 text-sm text-[#142127] hover:text-[#FD2B12] transition-colors uppercase tracking-widest font-black group"
+          >
+            Explore All Attractions
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>

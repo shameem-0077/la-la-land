@@ -1,38 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { Quote, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { supabase } from "@/lib/supabase";
 import { getOptimizedImage } from "@/lib/utils";
-
-const testimonials = [
-  {
-    name: "Preetha Sidharth",
-    role: "Visitor",
-    text: "An excellent choice for kids and adults to spend a day in nature and for playing. Staff were very friendly and helpful. The food in the restaurant was top quality as well as the service. God sure was in a good mood when he made this s theme park.",
-    avatar: "https://i.pravatar.cc/150?u=preetha",
-  },
-  {
-    name: "Jimish Bathia",
-    role: "Visitor",
-    text: "Nice place for the kids. We entered the park for 1 hour but ended up spending 5 hours. Kids loved all the s and the staff is super polite and helpful. Nice customized food prepared thanks to the park manager Mr. Sajid. Definitely a must stop place if you go with kids.",
-    avatar: "https://i.pravatar.cc/150?u=jimish",
-  },
-  {
-    name: "Rahul Verma",
-    role: "Visitor",
-    text: "The giant swing and the tower activities are a must try! The safety measures are top-notch which gave us peace of mind while enjoying the thrills. Great value for money and a perfect weekend getaway for groups.",
-    avatar: "https://i.pravatar.cc/150?u=rahul",
-  },
-  {
-    name: "Ananya Nair",
-    role: "Visitor",
-    text: "Loved the clean facilities and the infant room was so helpful for my baby. It's rare to find such well-maintained parks. The rope course was challenging but fun. We will definitely be coming back next month!",
-    avatar: "https://i.pravatar.cc/150?u=ananya",
-  },
-];
 
 interface TestimonialsProps {
   initialItems?: any[];
@@ -41,128 +12,191 @@ interface TestimonialsProps {
 const Testimonials = ({ initialItems = [] }: TestimonialsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-play
   useEffect(() => {
     if (initialItems.length === 0) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1 >= initialItems.length ? 0 : prev + 1));
-    }, 6000);
+    }, 8000);
     return () => clearInterval(timer);
   }, [currentIndex, initialItems.length]);
 
+  if (initialItems.length === 0) return null;
+
+  const prev = () => setCurrentIndex((p) => (p - 1 < 0 ? initialItems.length - 1 : p - 1));
+  const next = () => setCurrentIndex((p) => (p + 1 >= initialItems.length ? 0 : p + 1));
+
+  // Indices for the desktop arc
+  const prevIndex = (currentIndex - 1 + initialItems.length) % initialItems.length;
+  const nextIndex = (currentIndex + 1) % initialItems.length;
+
   return (
-    <section id="testimonials" className="py-12 md:py-16 relative overflow-hidden bg-gradient-to-br from-secondary via-secondary to-purple-800">
-      {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#ff7d00]/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/4" />
-      </div>
+    <section id="testimonials" className="relative py-20 md:py-32 bg-white overflow-hidden">
+      
+      {/* Background Subtle Gradient */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FD2B12]/[0.02] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#FFBB00]/[0.02] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-4 md:mb-12">
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* --- Section Title --- */}
+        <div className="text-center mb-12 md:mb-24">
+           <span className="inline-block px-5 py-2 rounded-full bg-[#142127]/5 text-[#142127] text-[10px] uppercase tracking-[0.22em] mb-5 font-bold border border-[#142127]/10">
+              Guest Experiences
+           </span>
+           <h2 className="text-3xl md:text-5xl lg:text-[62px] font-black text-[#142127] leading-tight tracking-tighter uppercase">
+              Words From Our <span className="text-[#FD2B12]">Visitors</span>
+           </h2>
+        </div>
+
+        {/* --- MOBILE LAYOUT (Simple & Clean) --- */}
+        <div className="lg:hidden flex flex-col items-center">
+          <AnimatePresence mode="wait">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              key={currentIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="w-full text-center"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white text-[10px] uppercase tracking-[0.2em] mb-4 border border-white/10">
-                <Star className="w-3 h-3 fill-[#adff00] text-[#adff00]" />
-                Real Stories
-              </span>
-              <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-                What Our <span className="text-primary">Visitors</span> Say
-              </h2>
+              <div className="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-white shadow-xl overflow-hidden p-1 bg-white">
+                <img src={getOptimizedImage(initialItems[currentIndex]?.avatar)} alt="" className="w-full h-full rounded-full object-cover" />
+              </div>
+              
+              <h4 className="text-xl font-black text-[#142127] mb-2">{initialItems[currentIndex]?.name}</h4>
+              <div className="flex justify-center items-center gap-1.5 mb-8">
+                 <div className="flex">
+                    {[...Array(Math.floor(initialItems[currentIndex]?.rating || 5))].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#76A700] text-[#76A700]" />
+                    ))}
+                 </div>
+                 <span className="text-xs font-bold text-[#142127]/40 uppercase tracking-widest">
+                    {initialItems[currentIndex]?.rating || "5.0"} Rated
+                 </span>
+              </div>
+
+              <div className="relative px-4">
+                 <Quote className="w-8 h-8 text-[#142127]/10 mx-auto mb-4" />
+                 <p className="text-lg font-medium text-[#142127]/80 leading-relaxed italic">
+                    {initialItems[currentIndex]?.text}
+                 </p>
+              </div>
             </motion.div>
-          </div>
+          </AnimatePresence>
 
-          {/* Main Review Display */}
-          <div className="relative min-h-[300px] flex items-center">
-            {initialItems.length > 0 ? (
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentIndex}
-                  initial={{ opacity: 0, scale: 0.98, y: 10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 1.02, y: -10 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="w-full"
-                >
-                  <div className="relative bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-[40px] md:rounded-[50px] p-6 md:p-14 overflow-hidden group">
-                    {/* Big Quote Mark Icon */}
-                    <Quote className="absolute -top-6 -left-6 w-32 h-32 text-white/5 -rotate-12" />
-                    
-                    <div className="relative z-10 flex flex-col items-center text-center">
-                      {/* Stars */}
-                      <div className="flex gap-1 mb-6">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 fill-[#adff00] text-[#adff00]" />
-                        ))}
-                      </div>
-
-                      <p className="text-xl md:text-2xl text-white leading-tight md:leading-snug mb-10 italic">
-                        "{initialItems[currentIndex].text}"
-                      </p>
-
-                      <div className="flex flex-col items-center">
-                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 mb-4 shadow-xl">
-                          <img 
-                            src={getOptimizedImage(initialItems[currentIndex].avatar)} 
-                            alt={initialItems[currentIndex].name} 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <h4 className="text-lg font-black text-white mb-0.5 uppercase tracking-wider">
-                          {initialItems[currentIndex].name}
-                        </h4>
-                        <span className="text-[10px] text-[#adff00] uppercase tracking-widest opacity-80">
-                          {initialItems[currentIndex].role}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            ) : (
-              <div className="w-full flex flex-col items-center justify-center py-20 bg-white/5 rounded-[40px] border border-white/10">
-                <p className="text-white/40 uppercase tracking-widest text-xs">No testimonials yet</p>
-              </div>
-            )}
-
-            {/* Navigation Controls */}
-            {initialItems.length > 1 && (
-              <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between pointer-events-none px-4 md:-px-10 lg:-mx-20">
-                <button 
-                  onClick={() => setCurrentIndex((prev) => (prev - 1 < 0 ? initialItems.length - 1 : prev - 1))}
-                  className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button 
-                  onClick={() => setCurrentIndex((prev) => (prev + 1 >= initialItems.length ? 0 : prev + 1))}
-                  className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff7d00] transition-all pointer-events-auto"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Progress Indicators */}
-          {initialItems.length > 1 && (
-            <div className="flex justify-center items-center gap-4 mt-16">
+          {/* Mobile Nav */}
+          <div className="flex items-center gap-6 mt-12">
+            <button onClick={prev} className="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center">
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <div className="flex gap-2">
               {initialItems.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  className={`h-2 rounded-full transition-all duration-500 ${
-                    i === currentIndex ? "bg-[#ff7d00] w-12" : "bg-white/20 w-4 hover:bg-white/40"
-                  }`}
-                />
+                <div key={i} className={`w-2 h-2 rounded-full ${i === currentIndex ? 'bg-[#FD2B12]' : 'bg-zinc-200'}`} />
               ))}
             </div>
-          )}
+            <button onClick={next} className="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center">
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* --- DESKTOP LAYOUT (The Arc Slider) --- */}
+        <div className="hidden lg:flex flex-row items-center justify-between gap-20">
+          
+          {/* Left: Arc */}
+          <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
+            <div className="absolute left-0 w-[150%] h-[150%] border-l border-zinc-100 rounded-full translate-x-[-70%] pointer-events-none" />
+            <div className="relative w-full h-full">
+              
+              {/* Previous */}
+              <motion.div 
+                key={`prev-${prevIndex}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.3 }}
+                className="absolute top-[15%] left-[10%] flex items-center gap-4 cursor-pointer"
+                onClick={() => setCurrentIndex(prevIndex)}
+              >
+                <div className="w-16 h-16 rounded-full overflow-hidden grayscale border border-zinc-200 p-1 bg-white">
+                  <img src={getOptimizedImage(initialItems[prevIndex]?.avatar)} alt="" className="w-full h-full rounded-full object-cover" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-[#142127]">{initialItems[prevIndex]?.name}</p>
+                </div>
+              </motion.div>
+
+              {/* Current */}
+              <motion.div 
+                key={`curr-${currentIndex}`}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute top-1/2 left-[35%] -translate-y-1/2 flex items-center gap-6 z-20"
+              >
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] p-1.5 bg-white">
+                  <img src={getOptimizedImage(initialItems[currentIndex]?.avatar)} alt="" className="w-full h-full rounded-full object-cover" />
+                </div>
+                <div className="text-left">
+                  <h4 className="text-2xl font-black text-[#142127] mb-1">{initialItems[currentIndex]?.name}</h4>
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-0.5">
+                      {[...Array(Math.floor(initialItems[currentIndex]?.rating || 5))].map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#76A700] text-[#76A700]" />
+                      ))}
+                    </div>
+                    <span className="text-sm font-bold text-[#142127]/60">
+                      {initialItems[currentIndex]?.rating || "5.0"} rated
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Next */}
+              <motion.div 
+                key={`next-${nextIndex}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.3 }}
+                className="absolute bottom-[15%] left-[10%] flex items-center gap-4 cursor-pointer"
+                onClick={() => setCurrentIndex(nextIndex)}
+              >
+                <div className="w-16 h-16 rounded-full overflow-hidden grayscale border border-zinc-200 p-1 bg-white">
+                  <img src={getOptimizedImage(initialItems[nextIndex]?.avatar)} alt="" className="w-full h-full rounded-full object-cover" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-[#142127]">{initialItems[nextIndex]?.name}</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Right: Text */}
+          <div className="flex-1 lg:pl-20 relative text-left">
+            <Quote className="w-10 h-10 text-[#142127]/10 mb-8" />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="relative"
+              >
+                <p className="text-2xl lg:text-[28px] font-medium text-[#142127]/80 leading-[1.6] relative italic first-letter:text-7xl first-letter:font-black first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-[#142127] first-letter:not-italic">
+                  {initialItems[currentIndex]?.text}
+                </p>
+                <div className="mt-12 pt-8 border-t border-zinc-100 flex items-center gap-6">
+                   <div className="flex -space-x-3">
+                      {initialItems.slice(0, 4).map((item, i) => (
+                        <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
+                           <img src={getOptimizedImage(item.avatar)} alt="" className="w-full h-full object-cover" />
+                        </div>
+                      ))}
+                   </div>
+                   <p className="text-xs font-bold uppercase tracking-widest text-[#142127]/40">
+                      Join {initialItems.length}+ happy visitors this season
+                   </p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
       </div>
     </section>
