@@ -15,7 +15,7 @@ const pillars = [
 
 const AboutSection = () => {
   return (
-    <section id="about-preview" className="py-20 md:py-28 bg-[#FFF6E7] overflow-hidden">
+    <section id="about-preview" className="py-12 md:py-16 bg-[#FFF6E7] overflow-hidden">
       <div className="container mx-auto px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 xl:gap-24">
 

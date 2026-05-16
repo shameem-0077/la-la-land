@@ -30,7 +30,7 @@ const Testimonials = ({ initialItems = [] }: TestimonialsProps) => {
   const nextIndex = (currentIndex + 1) % initialItems.length;
 
   return (
-    <section id="testimonials" className="relative py-20 md:py-32 bg-white overflow-hidden">
+    <section id="testimonials" className="relative py-12 md:py-16 bg-white overflow-hidden">
       
       {/* Background Subtle Gradient */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FD2B12]/[0.02] rounded-full blur-[120px] pointer-events-none" />

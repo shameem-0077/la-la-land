@@ -15,7 +15,7 @@ const CTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative overflow-hidden bg-[#FD2B12] p-10 md:p-16 lg:p-20 shadow-[0_24px_50px_rgba(253,43,18,0.25)]"
+          className="relative overflow-hidden bg-[#FD2B12] py-8 px-10 md:py-12 md:px-16 lg:py-14 lg:px-20 shadow-[0_24px_50px_rgba(253,43,18,0.25)]"
         >
           {/* Ambient glows (Carnival Lights) */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFBB00]/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />

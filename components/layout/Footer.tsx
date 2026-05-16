@@ -20,7 +20,7 @@ const Youtube = () => (
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-green text-white py-16 md:py-20 relative overflow-hidden">
+    <footer className="bg-dark-green text-white py-12 md:py-16 relative overflow-hidden">
       {/* Decorative background circle */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       

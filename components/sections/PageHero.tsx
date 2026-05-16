@@ -40,7 +40,7 @@ const PageHero = ({
       </div>
 
       {/* --- Content Area --- */}
-      <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center py-20">
+      <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center py-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}

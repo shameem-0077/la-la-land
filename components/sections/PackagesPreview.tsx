@@ -31,7 +31,7 @@ const PackagesPreview = ({ initialPackages = [] }: PackagesPreviewProps) => {
   return (
     <section
       id="packages"
-      className="relative py-20 md:py-28 overflow-hidden"
+      className="relative py-12 md:py-16 overflow-hidden"
       style={{ background: "#FFF6E7" }}
     >
       {/* Decorative background polka dots */}

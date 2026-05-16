@@ -22,7 +22,7 @@ const accentColors = [
 
 const Rides = ({ initialCategories = [] }: RidesProps) => {
   return (
-    <section id="rides" className="relative py-24 md:py-32 bg-[#FFF6E7] overflow-hidden">
+    <section id="rides" className="relative py-12 md:py-16 bg-[#FFF6E7] overflow-hidden">
       
       {/* Absolute minimal background */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FFBB00]/5 rounded-full blur-[120px] pointer-events-none" />

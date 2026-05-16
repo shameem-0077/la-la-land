@@ -25,7 +25,7 @@ const pinColors = ["#FD2B12", "#005EFE", "#FFBB00", "#76A700"];
 
 const Gallery = ({ initialItems = [], showViewAll = false }: GalleryProps) => {
   return (
-    <section id="gallery" className="relative py-20 md:py-28 overflow-hidden" style={{ background: "#FFF6E7" }}>
+    <section id="gallery" className="relative py-12 md:py-16 overflow-hidden" style={{ background: "#FFF6E7" }}>
       {/* Decorative background polka dots */}
       <div
         className="absolute inset-0 opacity-[0.06] pointer-events-none z-0"
