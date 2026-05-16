@@ -32,11 +32,31 @@ export default function TestimonialsListingPage() {
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: any) => {
     if (confirm("Are you sure you want to delete this testimonial?")) {
-      const { error } = await supabase.from("Testimonial").delete().eq("id", id);
-      if (!error) {
-        setTestimonials(testimonials.filter(t => t.id !== id));
+      try {
+        const { data, error } = await supabase
+          .from("Testimonial")
+          .delete()
+          .eq("id", id)
+          .select();
+
+        if (error) {
+          alert("Failed to delete: " + error.message);
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          alert("The record could not be found in the database. It might have been already deleted.");
+          // Still remove from UI to stay in sync
+          setTestimonials(prev => prev.filter(t => t.id !== id));
+          return;
+        }
+
+        // Successfully deleted
+        setTestimonials(prev => prev.filter(t => t.id !== id));
+      } catch (err: any) {
+        alert("An unexpected error occurred: " + err.message);
       }
     }
   };

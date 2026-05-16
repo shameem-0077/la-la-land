@@ -101,15 +101,25 @@ export default function EditTestimonialPage() {
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this testimonial?")) {
       try {
-        const { error } = await supabase
+        setIsSaving(true);
+        const { data, error } = await supabase
           .from("Testimonial")
           .delete()
-          .eq("id", id);
+          .eq("id", id)
+          .select();
         
         if (error) throw error;
+        
+        if (!data || data.length === 0) {
+          alert("The record could not be found in the database. It might have been already deleted.");
+        }
+
         router.push("/admin/testimonials");
+        router.refresh();
       } catch (err: any) {
-        alert(err.message || "Failed to delete testimonial");
+        alert("Failed to delete testimonial: " + err.message);
+      } finally {
+        setIsSaving(false);
       }
     }
   };

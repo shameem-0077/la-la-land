@@ -25,6 +25,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { supabase } from "@/lib/supabase";
 
+import Loader from "@/components/ui/Loader";
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -54,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }, [pathname, router]);
 
   if (pathname === "/admin/login") return <>{children}</>;
-  if (isLoading) return <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center text-secondary uppercase tracking-widest">Authenticating...</div>;
+  if (isLoading) return <Loader text="Verifying Admin Access..." />;
   if (!isAuthenticated) return null;
 
   const menuItems = [

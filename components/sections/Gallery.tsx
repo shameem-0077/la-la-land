@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Camera, Maximize2, Star, Image as ImageIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import { Camera, Maximize2, Star, Image as ImageIcon, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { getOptimizedImage } from "@/lib/utils";
 
 const InstagramIcon = ({ className }: { className?: string }) => (
@@ -24,6 +24,8 @@ const rotations = [-2, 3, -4, 2, -1, 4, -3, 1];
 const pinColors = ["#FD2B12", "#005EFE", "#FFBB00", "#76A700"];
 
 const Gallery = ({ initialItems = [], showViewAll = false }: GalleryProps) => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
     <section id="gallery" className="relative py-12 md:py-16 overflow-hidden" style={{ background: "#FFF6E7" }}>
       {/* Decorative background polka dots */}
@@ -98,6 +100,7 @@ const Gallery = ({ initialItems = [], showViewAll = false }: GalleryProps) => {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, type: "spring", stiffness: 100 }}
                   whileHover={{ scale: 1.05, rotate: 0, zIndex: 30 }}
+                  onClick={() => setSelectedImage(item.image)}
                   className={`group relative bg-white p-3 md:p-4 shadow-xl border border-[#E5DCCB] cursor-pointer flex flex-col ${
                     isLarge ? "col-span-2 row-span-2 pb-12 md:pb-16" : "col-span-1 row-span-1 pb-10 md:pb-12"
                   }`}
@@ -175,6 +178,49 @@ const Gallery = ({ initialItems = [], showViewAll = false }: GalleryProps) => {
           </div>
         </motion.div>
       </div>
+
+      {/* Lightbox / Expanded View */}
+      <AnimatePresence>
+        {selectedImage && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedImage(null)}
+              className="absolute inset-0 bg-[#142127]/95 backdrop-blur-md cursor-zoom-out"
+            />
+
+            {/* Close Button */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-[110]"
+            >
+              <X className="w-6 h-6" />
+            </motion.button>
+
+            {/* Image Container */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-6xl aspect-[4/3] md:aspect-auto md:h-full max-h-[80vh] z-[105] rounded-3xl overflow-hidden shadow-2xl"
+            >
+              <Image
+                src={selectedImage}
+                alt="Gallery Preview"
+                fill
+                className="object-contain"
+                priority
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
