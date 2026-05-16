@@ -3,7 +3,21 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Ticket, Users, Clock, ShieldCheck, Waves, Info, ChevronLeft, ChevronRight, Star, Zap, ArrowRight } from "lucide-react";
+import { 
+  Users, 
+  Clock, 
+  ShieldCheck, 
+  Waves, 
+  Info, 
+  ChevronLeft, 
+  ChevronRight, 
+  Star, 
+  Zap, 
+  ArrowRight,
+  Target,
+  Maximize,
+  CheckCircle2
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import PageHero from "@/components/sections/PageHero";
@@ -18,13 +32,11 @@ const defaultIcons: Record<string, React.ReactNode> = {
   waves: <Waves className="w-5 h-5" />,
   shield: <ShieldCheck className="w-5 h-5" />,
   star: <Star className="w-5 h-5" />,
-  zap: <Zap className="w-6 h-6 text-primary" />,
-  clock: <Clock className="w-6 h-6 text-primary" />,
-  info: <Info className="w-6 h-6 text-primary" />,
-  water: <Waves className="w-5 h-5" />,
-  thrill: <Zap className="w-5 h-5" />,
-  kids: <Star className="w-5 h-5" />,
-  all: <Ticket className="w-5 h-5" />,
+  zap: <Zap className="w-5 h-5" />,
+  clock: <Clock className="w-5 h-5" />,
+  info: <Info className="w-5 h-5" />,
+  target: <Target className="w-5 h-5" />,
+  maximize: <Maximize className="w-5 h-5" />,
 };
 
 export default function RideDetailClient({ ride }: RideDetailClientProps) {
@@ -34,7 +46,7 @@ export default function RideDetailClient({ ride }: RideDetailClientProps) {
   const prevSlide = () => setActiveSlide((prev) => (prev - 1 + ride.gallery.length) % ride.gallery.length);
 
   return (
-    <>
+    <div className="bg-[#FAFAFA] min-h-screen">
       <PageHero 
         badgeText={ride.category}
         title={ride.title}
@@ -46,100 +58,113 @@ export default function RideDetailClient({ ride }: RideDetailClientProps) {
         secondaryBtnLink="https://wa.me/yournumber"
       />
 
-      {/* Feature Spec Bar */}
-      <section className="-mt-12 relative z-30 mb-20">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap md:flex-nowrap gap-4 md:gap-0 bg-secondary/90 backdrop-blur-2xl rounded-[40px] md:rounded-full p-4 md:p-2 border border-white/10 shadow-2xl">
-            {ride.highlights.map((spec: any, i: number) => (
-              <div key={i} className={`flex-1 flex items-center gap-6 px-8 py-4 ${i !== ride.highlights.length - 1 ? 'md:border-r border-white/10' : ''}`}>
-                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 text-primary">
-                  {defaultIcons[spec.icon] || (spec.icon && (spec.icon.startsWith('http') || spec.icon.includes('/')) ? <img src={spec.icon} alt="" className="w-6 h-6 object-contain" /> : <Star className="w-6 h-6" />)}
+      {/* --- Elegant Specs Bar --- */}
+      <section className="relative z-30 -mt-12 mb-8 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] rounded-[40px] border border-zinc-100 p-2 md:p-3 flex flex-wrap md:flex-nowrap items-stretch"
+          >
+            {ride.specs.map((spec: any, i: number) => (
+              <React.Fragment key={i}>
+                <div className="flex-1 min-w-[140px] px-8 py-6 md:py-8 flex flex-col items-center justify-center text-center group transition-all duration-500">
+                  <div className="w-12 h-12 rounded-2xl bg-zinc-50 flex items-center justify-center text-primary mb-4 group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500">
+                    {defaultIcons[spec.icon] || <Star className="w-5 h-5" />}
+                  </div>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-zinc-400 font-bold mb-1.5">{spec.label}</p>
+                  <p className="text-sm text-dark font-black uppercase tracking-tight leading-none">{spec.value}</p>
                 </div>
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-1">Highlight</p>
-                  <p className="text-sm text-white font-black uppercase">{spec.label}</p>
-                </div>
-              </div>
+                {i < ride.specs.length - 1 && (
+                  <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-zinc-200 to-transparent my-8" />
+                )}
+              </React.Fragment>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Narrative Section */}
-      <section className="py-32 bg-white relative">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+      {/* --- Narrative & Experience --- */}
+      <section className="py-10 md:py-16">
+        <div className="container mx-auto px-6 lg:px-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            {/* Content */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="space-y-12"
+              className="space-y-10"
             >
-              <div>
-                {/* <span className="text-primary font-black uppercase tracking-[0.4em] text-xs mb-6 block">{ride.aboutTitle || `The Experience`}</span> */}
-                <h2 className="text-6xl md:text-8xl font-black text-secondary leading-[0.85] tracking-tighter uppercase mb-10">
-                  {ride.aboutTitle}
+              <div className="flex flex-col items-center">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+                  The Experience
+                </span>
+                <h2 className="text-5xl md:text-8xl font-black text-dark leading-[1.0] tracking-tighter mb-8">
+                  {ride.aboutTitle || `Unveiling the ${ride.title}`}
                 </h2>
-                <div className="space-y-8 text-xl text-muted-foreground leading-relaxed">
-                  <p className="font-medium text-secondary">
-                    {ride.details}
-                  </p>
+                <div className="text-lg md:text-2xl text-zinc-600 leading-relaxed max-w-3xl mx-auto">
+                  {ride.details?.split('\n').map((para: string, i: number) => (
+                    <p key={i} className="mb-6">{para}</p>
+                  ))}
                 </div>
+              </div>
+
+              {/* Quick Features List - Centered Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                {ride.highlights.slice(0, 4).map((h: any, i: number) => (
+                  <div key={i} className="flex items-center gap-5 p-5 rounded-3xl bg-zinc-50 border border-zinc-100 shadow-sm text-left">
+                    <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-primary shadow-sm">
+                      {defaultIcons[h.icon] || <CheckCircle2 className="w-6 h-6" />}
+                    </div>
+                    <span className="text-sm font-bold text-dark uppercase tracking-wider">{h.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-8">
+                <Link 
+                  href="/book" 
+                  className="inline-flex items-center gap-4 px-12 py-6 bg-dark text-white rounded-full text-sm font-black uppercase tracking-widest hover:bg-primary transition-all group shadow-2xl"
+                >
+                  Experience It Now
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
             </motion.div>
-
-            <div className="relative group">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="rounded-[80px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] relative z-10 aspect-[3/4]"
-              >
-                {ride.gallery.length > 0 ? (
-                  <>
-                    <div className="absolute inset-0 flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${activeSlide * 100}%)` }}>
-                      {ride.gallery.map((item: any, i: number) => (
-                        <div key={i} className="min-w-full h-full relative">
-                          <Image 
-                            src={getOptimizedImage(item.image)} 
-                            alt={item.title} 
-                            fill 
-                            className="object-cover" 
-                          />
-                        </div>
-                      ))}
-                    </div>
-
-                    {ride.gallery.length > 1 && (
-                      <>
-                        <div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                          <button onClick={prevSlide} className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-primary transition-all">
-                            <ChevronLeft className="w-6 h-6" />
-                          </button>
-                          <button onClick={nextSlide} className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-primary transition-all">
-                            <ChevronRight className="w-6 h-6" />
-                          </button>
-                        </div>
-                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                          {ride.gallery.map((_: any, i: number) => (
-                            <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === activeSlide ? "w-8 bg-primary" : "w-2 bg-white/40"}`} />
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <div className="w-full h-full bg-muted flex items-center justify-center">
-                    <p className="text-zinc-400 uppercase tracking-widest text-xs">No gallery images</p>
-                  </div>
-                )}
-              </motion.div>
-              <div className="absolute -top-12 -right-12 w-48 h-48 bg-primary/20 rounded-full blur-3xl -z-10" />
-              <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10" />
-            </div>
           </div>
         </div>
       </section>
-    </>
+
+      {/* --- Mini Gallery / Grid --- */}
+      {ride.gallery.length > 1 && (
+        <section className="pb-12 px-4">
+          <div className="container mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {ride.gallery.map((item: any, i: number) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  onClick={() => setActiveSlide(i)}
+                  className={`relative aspect-square rounded-[32px] overflow-hidden cursor-pointer transition-all duration-500 ${i === activeSlide ? 'ring-4 ring-primary ring-offset-4' : 'hover:scale-[1.02] opacity-70 hover:opacity-100'}`}
+                >
+                  <Image 
+                    src={getOptimizedImage(item.image)} 
+                    alt={item.title} 
+                    fill 
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover" 
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </div>
   );
 }
