@@ -20,6 +20,7 @@ const navItems = [
     ]
   },
   { name: "Packages", href: "/packages" },
+  { name: "Gallery", href: "/gallery" },
   { name: "Blogs", href: "/blogs" },
   { name: "Contact Us", href: "/contact" }
 ];

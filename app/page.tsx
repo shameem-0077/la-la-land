@@ -14,11 +14,12 @@ async function getGalleryData() {
   const { data } = await supabase
     .from('Gallery')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(9);
   
   return (data || []).map((item, i) => ({
     ...item,
-    size: (i % 4 === 0) ? 'lg' : 'sm'
+    size: (i % 5 === 0) ? 'lg' : 'sm'
   }));
 }
 
@@ -86,7 +87,7 @@ export default async function Home() {
         <AboutSection />
         <Rides initialCategories={rides} />
         <PackagesPreview initialPackages={packages} />
-        <Gallery initialItems={galleryItems} />
+        <Gallery initialItems={galleryItems} showViewAll={true} />
         <Testimonials initialItems={testimonials} />
         {/* <ScrollingPark /> */}
         <CTA />

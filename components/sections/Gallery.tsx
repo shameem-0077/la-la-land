@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Camera, Maximize2, Star, Image as ImageIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { getOptimizedImage } from "@/lib/utils";
@@ -16,12 +17,13 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 
 interface GalleryProps {
   initialItems?: any[];
+  showViewAll?: boolean;
 }
 
 const rotations = [-2, 3, -4, 2, -1, 4, -3, 1];
 const pinColors = ["#FD2B12", "#005EFE", "#FFBB00", "#76A700"];
 
-const Gallery = ({ initialItems = [] }: GalleryProps) => {
+const Gallery = ({ initialItems = [], showViewAll = false }: GalleryProps) => {
   return (
     <section id="gallery" className="relative py-20 md:py-28 overflow-hidden" style={{ background: "#FFF6E7" }}>
       {/* Decorative background polka dots */}
@@ -82,7 +84,7 @@ const Gallery = ({ initialItems = [] }: GalleryProps) => {
 
         {/* Polaroid Grid */}
         {initialItems.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 auto-rows-[220px] md:auto-rows-[280px]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 auto-rows-[220px] md:auto-rows-[280px] grid-flow-dense">
             {initialItems.map((item, i) => {
               const rotation = rotations[i % rotations.length];
               const pinColor = pinColors[i % pinColors.length];
@@ -148,13 +150,23 @@ const Gallery = ({ initialItems = [] }: GalleryProps) => {
           </div>
         )}
 
-        {/* Hashtag footer */}
+        {/* Hashtag footer & CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-16 flex flex-col items-center gap-8"
         >
+          {showViewAll && (
+            <Link 
+              href="/gallery"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-[#005EFE] text-white rounded-full text-xs md:text-sm font-black uppercase tracking-[0.2em] hover:bg-[#142127] transition-all shadow-xl shadow-[#005EFE]/20 hover:scale-105"
+            >
+              <ImageIcon className="w-4 h-4" />
+              View Full Gallery
+            </Link>
+          )}
+
           <div className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-white rounded-full border border-[#E5DCCB] shadow-sm transform -rotate-1">
             <Camera className="w-4 h-4 text-[#FD2B12]" />
             <p className="text-[#142127] text-xs md:text-sm uppercase tracking-widest font-bold">
